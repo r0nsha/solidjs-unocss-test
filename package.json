@@ -1,0 +1,19 @@
+{
+	"name": "hare-web",
+	"version": "0.1.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"serve": "vite preview"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"solid-js": "^1.7.3"
+	},
+	"devDependencies": {
+		"typescript": "^5.0.4",
+		"vite": "^4.2.1",
+		"vite-plugin-solid": "^2.7.0"
+	}
+}
