@@ -1,4 +1,4 @@
-import type { Component } from "solid-js";
+import type { Component } from "solid-js"
 
 export const App: Component = () => {
 	return (
@@ -13,5 +13,5 @@ export const App: Component = () => {
 			</a>
 			!
 		</p>
-	);
-};
+	)
+}
