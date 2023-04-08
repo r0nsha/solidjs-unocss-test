@@ -11,7 +11,9 @@
 	},
 	"javascript": {
 		"formatter": {
-			"semicolons": "asNeeded"
+			"trailingComma": "all",
+			"semicolons": "asNeeded",
+			"quoteStyle": "double"
 		}
 	},
 	"linter": { "enabled": true, "rules": { "recommended": true } }
