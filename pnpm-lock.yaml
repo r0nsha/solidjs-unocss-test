@@ -9,6 +9,9 @@ dependencies:
     version: 1.7.3
 
 devDependencies:
+  '@unocss/preset-web-fonts':
+    specifier: ^0.51.2
+    version: 0.51.2
   '@unocss/transformer-variant-group':
     specifier: ^0.51.2
     version: 0.51.2
@@ -821,6 +824,13 @@ packages:
     resolution: {integrity: sha512-diGJVTC3W2lovRL9hlV7h4mdzKjoyJD1rlLai2QMZP/+UCsEwDcL9JFF0lZTlEN5GtcbgvcyPRZKB1/ituvjdg==}
     dependencies:
       '@unocss/core': 0.50.8
+      ofetch: 1.0.1
+    dev: true
+
+  /@unocss/preset-web-fonts@0.51.2:
+    resolution: {integrity: sha512-5E6F8SZLlEQz7oeYF/8Pn5V5tyoVUT4eTUcvjpdr3gdSLfQiax5uDrhPjUfOskhzx1TXEk2iX3o+BTZ0RvgQ/w==}
+    dependencies:
+      '@unocss/core': 0.51.2
       ofetch: 1.0.1
     dev: true
 
