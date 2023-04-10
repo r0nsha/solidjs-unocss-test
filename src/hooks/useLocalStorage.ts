@@ -16,26 +16,33 @@ export const useStorage = <V extends string>(
 	key: string,
 	options?: UseLocalStorageOptions<V>,
 ): UseLocalStorageReturn<V> => {
-	const [value, setValue] = createSignal<V | null>(storage.getItem(key) as V | null)
+	const initialValue = storage.getItem(key) as V | null
 
-	if (value == null && options?.defaultValue != null) {
-		storage.setItem(key, options.defaultValue)
-	}
+	const [value, setValue] = createSignal<V | null>(initialValue)
 
 	const listener = (e: StorageEvent) => setValue((_) => e.newValue as V | null)
 
-	onMount(() => window.addEventListener("storage", listener))
-	onCleanup(() => window.removeEventListener("storage", listener))
+	const setItem = (newValue: V) => {
+		storage.setItem(key, newValue)
+		setValue((_) => newValue)
+	}
 
-	return [
-		value,
-		(newValue) => {
-			storage.setItem(key, newValue)
-			setValue((_) => newValue as V)
-		},
-		() => {
-			storage.removeItem(key)
-			setValue(null)
-		},
-	]
+	const removeItem = () => {
+		storage.removeItem(key)
+		setValue((_) => options?.defaultValue ?? null)
+	}
+
+	onMount(() => {
+		if (initialValue == null && options?.defaultValue != null) {
+			setItem(options.defaultValue)
+		}
+
+		window.addEventListener("storage", listener)
+	})
+
+	onCleanup(() => {
+		window.removeEventListener("storage", listener)
+	})
+
+	return [value, setItem, removeItem]
 }

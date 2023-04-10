@@ -10,13 +10,14 @@ export const App: Component = () => {
 	)
 }
 
+// TODO: basic theme toggle setting
 const X = () => {
 	// rome-ignore lint/style/noNonNullAssertion: ThemeContext must exist
 	const { setTheme } = useThemeContext()!
 
 	return (
 		<>
-			<button onClick={() => setTheme(null)}>system</button>
+			<button onClick={() => setTheme("system")}>system</button>
 			<button onClick={() => setTheme("light")}>light</button>
 			<button onClick={() => setTheme("dark")}>dark</button>
 		</>
