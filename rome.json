@@ -16,5 +16,13 @@
 			"quoteStyle": "double"
 		}
 	},
-	"linter": { "enabled": true, "rules": { "recommended": true } }
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"style": {
+				"noNonNullAssertion": "warn"
+			}
+		}
+	}
 }

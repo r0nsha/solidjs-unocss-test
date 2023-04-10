@@ -1,9 +1,24 @@
-import { Component, onMount } from "solid-js"
+import { Component } from "solid-js"
+import { ThemeProvider, useThemeContext } from "./contexts/theme.context"
 
 export const App: Component = () => {
-	onMount(() => {
-		document.body.classList.add("theme-light")
-	})
+	return (
+		<ThemeProvider>
+			<div>Hello</div>
+			<X />
+		</ThemeProvider>
+	)
+}
 
-	return <div>Hello</div>
+const X = () => {
+	// rome-ignore lint/style/noNonNullAssertion: ThemeContext must exist
+	const { setTheme } = useThemeContext()!
+
+	return (
+		<>
+			<button onClick={() => setTheme(null)}>system</button>
+			<button onClick={() => setTheme("light")}>light</button>
+			<button onClick={() => setTheme("dark")}>dark</button>
+		</>
+	)
 }
