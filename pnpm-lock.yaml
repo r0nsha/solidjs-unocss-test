@@ -12,9 +12,15 @@ devDependencies:
   '@unocss/preset-web-fonts':
     specifier: ^0.51.2
     version: 0.51.2
+  '@unocss/transformer-directives':
+    specifier: ^0.51.2
+    version: 0.51.2
   '@unocss/transformer-variant-group':
     specifier: ^0.51.2
     version: 0.51.2
+  sass:
+    specifier: ^1.61.0
+    version: 1.61.0
   typescript:
     specifier: ^5.0.4
     version: 5.0.4
@@ -23,7 +29,7 @@ devDependencies:
     version: 0.50.8(postcss@8.4.21)(vite@4.2.1)
   vite:
     specifier: ^4.2.1
-    version: 4.2.1
+    version: 4.2.1(sass@1.61.0)
   vite-plugin-solid:
     specifier: ^2.7.0
     version: 2.7.0(solid-js@1.7.3)(vite@4.2.1)
@@ -878,6 +884,13 @@ packages:
       css-tree: 2.3.1
     dev: true
 
+  /@unocss/transformer-directives@0.51.2:
+    resolution: {integrity: sha512-bxAfqMlJ11tIdfTF0Mer06sXHADjOfV4CQE5j/H8Rms4a7mcG/n/XED7BIBbrJDcaPaDE92B+P4CeB/TRmwQ6A==}
+    dependencies:
+      '@unocss/core': 0.51.2
+      css-tree: 2.3.1
+    dev: true
+
   /@unocss/transformer-variant-group@0.50.8:
     resolution: {integrity: sha512-UjDsa3K3Bv11u3q8BYZ4ZrdMhlu937hiQct6sXzFIQcSnOwqOokr/h6V/8aB3hFiPWX/yQuIIQnQJjYTVWZYxw==}
     dependencies:
@@ -905,7 +918,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.2.12
       magic-string: 0.30.0
-      vite: 4.2.1
+      vite: 4.2.1(sass@1.61.0)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -1226,6 +1239,10 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
+  /immutable@4.3.0:
+    resolution: {integrity: sha512-0AOCmOip+xgJwEVTQj1EfiDDOkPmuyllDuTuEX+DDXUgapLAsBIfkg3sxCYyCEA8mQqZrrxPUGjcOQ2JS3WLkg==}
+    dev: true
+
   /is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -1496,6 +1513,16 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
+  /sass@1.61.0:
+    resolution: {integrity: sha512-PDsN7BrVkNZK2+dj/dpKQAWZavbAQ87IXqVvw2+oEYI+GwlTWkvbQtL7F2cCNbMqJEYKPh1EcjSxsnqIb/kyaQ==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.3.0
+      source-map-js: 1.0.2
+    dev: true
+
   /semver@6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
     hasBin: true
@@ -1667,13 +1694,13 @@ packages:
       merge-anything: 5.1.4
       solid-js: 1.7.3
       solid-refresh: 0.5.2(solid-js@1.7.3)
-      vite: 4.2.1
+      vite: 4.2.1(sass@1.61.0)
       vitefu: 0.2.4(vite@4.2.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@4.2.1:
+  /vite@4.2.1(sass@1.61.0):
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -1702,6 +1729,7 @@ packages:
       postcss: 8.4.21
       resolve: 1.22.2
       rollup: 3.20.2
+      sass: 1.61.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -1714,7 +1742,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.2.1
+      vite: 4.2.1(sass@1.61.0)
     dev: true
 
   /which@2.0.2:

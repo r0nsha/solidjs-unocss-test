@@ -1,4 +1,5 @@
-import "virtual:uno.css"
+import "uno.css"
+import "./index.scss"
 import "@unocss/reset/normalize.css"
 
 import { render } from "solid-js/web"
