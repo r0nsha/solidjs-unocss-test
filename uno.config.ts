@@ -35,6 +35,11 @@ export default defineConfig({
 				primary: "var(--on-primary)",
 				secondary: "var(--on-secondary)",
 			},
+			primary: colorPalette("primary"),
+			success: colorPalette("success"),
+			info: colorPalette("info"),
+			warning: colorPalette("warning"),
+			danger: colorPalette("danger"),
 		},
 	},
 })
