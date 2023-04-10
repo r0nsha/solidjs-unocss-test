@@ -7,7 +7,7 @@
 		"build": "vite build",
 		"serve": "vite preview",
 		"format": "rome format . --write",
-		"check": "rome check ."
+		"check": "rome check . && tsc --noEmit"
 	},
 	"license": "ISC",
 	"dependencies": {
