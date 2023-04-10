@@ -1,25 +1,12 @@
 import { Component } from "solid-js"
-import { ThemeProvider, useThemeContext } from "./contexts/theme.context"
+import { ThemeProvider, useThemeContext } from "./components/theme/theme.context"
+import { ThemeSelect } from "./components/theme/theme-select"
 
 export const App: Component = () => {
 	return (
 		<ThemeProvider>
 			<div>Hello</div>
-			<X />
+			<ThemeSelect />
 		</ThemeProvider>
-	)
-}
-
-// TODO: basic theme toggle setting
-const X = () => {
-	// rome-ignore lint/style/noNonNullAssertion: ThemeContext must exist
-	const { setTheme } = useThemeContext()!
-
-	return (
-		<>
-			<button onClick={() => setTheme("system")}>system</button>
-			<button onClick={() => setTheme("light")}>light</button>
-			<button onClick={() => setTheme("dark")}>dark</button>
-		</>
 	)
 }

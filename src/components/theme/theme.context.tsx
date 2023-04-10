@@ -9,7 +9,7 @@ import {
 	onMount,
 	useContext,
 } from "solid-js"
-import { useLocalStorage } from "../hooks/useLocalStorage"
+import { useLocalStorage } from "../../hooks/useLocalStorage"
 
 export type Theme = "light" | "dark" | "system"
 export type SystemTheme = Exclude<Theme, "system">
