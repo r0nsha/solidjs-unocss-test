@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@tabler/icons-solidjs':
+    specifier: ^2.15.0
+    version: 2.15.0(solid-js@1.7.3)
   '@unocss/reset':
     specifier: ^0.51.2
     version: 0.51.2
@@ -679,6 +682,19 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+
+  /@tabler/icons-solidjs@2.15.0(solid-js@1.7.3):
+    resolution: {integrity: sha512-y22VFrW71v9EBeXowSjSkhYxXg8s2BFvoud1kRPkUAP90Wwdk4e+GPuJx4GkVFpFhe8Dgk3LXJ1dj2dzharmGg==}
+    peerDependencies:
+      solid-js: ^1.4.7
+    dependencies:
+      '@tabler/icons': 2.15.0
+      solid-js: 1.7.3
+    dev: false
+
+  /@tabler/icons@2.15.0:
+    resolution: {integrity: sha512-6fwWrsLOqmeoDPii4O1/tG1lsaNoPigUEx8UrOgTLJ81HazbAy5rfypp7FN9/PGsal4VDU+hevOkaGkE6algTQ==}
+    dev: false
 
   /@types/babel__core@7.20.0:
     resolution: {integrity: sha512-+n8dL/9GWblDO0iU6eZAwEIJVr5DWigtle+Q6HLOrh/pdbXOhOtqzq8VPPE2zvNJzSKY4vH/z3iT3tn0A3ypiQ==}
