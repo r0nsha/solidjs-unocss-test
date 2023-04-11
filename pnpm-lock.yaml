@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@solid-primitives/i18n':
+    specifier: ^1.2.4
+    version: 1.2.4(solid-js@1.7.3)
   '@tabler/icons-solidjs':
     specifier: ^2.15.0
     version: 2.15.0(solid-js@1.7.3)
@@ -682,6 +685,23 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+
+  /@solid-primitives/context@0.2.1(solid-js@1.7.3):
+    resolution: {integrity: sha512-XIIwCOWpRKDersgkR9LNFXaJHIV8QlCFo/tq5bV0cAOZklcwOFcqi2bN+uWgEIQSWGjWXU2kc1H1/TzgYzVDlg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.7.3
+    dev: false
+
+  /@solid-primitives/i18n@1.2.4(solid-js@1.7.3):
+    resolution: {integrity: sha512-4phkfhFKAfKWWwN+U5M77P8lq65J5XljyjPkZSVzk+AI2OwpO5aDtKpDxiAMWSS8aYhnfJvlfCkIY7X7XDCDLw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/context': 0.2.1(solid-js@1.7.3)
+      solid-js: 1.7.3
+    dev: false
 
   /@tabler/icons-solidjs@2.15.0(solid-js@1.7.3):
     resolution: {integrity: sha512-y22VFrW71v9EBeXowSjSkhYxXg8s2BFvoud1kRPkUAP90Wwdk4e+GPuJx4GkVFpFhe8Dgk3LXJ1dj2dzharmGg==}

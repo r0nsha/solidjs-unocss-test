@@ -1,7 +1,6 @@
 import {
 	Accessor,
-	Component,
-	JSXElement,
+	FlowComponent,
 	createContext,
 	createEffect,
 	createSignal,
@@ -18,9 +17,7 @@ const ThemeContext = createContext<{ setTheme: (newTheme: Theme) => void }>()
 
 export const useThemeContext = () => useContext(ThemeContext)
 
-export const ThemeProvider: Component<{
-	children?: JSXElement
-}> = (props) => {
+export const ThemeProvider: FlowComponent = (props) => {
 	const systemTheme = useSystemTheme()
 	const [theme, setTheme] = useLocalStorage<Theme>("theme", { defaultValue: "system" })
 
