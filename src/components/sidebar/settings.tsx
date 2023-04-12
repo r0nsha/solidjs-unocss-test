@@ -1,4 +1,4 @@
-import { useThemeContext } from "./theme.context"
+import { useThemeContext } from "../../contexts/theme.context"
 
 // TODO: basic theme toggle setting
 export const ThemeSelect = () => {

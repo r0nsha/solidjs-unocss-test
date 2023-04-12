@@ -1,5 +1,5 @@
 import { Component } from "solid-js"
 
-const Sidebar: Component & { Item: Component } = () => "Sidebar"
+export const Sidebar: Component & { Item: Component } = () => "Sidebar"
 
 Sidebar.Item = () => "Item"
