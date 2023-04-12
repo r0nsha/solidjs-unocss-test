@@ -1,9 +1,7 @@
-import { useThemeContext } from "../../contexts/theme.context"
+import { useTheme } from "../../contexts/theme.context"
 
-// TODO: basic theme toggle setting
 export const ThemeSelect = () => {
-	// rome-ignore lint/style/noNonNullAssertion: ThemeContext must exist
-	const { setTheme } = useThemeContext()!
+	const { setTheme } = useTheme()
 
 	return (
 		<>

@@ -15,7 +15,11 @@ export type SystemTheme = Exclude<Theme, "system">
 
 const ThemeContext = createContext<{ setTheme: (newTheme: Theme) => void }>()
 
-export const useThemeContext = () => useContext(ThemeContext)
+export const useTheme = () => {
+	const value = useContext(ThemeContext)
+	if (!value) throw new Error("useTheme must be used within a ThemeProvider")
+	return value
+}
 
 export const ThemeProvider: FlowComponent = (props) => {
 	const systemTheme = useSystemTheme()
