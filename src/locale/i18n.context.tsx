@@ -1,5 +1,4 @@
-import { Component, FlowComponent, JSXElement } from "solid-js"
-import { I18nContext, createChainedI18nContext, createI18nContext } from "@solid-primitives/i18n"
+import { I18nContext, createChainedI18nContext } from "@solid-primitives/i18n"
 import translations from "./translations"
 
 const [_I18nProvider, useI18nContext] = createChainedI18nContext({
