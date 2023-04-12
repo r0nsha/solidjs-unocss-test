@@ -46,14 +46,14 @@ code {
     @include swatch-palette(
       surface,
       $c-100: #ffffff,
-      $c-200: #e9e9e9,
-      $c-300: #c7c7c7,
-      $c-400: #aaaaaa,
-      $c-500: #919191,
-      $c-600: #787878,
-      $c-700: #646464,
-      $c-800: #535353,
-      $c-900: #454545
+      $c-200: #fbfbfb,
+      $c-300: #e7e7e7,
+      $c-400: #cccccc,
+      $c-500: #b2b2b2,
+      $c-600: #969696,
+      $c-700: #767676,
+      $c-800: #5e5e5e,
+      $c-900: #3f3f3f
     );
 
     @include on-palette(#000);
