@@ -12,7 +12,7 @@ export const Sidebar: Component = () => {
 				<WorkoutItem text={"Untitled"} />
 			</div>
 			<div class="mx-1 mb-6">
-				<ThemeSelect />
+				<ThemeToggle />
 			</div>
 		</div>
 	)
@@ -40,7 +40,7 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 	)
 }
 
-const ThemeSelect = () => {
+const ThemeToggle = () => {
 	const [t] = useI18n()
 	const { theme, setTheme } = useTheme()
 
