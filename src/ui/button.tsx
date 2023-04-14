@@ -26,7 +26,7 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		primary:
 			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-500 focus-visible:(outline-(width-3 solid primary-200))",
 		neutral:
-			"bg-surface-100 color-on-primary outline-(width-0 transparent) hover:bg-surface-200 active:bg-surface-100 focus-visible:(outline-(width-3 solid surface-300))",
+			"bg-surface-200 color-on-primary outline-(width-0 transparent) hover:bg-surface-300 active:bg-surface-200 focus-visible:(outline-(width-3 solid surface-300))",
 		success:
 			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-500 focus-visible:(outline-(width-3 solid success-200))",
 		warning:
@@ -39,7 +39,7 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		primary:
 			"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:bg-primary-50 active:(bg-primary-100 color-primary-600 outline-primary-600) focus-visible:(bg-primary-50)",
 		neutral:
-			"bg-transparent color-surface-800 outline-(width-2 solid surface-800 offset--2) hover:bg-surface-100 active:(bg-surface-200 color-surface-950 outline-surface-950) focus-visible:(bg-surface-100)",
+			"bg-transparent color-on-secondary outline-(width-2 solid on-secondary offset--2) hover:bg-surface-100 active:(bg-surface-200 color-on-primary outline-on-primary) focus-visible:(bg-surface-200)",
 		success:
 			"bg-transparent color-success-500 outline-(width-2 solid success-500 offset--2) hover:bg-success-50 active:(bg-success-100 color-success-600 outline-success-600) focus-visible:(bg-success-50)",
 		warning:
@@ -52,7 +52,7 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		primary:
 			"bg-transparent color-primary-500 outline-(width-0 transparent) hover:bg-primary-50 active:(bg-primary-100 color-primary-600) focus-visible:(bg-primary-50 outline-(width-2 solid primary-300))",
 		neutral:
-			"bg-transparent color-surface-800 outline-(width-0 transparent) hover:bg-surface-100 active:(bg-surface-200 color-surface-950) focus-visible:(bg-surface-100 outline-(width-2 solid surface-300))",
+			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:bg-surface-100 active:(bg-surface-200 color-on-primary) focus-visible:(bg-surface-100 outline-(width-2 solid surface-300))",
 		success:
 			"bg-transparent color-success-500 outline-(width-0 transparent) hover:bg-success-50 active:(bg-success-100 color-success-600) focus-visible:(bg-success-50 outline-(width-2 solid success-300))",
 		warning:
