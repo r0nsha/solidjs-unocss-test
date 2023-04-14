@@ -10,6 +10,7 @@ export type ButtonExtraProps = {
 	colorScheme?: ColorScheme
 	icon?: IconComponent
 	text?: string
+	disabled?: boolean
 }
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & ButtonExtraProps
@@ -29,24 +30,26 @@ const classes: Record<ButtonVariant, string> = {
 		"bg-transparent color-primary-500 outline-(width-0 transparent) hover:focus-visible:bg-primary-50 active:(bg-primary-100 color-primary-600) focus-visible:(bg-primary-50 outline-(width-2 solid primary-200))",
 }
 
-// TODO: state: disabled
 // TODO: colorschemes
+// TODO: state (colorscheme): disabled
 export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(_props, {
 		type: "button",
 		colorScheme: "neutral",
 	} satisfies Partial<ButtonProps>)
 
-	const [buttonProps, htmlProps] = splitProps(props, ["variant", "colorScheme", "icon", "text"])
+	const [buttonProps, htmlProps] = splitProps(props, ["variant", "colorScheme", "icon", "text", "disabled"])
 
 	return (
 		<button
 			{...htmlProps}
+			disabled={buttonProps.disabled}
 			class={classnames(
 				sharedClass,
 				classes[buttonProps.variant],
 				htmlProps.class,
 				buttonProps.text ? textClass : iconClass,
+				buttonProps.disabled && "opacity-50",
 			)}
 		>
 			{props.icon?.({ class: "flex-shrink-0", size: 18 })}
