@@ -5,7 +5,7 @@ import { colorSchemes } from "../../types/color"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-60 h-full flex flex-wrap py-40 px-20">
+		<div class="w-60 h-full flex flex-col gap-16 py-40 px-20">
 			{colorSchemes.map((colorScheme) => (
 				<div class="flex flex-col gap-2">
 					<Button
