@@ -5,15 +5,17 @@ export type ButtonVariant = "solid" | "outline" | "ghost"
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant: ButtonVariant
+	colorScheme: ColorScheme
 	icon?: IconComponent
 	text?: string
 }
 
-const sharedClass = "w-[fit-content] h-8 flex items-center gap-2 text-sm border-none rounded-1"
+const sharedClass = "w-[fit-content] h-8 flex justify-center items-center gap-2 text-sm border-none rounded-1"
 
 const classes: Record<ButtonVariant, string> = {
-	solid: "",
-	outline: "",
+	solid: "bg-primary-500 color-white",
+	outline:
+		"bg-transparent color-primary-500 outline-width-2 outline-solid outline-primary-500 outline-offset--2",
 	ghost: "",
 }
 
@@ -35,6 +37,8 @@ export const Button: Component<ButtonProps> = (_props) => {
 				"rounded-[50%]": !hasText(),
 				"px-3": hasText(),
 				"min-w-20": hasText(),
+				"w-[fit-content]": hasText(),
+				"w-8": !hasText(),
 			}}
 			type={props.type}
 		>
