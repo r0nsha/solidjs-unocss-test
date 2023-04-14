@@ -5,5 +5,6 @@ export default {
 		app_name: "hare",
 		settings: "Settings",
 		theme: "Theme",
+		dark_mode: "Dark mode",
 	},
 }

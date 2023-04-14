@@ -13,7 +13,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage"
 export type Theme = "light" | "dark" | "system"
 export type SystemTheme = Exclude<Theme, "system">
 
-const ThemeContext = createContext<{ setTheme: (newTheme: Theme) => void }>()
+const ThemeContext = createContext<{ theme: Accessor<SystemTheme>; setTheme: (newTheme: Theme) => void }>()
 
 export const useTheme = () => {
 	const value = useContext(ThemeContext)
@@ -25,13 +25,26 @@ export const ThemeProvider: FlowComponent = (props) => {
 	const systemTheme = useSystemTheme()
 	const [theme, setTheme] = useLocalStorage<Theme>("theme", { defaultValue: "system" })
 
-	createEffect(() => {
+	const getTheme = () => {
 		const _theme = theme()
-		const currentTheme = _theme === "system" ? systemTheme() : _theme
+		return _theme === "system" ? systemTheme() : _theme ?? "light"
+	}
+
+	createEffect(() => {
+		const currentTheme = getTheme()
 		document.body.className = `theme-${currentTheme}`
 	})
 
-	return <ThemeContext.Provider value={{ setTheme }}>{props.children}</ThemeContext.Provider>
+	return (
+		<ThemeContext.Provider
+			value={{
+				theme: getTheme,
+				setTheme,
+			}}
+		>
+			{props.children}
+		</ThemeContext.Provider>
+	)
 }
 
 const useSystemTheme = (): Accessor<SystemTheme> => {

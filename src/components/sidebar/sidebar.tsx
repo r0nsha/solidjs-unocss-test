@@ -42,17 +42,13 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 
 const ThemeSelect = () => {
 	const [t] = useI18n()
-	const { setTheme } = useTheme()
+	const { theme, setTheme } = useTheme()
 
-	// <button onClick={() => setTheme("system")}>system</button>
-	// <button onClick={() => setTheme("light")}>light</button>
-	// <button onClick={() => setTheme("dark")}>dark</button>
-	// <Switch />
 	return (
 		<>
 			<div class="px-2 py-1 rounded-1 flex justify-between items-center gap-2.5 select-none color-on-secondary">
-				<span class="flex-1 text-sm font-bold">{t.theme()}</span>
-				<Toggle />
+				<span class="flex-1 text-sm font-bold">{t.dark_mode()}</span>
+				<Toggle checked={theme() === "dark"} onChange={(newValue) => setTheme(newValue ? "dark" : "light")} />
 			</div>
 		</>
 	)
