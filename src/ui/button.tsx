@@ -24,16 +24,16 @@ const iconClass = "w-8 rounded-[50%]"
 const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 	solid: {
 		primary:
-			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-500 focus-visible:(outline-(width-3 solid primary-200))",
+			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-200))",
 		neutral:
-			"bg-surface-200 color-on-primary outline-(width-0 transparent) hover:bg-surface-300 active:bg-surface-200 focus-visible:(outline-(width-3 solid surface-300))",
+			"bg-surface-200 color-on-primary outline-(width-0 transparent) hover:bg-surface-300 active:bg-surface-400 focus-visible:(outline-(width-3 solid surface-300))",
 		success:
-			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-500 focus-visible:(outline-(width-3 solid success-200))",
+			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-700 focus-visible:(outline-(width-3 solid success-200))",
 		warning:
-			"bg-warning-500 color-white outline-(width-0 transparent) hover:bg-warning-600 active:bg-warning-500 focus-visible:(outline-(width-3 solid warning-200))",
-		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-500 focus-visible:(outline-(width-3 solid info-200))",
+			"bg-warning-500 color-white outline-(width-0 transparent) hover:bg-warning-600 active:bg-warning-700 focus-visible:(outline-(width-3 solid warning-200))",
+		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-700 focus-visible:(outline-(width-3 solid info-200))",
 		danger:
-			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-500 focus-visible:(outline-(width-3 solid danger-200))",
+			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-700 focus-visible:(outline-(width-3 solid danger-200))",
 	},
 	outline: {
 		primary:
