@@ -13,14 +13,15 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const sharedClass =
-	"h-8 flex justify-center items-center gap-1.5 text-sm font-bold border-none transition-all duration-150"
+	"h-8 flex justify-center items-center gap-1.5 text-sm font-bold border-none transition-all duration-100 select-none"
 
 const textClass = "w-[fit-content] min-w-20 px-3 rounded-1"
 const iconClass = "w-8 rounded-[50%]"
 
 const classes: Record<ButtonVariant, string> = {
-	solid: "bg-primary-500 color-white",
-	outline: "bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2)",
+	solid: "bg-primary-500 color-white hover:bg-primary-600 active:bg-primary-500",
+	outline:
+		"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:bg-primary-100",
 	ghost: "bg-transparent color-primary-500",
 }
 

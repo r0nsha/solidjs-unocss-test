@@ -9,9 +9,15 @@ import {
 const colorPalette = (name: string): Record<number, string> => {
 	const palette: Record<number, string> = {}
 
+	const add = (level: number) => (palette[level] = `var(--${name}-${level})`)
+
+	add(50)
+
 	for (let i = 100; i < 1000; i += 100) {
-		palette[i] = `var(--${name}-${i})`
+		add(i)
 	}
+
+	add(950)
 
 	return palette
 }
