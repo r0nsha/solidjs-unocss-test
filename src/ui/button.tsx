@@ -1,11 +1,12 @@
 import { Component, JSX, Show, mergeProps, splitProps } from "solid-js"
 import { IconComponent } from "../types/component"
+import { ColorScheme } from "../types/colorscheme"
 
 export type ButtonVariant = "solid" | "outline" | "ghost"
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant: ButtonVariant
-	colorScheme: ColorScheme
+	colorScheme?: ColorScheme
 	icon?: IconComponent
 	text?: string
 }
@@ -19,11 +20,15 @@ const classes: Record<ButtonVariant, string> = {
 	ghost: "",
 }
 
-// TODO: disabled
+// TODO: state: hover
+// TODO: state: active
+// TODO: state: focus
+// TODO: state: disabled
 export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(_props, {
-		type: "button" as ButtonProps["type"],
-	})
+		type: "button",
+		colorScheme: "neutral",
+	} satisfies Partial<ButtonProps>)
 
 	const [buttonProps, htmlProps] = splitProps(props, ["variant", "icon", "text"])
 
