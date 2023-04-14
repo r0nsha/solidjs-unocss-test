@@ -6,20 +6,33 @@ import {
 	transformerVariantGroup,
 } from "unocss"
 
-const colorPalette = (name: string): Record<number, string> => {
-	const palette: Record<number, string> = {}
+const colors = ["surface", "primary", "success", "info", "warning", "danger"] as const
+type Color = typeof colors[number]
 
-	const add = (level: number) => (palette[level] = `var(--${name}-${level})`)
+type ColorPalette = Record<number, string>
 
-	add(50)
-
+const forEachColorLevel = (fn: (level: number) => void) => {
+	fn(50)
 	for (let i = 100; i < 1000; i += 100) {
-		add(i)
+		fn(i)
 	}
+	fn(950)
+}
 
-	add(950)
-
+const colorPalette = (color: Color): ColorPalette => {
+	const palette: Record<number, string> = {}
+	forEachColorLevel((level) => {
+		palette[level] = `var(--${color}-${level})`
+	})
 	return palette
+}
+
+const colorTheme = () => {
+	const t: Partial<Record<Color, ColorPalette>> = {}
+	colors.forEach((color) => {
+		t[color] = colorPalette(color)
+	})
+	return t
 }
 
 export default defineConfig({
@@ -36,16 +49,11 @@ export default defineConfig({
 	transformers: [transformerVariantGroup(), transformerDirectives()],
 	theme: {
 		colors: {
-			surface: colorPalette("surface"),
+			...colorTheme(),
 			on: {
 				primary: "var(--on-primary)",
 				secondary: "var(--on-secondary)",
 			},
-			primary: colorPalette("primary"),
-			success: colorPalette("success"),
-			info: colorPalette("info"),
-			warning: colorPalette("warning"),
-			danger: colorPalette("danger"),
 		},
 	},
 })
