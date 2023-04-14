@@ -21,13 +21,19 @@ const sharedClass =
 const textClass = "w-[fit-content] min-w-20 px-3 rounded-2"
 const iconClass = "w-8 rounded-[50%]"
 
-const classes: Record<ButtonVariant, string> = {
-	solid:
-		"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-500 focus-visible:(outline-(width-4 solid primary-200))",
-	outline:
-		"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:bg-primary-50 active:(bg-primary-100 color-primary-600 outline-primary-600) focus-visible:(bg-primary-50)",
-	ghost:
-		"bg-transparent color-primary-500 outline-(width-0 transparent) hover:focus-visible:bg-primary-50 active:(bg-primary-100 color-primary-600) focus-visible:(bg-primary-50 outline-(width-2 solid primary-200))",
+const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
+	solid: {
+		primary:
+			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-500 focus-visible:(outline-(width-4 solid primary-200))",
+	},
+	outline: {
+		primary:
+			"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:bg-primary-50 active:(bg-primary-100 color-primary-600 outline-primary-600) focus-visible:(bg-primary-50)",
+	},
+	ghost: {
+		primary:
+			"bg-transparent color-primary-500 outline-(width-0 transparent) hover:focus-visible:bg-primary-50 active:(bg-primary-100 color-primary-600) focus-visible:(bg-primary-50 outline-(width-2 solid primary-200))",
+	},
 }
 
 // TODO: colorschemes
@@ -35,7 +41,7 @@ const classes: Record<ButtonVariant, string> = {
 export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(_props, {
 		type: "button",
-		colorScheme: "neutral",
+		colorScheme: "primary",
 	} satisfies Partial<ButtonProps>)
 
 	const [buttonProps, htmlProps] = splitProps(props, ["variant", "colorScheme", "icon", "text", "disabled"])
@@ -46,7 +52,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			disabled={buttonProps.disabled}
 			class={classnames(
 				sharedClass,
-				classes[buttonProps.variant],
+				classes[buttonProps.variant][buttonProps.colorScheme],
 				htmlProps.class,
 				buttonProps.text ? textClass : iconClass,
 				buttonProps.disabled && "opacity-50",

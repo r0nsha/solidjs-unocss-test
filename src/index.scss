@@ -13,11 +13,6 @@ code {
   @apply font-mono;
 }
 
-@mixin on-palette($base) {
-  --on-primary: #{rgba($base, 0.87)};
-  --on-secondary: #{rgba($base, 0.6)};
-}
-
 .theme {
   &-light {
     --surface-50: #ffffff;
@@ -32,7 +27,8 @@ code {
     --surface-900: #3d3d3d;
     --surface-950: #292929;
 
-    @include on-palette(#000);
+	--on-primary: rgba(#000, 0.87)
+	--on-secondary: rgba(#000, 0.6)
   }
 
   &-dark {
@@ -48,7 +44,8 @@ code {
     --surface-900: #696969;
     --surface-950: #818181;
 
-    @include on-palette(#fff);
+	--on-primary: rgba(#fff, 0.87)
+	--on-secondary: rgba(#fff, 0.6)
   }
 }
 

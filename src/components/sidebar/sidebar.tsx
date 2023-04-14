@@ -5,18 +5,18 @@ import { IconCirclePlus, IconExternalLink, IconPlus, IconTrash } from "@tabler/i
 export const Sidebar: Component = () => {
 	return (
 		<div class="w-60 h-full flex flex-col gap-4 p-40">
-			<Button disabled variant="solid" icon={IconPlus} text="Button" onClick={() => console.log("click")} />
-			<Button disabled variant="outline" icon={IconCirclePlus} text="Button" onClick={() => console.log("click")} />
-			<Button disabled 
+			<Button disabled={false} variant="solid" icon={IconPlus} text="Button" onClick={() => console.log("click")} />
+			<Button disabled={false} variant="outline" icon={IconCirclePlus} text="Button" onClick={() => console.log("click")} />
+			<Button disabled={false} 
 				variant="ghost"
 				icon={IconExternalLink}
 				text="Open in new tab"
 				onClick={() => console.log("click")}
 			/>
 			<br />
-			<Button disabled variant="solid" icon={IconTrash} onClick={() => console.log("click")} />
-			<Button disabled variant="outline" icon={IconTrash} onClick={() => console.log("click")} />
-			<Button disabled variant="ghost" icon={IconTrash} onClick={() => console.log("click")} />
+			<Button disabled={false} variant="solid" icon={IconTrash} onClick={() => console.log("click")} />
+			<Button disabled={false} variant="outline" icon={IconTrash} onClick={() => console.log("click")} />
+			<Button disabled={false} variant="ghost" icon={IconTrash} onClick={() => console.log("click")} />
 			Sidebar
 		</div>
 	)
