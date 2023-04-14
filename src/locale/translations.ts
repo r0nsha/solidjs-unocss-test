@@ -4,5 +4,6 @@ export default {
 	en: {
 		app_name: "hare",
 		settings: "Settings",
+		theme: "Theme",
 	},
 }
