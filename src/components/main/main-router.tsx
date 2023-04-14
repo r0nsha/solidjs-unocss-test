@@ -1,5 +1,5 @@
 import { Component } from "solid-js"
 
 export const MainRouter: Component = () => {
-	return <div class="h-full flex-1">Router</div>
+	return <div class="flex-1 p-4">Router</div>
 }
