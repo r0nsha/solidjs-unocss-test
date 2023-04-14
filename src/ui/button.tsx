@@ -13,7 +13,7 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const sharedClass =
-	"h-8 flex justify-center items-center gap-2 text-sm border-none transition-all duration-150"
+	"h-8 flex justify-center items-center gap-1.5 text-sm font-bold border-none transition-all duration-150"
 
 const textClass = "w-[fit-content] min-w-20 px-3 rounded-1"
 const iconClass = "w-8 rounded-[50%]"
@@ -49,7 +49,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			)}
 			type={props.type}
 		>
-			{props.icon?.({ size: 16 })}
+			{props.icon?.({ size: 18 })}
 			{props.text}
 		</button>
 	)
