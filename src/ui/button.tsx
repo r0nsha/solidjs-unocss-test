@@ -21,7 +21,7 @@ const sharedClass =
 const textClass = "w-[fit-content] min-w-20 px-3 rounded-2"
 const iconClass = "w-8 rounded-[50%]"
 
-const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
+const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", string>> = {
 	solid: {
 		primary:
 			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-200))",
@@ -34,6 +34,7 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-700 focus-visible:(outline-(width-3 solid info-200))",
 		danger:
 			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-700 focus-visible:(outline-(width-3 solid danger-200))",
+		disabled: "bg-surface-200 color-surface-400 outline-(width-0 transparent)",
 	},
 	outline: {
 		primary:
@@ -47,6 +48,7 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		info: "bg-transparent color-info-500 outline-(width-2 solid info-500 offset--2) hover:bg-info-50 active:(bg-info-100 color-info-600 outline-info-600) focus-visible:(bg-info-50)",
 		danger:
 			"bg-transparent color-danger-500 outline-(width-2 solid danger-500 offset--2) hover:bg-danger-50 active:(bg-danger-100 color-danger-600 outline-danger-600) focus-visible:(bg-danger-50)",
+		disabled: "bg-transparent color-surface-300 outline-(width-2 solid surface-300 offset--2)",
 	},
 	ghost: {
 		primary:
@@ -60,11 +62,10 @@ const classes: Record<ButtonVariant, Record<ColorScheme, string>> = {
 		info: "bg-transparent color-info-500 outline-(width-0 transparent) hover:bg-info-50 active:(bg-info-100 color-info-600) focus-visible:(bg-info-50 outline-(width-2 solid info-300))",
 		danger:
 			"bg-transparent color-danger-500 outline-(width-0 transparent) hover:bg-danger-50 active:(bg-danger-100 color-danger-600) focus-visible:(bg-danger-50 outline-(width-2 solid danger-300))",
+		disabled: "bg-transparent color-surface-300 outline-(width-0 transparent)",
 	},
 }
 
-// TODO: make all colors work with dark mode
-// TODO: state (colorscheme): disabled
 export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(
 		{
@@ -82,10 +83,10 @@ export const Button: Component<ButtonProps> = (_props) => {
 			disabled={buttonProps.disabled}
 			class={classnames(
 				sharedClass,
-				classes[buttonProps.variant][buttonProps.colorScheme],
+				variantClasses[buttonProps.variant][buttonProps.disabled ? "disabled" : buttonProps.colorScheme],
 				htmlProps.class,
 				buttonProps.text ? textClass : iconClass,
-				buttonProps.disabled && "opacity-50",
+				// buttonProps.disabled && "opacity-50",
 			)}
 		>
 			{props.icon?.({ class: "flex-shrink-0", size: 18 })}
