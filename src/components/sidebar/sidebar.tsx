@@ -7,11 +7,12 @@ export const Sidebar: Component = () => {
 	const [t] = useI18n()
 
 	return (
-		<div class="w-60 bg-surface-100 border-e-(2 solid surface-100)">
+		<div class="w-60 border-e-(2 solid surface-100)">
 			<Title />
-			<div class="flex-1 flex flex-col mx-1">
+			<div class="mx-1">
 				<Item icon={IconSettings} text={t.settings()} suffix={<IconChevronDown size={16} />} />
 			</div>
+			{/* <div class="flex-1 mx-1"></div> */}
 		</div>
 	)
 }
@@ -33,7 +34,7 @@ type ItemProps = {
 
 const Item: Component<ItemProps> = (props) => {
 	return (
-		<div class="px-2 py-1 rounded-1 text-sm font-bold flex items-center gap-2.5 select-none color-on-secondary transition-colors duration-100 hover:bg-surface-200 active:bg-surface-300">
+		<div class="px-2 py-1 rounded-1 text-sm font-bold flex items-center gap-2.5 select-none color-on-secondary transition-colors duration-100 hover:bg-surface-100 active:bg-surface-200">
 			{props.icon({ size: 22 })}
 			<span class="flex-1">{props.text}</span>
 			{props.suffix}
