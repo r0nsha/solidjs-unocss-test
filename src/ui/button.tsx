@@ -86,10 +86,9 @@ export const Button: Component<ButtonProps> = (_props) => {
 				variantClasses[buttonProps.variant][buttonProps.disabled ? "disabled" : buttonProps.colorScheme],
 				htmlProps.class,
 				buttonProps.text ? textClass : iconClass,
-				// buttonProps.disabled && "opacity-50",
 			)}
 		>
-			{props.icon?.({ class: "flex-shrink-0", size: 18 })}
+			{props.icon?.({ class: "flex-shrink-0", size: 20 })}
 			<Show when={buttonProps.text}>
 				<span>{buttonProps.text}</span>
 			</Show>
