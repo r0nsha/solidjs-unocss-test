@@ -27,8 +27,8 @@ code {
     --surface-900: #3d3d3d;
     --surface-950: #292929;
 
-    --on-primary: rgba(#000, 0.87);
-    --on-secondary: rgba(#000, 0.6);
+    --on-primary: rgba(0, 0, 0, 0.87);
+    --on-secondary: rgba(0, 0, 0, 0.6);
 
     --primary-50: #fff2f1;
     --primary-100: #ffe1df;
@@ -104,8 +104,8 @@ code {
     --surface-900: #696969;
     --surface-950: #818181;
 
-    --on-primary: rgba(#fff, 0.87);
-    --on-secondary: rgba(#fff, 0.6);
+    --on-primary: rgba(255, 255, 255, 0.87);
+    --on-secondary: rgba(255, 255, 255, 0.6);
 
     --primary-50: #290c0a;
     --primary-100: #542421;
