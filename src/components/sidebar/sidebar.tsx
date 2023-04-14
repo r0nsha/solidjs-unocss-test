@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 import { Button } from "../../ui/button"
 import { IconCirclePlus, IconExternalLink, IconPlus, IconTrash } from "@tabler/icons-solidjs"
 
-export const Sidebar: Component & { Item: Component } = () => {
+export const Sidebar: Component = () => {
 	return (
 		<div class="w-60 h-full flex flex-col gap-4 p-40">
 			<Button variant="solid" icon={IconPlus} text="Button" onClick={() => console.log("click")} />
@@ -21,5 +21,3 @@ export const Sidebar: Component & { Item: Component } = () => {
 		</div>
 	)
 }
-
-Sidebar.Item = () => "Item"
