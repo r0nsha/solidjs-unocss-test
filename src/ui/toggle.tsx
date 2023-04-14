@@ -15,9 +15,6 @@ export const Toggle: Component<ToggleProps> = (props) => {
 					? "bg-primary-300 hover:bg-primary-400 active:bg-primary-500"
 					: "bg-surface-300 hover:bg-surface-400 active:bg-surface-500",
 			)}
-			classList={{
-				"bg-primary-500": props.checked,
-			}}
 			onKeyPress={(e) => props.onChange?.(!props.checked, e)}
 			onClick={(e) => props.onChange?.(!props.checked, e)}
 		>
