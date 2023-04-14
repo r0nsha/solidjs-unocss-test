@@ -1,7 +1,7 @@
 import { Component, JSX, Show, mergeProps, splitProps } from "solid-js"
 import { IconComponent } from "../types/component"
 import { ColorScheme } from "../types/color"
-import classnames from "classnames"
+import classNames from "classnames"
 
 export type ButtonVariant = "solid" | "outline" | "ghost"
 
@@ -81,7 +81,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 		<button
 			{...htmlProps}
 			disabled={buttonProps.disabled}
-			class={classnames(
+			class={classNames(
 				sharedClass,
 				variantClasses[buttonProps.variant][buttonProps.disabled ? "disabled" : buttonProps.colorScheme],
 				htmlProps.class,
