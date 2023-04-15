@@ -18,9 +18,9 @@ type WorkoutItemProps = {
 
 const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 	return (
-		<div class="h-[fit-content] px-2 py-1 rounded-1 text-sm font-bold flex items-center gap-2.5 select-none color-on-secondary transition-colors duration-100 hover:(bg-surface-100 color-on-primary) active:bg-surface-200">
-			<IconFileDescription size={22} />
+		<button class="h-[fit-content] px-2 py-1 bg-transparent border-none outline-transparent rounded-1 text-sm text-start font-bold flex items-center gap-2 select-none color-on-secondary transition-colors duration-100 hover:(bg-surface-200 color-on-primary) active:bg-surface-300 focus-visible:(bg-surface-100 outline-(width-2 solid surface-500))">
+			<IconFileDescription size={20} />
 			<span class="flex-1">{props.text}</span>
-		</div>
+		</button>
 	)
 }
