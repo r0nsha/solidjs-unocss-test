@@ -14,7 +14,7 @@ export const WorkoutList: Component = () => {
 			<div class="ps-2 pb-2 flex justify-between items-center select-none">
 				<span class="text-lg font-bold">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
-					{(ref) => <Button ref={ref} variant="ghost" colorScheme="neutral" icon={IconSquarePlus} />}
+					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconSquarePlus} />}
 				</Tooltip>
 			</div>
 			<Divider />

@@ -1,4 +1,4 @@
-import { Component, FlowComponent, splitProps } from "solid-js"
+import { Component, splitProps } from "solid-js"
 import { Float, FloatProps } from "./float"
 
 export type TooltipProps = Omit<FloatProps, "render"> & {
