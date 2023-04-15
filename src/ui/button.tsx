@@ -5,16 +5,13 @@ import classNames from "classnames"
 
 export type ButtonVariant = "solid" | "outline" | "ghost"
 
-export type ButtonExtraProps = {
+export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant: ButtonVariant
 	colorScheme?: ColorScheme
 	icon?: IconComponent
 	text?: string
 	disabled?: boolean
 }
-
-export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & ButtonExtraProps
-
 const sharedClass =
 	"h-8 flex truncate justify-center items-center gap-1.5 text-sm font-bold border-none transition-all duration-100 select-none"
 

@@ -1,4 +1,4 @@
 import { TablerIconsProps } from "@tabler/icons-solidjs"
-import { JSX } from "solid-js/jsx-runtime"
+import { JSXElement } from "solid-js"
 
-export type IconComponent = (props: TablerIconsProps) => JSX.Element
+export type IconComponent = (props: TablerIconsProps) => JSXElement
