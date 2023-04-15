@@ -15,13 +15,14 @@ export type FloatProps = {
 	options?: UseFloatingOptions<ReferenceElement, HTMLElement>
 }
 
+// TODO: increase dark theme contrast
 // TODO: trigger or trigger array
 // TODO: trigger: manual (via prop)
 // TODO: trigger: hover
 // TODO: trigger: focus
 // TODO: trigger: focus-within
 // TODO: trigger: click (and key press)
-// TODO: presence animation
+// TODO: presence animation (scale/shift/fade)
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps({ trigger: "hover" }, _props)
 
