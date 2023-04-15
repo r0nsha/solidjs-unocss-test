@@ -5,6 +5,8 @@ export type TooltipProps = Omit<FloatProps, "render"> & {
 	text: string
 }
 
+// TODO: style
+// TODO: arrow middleware
 export const Tooltip: Component<TooltipProps> = (props) => {
 	const [local, float] = splitProps(props, ["text"])
 
