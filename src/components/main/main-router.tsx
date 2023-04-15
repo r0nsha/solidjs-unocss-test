@@ -5,7 +5,7 @@ export const MainRouter: Component = () => {
 		<div class="flex-1 flex flex-col">
 			<div class="h-11" />
 			<div class="ps-24 overflow-y-auto flex-1">
-				<span class="text-4xl font-bold">Untitled</span>
+				<span class="text-4xl font-bold">My Workout</span>
 			</div>
 		</div>
 	)
