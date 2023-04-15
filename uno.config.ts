@@ -41,8 +41,14 @@ export default defineConfig({
 		presetWebFonts({
 			provider: "google",
 			fonts: {
-				sans: "DM Sans",
-				mono: "Noto Sans Mono",
+				sans: {
+					name: "Anuphan",
+					weights: [400, 500, 700],
+				},
+				mono: {
+					name: "Noto Sans Mono",
+					weights: [400, 500, 700],
+				},
 			},
 		}),
 	],

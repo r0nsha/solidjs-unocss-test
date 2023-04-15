@@ -20,6 +20,6 @@ export const Sidebar: Component = () => {
 const Title: Component = () => (
 	<div class="h-11 flex items-center gap-2.5 px-3">
 		<div class="w-5.5 h-5.5 bg-primary-300 rounded-1" />
-		<span class="text-sm font-bold">Your name here...</span>
+		<span class="text-sm font-medium">Your name here...</span>
 	</div>
 )

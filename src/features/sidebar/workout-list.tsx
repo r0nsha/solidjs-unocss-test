@@ -3,8 +3,11 @@ import { Component } from "solid-js"
 
 export const WorkoutList: Component = () => {
 	return (
-		<div class="flex-1 mx-1">
+		<div class="flex flex-col gap-1 flex-1 mx-1">
 			<WorkoutItem text={"Untitled"} />
+			<WorkoutItem text={"Stronglifts 5x5"} />
+			<WorkoutItem text={"Starting Strength"} />
+			<WorkoutItem text={"GZCLP"} />
 		</div>
 	)
 }
