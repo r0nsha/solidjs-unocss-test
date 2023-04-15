@@ -1,5 +1,5 @@
 import { Component } from "solid-js"
-import { Sidebar } from "../../features/sidebar"
+import { Sidebar } from "../../features/sidebar/sidebar"
 import { MainRouter } from "./main-router"
 
 export const Main: Component = () => {

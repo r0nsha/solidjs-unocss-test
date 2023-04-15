@@ -1,9 +1,9 @@
 import { Component } from "solid-js"
-import { useI18n } from "../locale/i18n.context"
+import { useI18n } from "../../locale/i18n.context"
 import { IconFileDescription } from "@tabler/icons-solidjs"
-import { useTheme } from "../contexts/theme.context"
-import { Toggle } from "../ui/toggle"
-import { Divider } from "../ui/divider"
+import { useTheme } from "../../contexts/theme.context"
+import { Toggle } from "../../ui/toggle"
+import { Divider } from "../../ui/divider"
 
 export const Sidebar: Component = () => {
 	return (
