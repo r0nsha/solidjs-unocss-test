@@ -42,7 +42,7 @@ export default defineConfig({
 			provider: "google",
 			fonts: {
 				sans: {
-					name: "Anuphan",
+					name: "Noto Sans",
 					weights: [400, 500, 700],
 				},
 				mono: {
