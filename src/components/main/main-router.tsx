@@ -2,7 +2,7 @@ import { Component } from "solid-js"
 
 export const MainRouter: Component = () => {
 	return (
-		<div class="flex-1 flex flex-col bg-surface-200">
+		<div class="flex-1 flex flex-col">
 			<div class="h-11" />
 			<div class="ps-24 overflow-y-auto flex-1">
 				<span class="text-4xl font-bold">Untitled</span>
