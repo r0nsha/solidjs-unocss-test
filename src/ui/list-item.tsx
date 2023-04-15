@@ -12,7 +12,7 @@ export type ListItemProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export const ListItem: Component<ListItemProps> = (props) => {
-	const [itemProps, htmlProps] = splitProps(props, [
+	const [local, html] = splitProps(props, [
 		"text",
 		"prefixIcon",
 		"prefix",
@@ -23,20 +23,20 @@ export const ListItem: Component<ListItemProps> = (props) => {
 
 	return (
 		<button
-			{...htmlProps}
+			{...html}
 			class={classNames(
 				"h-7 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
-				itemProps.disabled
+				local.disabled
 					? "opacity-50"
 					: "hover:(bg-surface-200 color-on-primary) active:bg-surface-300 focus-visible:bg-surface-100",
 			)}
 		>
-			<Show when={itemProps.prefixIcon} fallback={itemProps.prefix}>
-				{itemProps.prefixIcon?.({ size: 20 })}
+			<Show when={local.prefixIcon} fallback={local.prefix}>
+				{local.prefixIcon?.({ size: 20 })}
 			</Show>
-			<span class="flex-1 font-medium">{itemProps.text}</span>
-			<Show when={itemProps.suffixIcon} fallback={itemProps.suffix}>
-				{itemProps.suffixIcon?.({ size: 20 })}
+			<span class="flex-1 font-medium">{local.text}</span>
+			<Show when={local.suffixIcon} fallback={local.suffix}>
+				{local.suffixIcon?.({ size: 20 })}
 			</Show>
 		</button>
 	)

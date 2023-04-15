@@ -72,22 +72,22 @@ export const Button: Component<ButtonProps> = (_props) => {
 		_props,
 	)
 
-	const [buttonProps, htmlProps] = splitProps(props, ["variant", "colorScheme", "icon", "text", "disabled"])
+	const [local, html] = splitProps(props, ["variant", "colorScheme", "icon", "text", "disabled"])
 
 	return (
 		<button
-			{...htmlProps}
-			disabled={buttonProps.disabled}
+			{...html}
+			disabled={local.disabled}
 			class={classNames(
 				sharedClass,
-				variantClasses[buttonProps.variant][buttonProps.disabled ? "disabled" : buttonProps.colorScheme],
-				htmlProps.class,
-				buttonProps.text ? textClass : iconClass,
+				variantClasses[local.variant][local.disabled ? "disabled" : local.colorScheme],
+				html.class,
+				local.text ? textClass : iconClass,
 			)}
 		>
 			{props.icon?.({ class: "flex-shrink-0", size: 20 })}
-			<Show when={buttonProps.text}>
-				<span>{buttonProps.text}</span>
+			<Show when={local.text}>
+				<span>{local.text}</span>
 			</Show>
 		</button>
 	)
