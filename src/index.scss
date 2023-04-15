@@ -169,6 +169,7 @@ code {
   }
 }
 
+// Scrollbar
 * {
   // Firefox
   scrollbar-width: auto;
@@ -188,4 +189,9 @@ code {
     border-radius: 10px;
     border: 5px solid var(--surface-50);
   }
+}
+
+// Default focus outline
+*:focus-visible {
+  outline: 2px solid var(--on-primary);
 }

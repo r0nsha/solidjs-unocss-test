@@ -8,14 +8,13 @@ export type ToggleProps = {
 
 export const Toggle: Component<ToggleProps> = (props) => {
 	return (
-		<div
+		<button
 			class={classNames(
-				"relative w-10 h-4.5 rounded-4.5 flex items-center transition-colors duration-100",
+				"relative w-10 h-4.5 rounded-4.5 flex items-center transition-colors duration-100 outline-transparent border-none focus-visible:(outline-(width-2 solid on-primary))",
 				props.checked
 					? "bg-primary-500 hover:bg-primary-600 active:bg-primary-700"
 					: "bg-surface-300 hover:bg-surface-400 active:bg-surface-500",
 			)}
-			onKeyPress={(e) => props.onChange?.(!props.checked, e)}
 			onClick={(e) => props.onChange?.(!props.checked, e)}
 		>
 			<div
@@ -24,6 +23,6 @@ export const Toggle: Component<ToggleProps> = (props) => {
 					"inset-s-6": props.checked,
 				}}
 			/>
-		</div>
+		</button>
 	)
 }
