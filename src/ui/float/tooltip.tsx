@@ -9,7 +9,6 @@ export type TooltipProps = Omit<FloatProps, "render"> & {
 	subtext?: string
 }
 
-// TODO: style
 export const Tooltip: Component<TooltipProps> = (props) => {
 	const [local, float] = splitProps(props, ["text", "subtext"])
 
