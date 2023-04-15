@@ -22,7 +22,7 @@ export type FloatProps = {
 // TODO: trigger: focus
 // TODO: trigger: focus-within
 // TODO: trigger: click (and key press)
-// TODO: presence animation (scale/shift/fade)
+// TODO: presence animation (scale + shift + fade)
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps({ trigger: "hover" }, _props)
 
