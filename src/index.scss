@@ -6,11 +6,15 @@ body,
 
 body {
   margin: 0;
-  @apply font-sans bg-surface-50 text-on-primary;
-}
+  @apply bg-surface-50 text-on-primary;
 
-code {
-  @apply font-mono;
+  * {
+    @apply font-sans;
+  }
+
+  code {
+    @apply font-mono;
+  }
 }
 
 .theme {

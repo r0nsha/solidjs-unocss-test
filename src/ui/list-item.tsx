@@ -25,7 +25,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 		<button
 			{...htmlProps}
 			class={classNames(
-				"h-[fit-content] px-2 py-1 bg-transparent border-none outline-transparent rounded-1 text-sm text-start font-bold flex items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
+				"h-7 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
 				itemProps.disabled
 					? "opacity-50"
 					: "hover:(bg-surface-200 color-on-primary) active:bg-surface-300 focus-visible:bg-surface-100",
@@ -34,7 +34,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 			<Show when={itemProps.prefixIcon} fallback={itemProps.prefix}>
 				{itemProps.prefixIcon?.({ size: 20 })}
 			</Show>
-			<span class="flex-1">{itemProps.text}</span>
+			<span class="flex-1 font-medium">{itemProps.text}</span>
 			<Show when={itemProps.suffixIcon} fallback={itemProps.suffix}>
 				{itemProps.suffixIcon?.({ size: 20 })}
 			</Show>
