@@ -70,7 +70,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(
 		{
 			type: "button",
-			colorScheme: "danger",
+			colorScheme: "primary",
 		} satisfies Partial<ButtonProps>,
 		_props,
 	)
