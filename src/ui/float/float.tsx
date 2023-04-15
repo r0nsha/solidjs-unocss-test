@@ -12,6 +12,12 @@ export type FloatProps = {
 	options?: UseFloatingOptions<ReferenceElement, HTMLElement>
 }
 
+// TODO: trigger or trigger array
+// TODO: trigger: manual (via prop)
+// TODO: trigger: hover
+// TODO: trigger: focus
+// TODO: trigger: focus-within
+// TODO: trigger: press
 export const Float: Component<FloatProps> = (props) => {
 	const [reference, setReference] = createSignal<ReferenceElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
