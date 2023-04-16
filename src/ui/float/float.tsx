@@ -1,20 +1,20 @@
 import { ReferenceElement, autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
-import { Component, JSXElement, Setter, createSignal, mergeProps } from "solid-js"
+import { Component, JSXElement, Setter, Show, createEffect, createSignal, mergeProps } from "solid-js"
+import { FloatTrigger } from "./triggers"
 
-export type FloatTrigger = "hover" | "focus" | "focus-within" | "click"
-export type FloatTriggers = FloatTrigger | FloatTrigger[] | { visible: boolean }
+export type FloatTriggers = FloatTrigger /* | FloatTrigger[] */ | { visible: boolean }
 
 export type FloatChildrenProvided = {
-	ref: Setter<ReferenceElement | undefined>
+	ref: Setter<HTMLElement | undefined>
 }
 
 export type FloatProps = {
 	render: (ref: Setter<HTMLElement | undefined>, position: UseFloatingResult) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
-	trigger?: FloatTrigger
+	trigger?: FloatTriggers
 	interactive?: boolean
-	options?: UseFloatingOptions<ReferenceElement, HTMLElement>
+	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 }
 
 // TODO: trigger or trigger array
@@ -23,7 +23,6 @@ export type FloatProps = {
 // TODO: trigger: focus
 // TODO: trigger: focus-within
 // TODO: trigger: click (and key press)
-// TODO: presence animation (scale + shift + fade)
 // TODO: interactive
 // TODO: interactiveBorder
 // TODO: delay
@@ -31,11 +30,12 @@ export type FloatProps = {
 // TODO: onShown
 // TODO: onHide
 // TODO: onHidden
-// TODO: onClickOutside (use:clickOutside)
+// TODO: onClickOutside
+// TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
-	const props = mergeProps({ trigger: "hover" }, _props)
+	const props = mergeProps({ trigger: "hover" as FloatTrigger }, _props)
 
-	const [reference, setReference] = createSignal<ReferenceElement>()
+	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
 
 	const position = useFloating(reference, floating, {
@@ -45,10 +45,35 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
+	const show = () => {
+		// TODO: trigger array
+		// if (Array.isArray(props.trigger)) {
+		// 	throw new Error("todo")
+		// } else
+		if (typeof props.trigger === "object") {
+			return props.trigger.visible
+		} else {
+			throw new Error("TODO: triggers")
+			// switch (props.trigger) {
+			// 	case "hover":
+			// 		break
+			// }
+		}
+	}
+
+	// throw new Error("TODO: triggers")
+	// createEffect(() => {
+	// 	const ref = reference()
+	//
+	// 	const triggerHandlers
+	//
+	// 	ref?.removeEventListener()
+	// })
+
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			{props.render(setFloating, position)}
+			<Show when={show()}>{props.render(setFloating, position)}</Show>
 		</>
 	)
 }
