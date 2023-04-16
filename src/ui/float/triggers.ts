@@ -1,6 +1,6 @@
 import { Setter } from "solid-js"
 
-const floatTriggers = ["hover", "focus", "focus-within", "click"] as const
+const floatTriggers = ["hover", "focus", "focusin", "click"] as const
 export type FloatTrigger = typeof floatTriggers[number]
 
 export type FloatTriggerEventHandlers = (readonly [
@@ -10,7 +10,7 @@ export type FloatTriggerEventHandlers = (readonly [
 
 export const getFloatTriggerProps = (
 	trigger: FloatTrigger,
-	setShow: (show:boolean)=>void
+	setShow: (show: boolean) => void,
 ): FloatTriggerEventHandlers => {
 	const show = () => setShow(true)
 	const hide = () => setShow(false)
@@ -26,7 +26,7 @@ export const getFloatTriggerProps = (
 				["focus", show],
 				["blur", hide],
 			]
-		case "focus-within":
+		case "focusin":
 			return [
 				["focusin", show],
 				["focusout", hide],

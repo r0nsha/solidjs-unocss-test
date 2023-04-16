@@ -16,7 +16,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 
 	return (
 		<Float
-			trigger={["hover", "focus"]}
+			trigger={["hover", "focusin"]}
 			{...float}
 			options={{
 				middleware: [offset({ mainAxis: 4 })],
