@@ -27,6 +27,7 @@ export type FloatProps = {
 	render: (ref: Setter<HTMLElement | undefined>, position: UseFloatingResult) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
 	trigger?: FloatTriggers
+	hideOnClick?: boolean
 	interactive?: boolean
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 }
@@ -60,6 +61,16 @@ export const Float: Component<FloatProps> = (_props) => {
 	const isManual = (trigger: FloatTriggers): trigger is ManualFloatTrigger =>
 		typeof trigger === "object" && !Array.isArray(trigger)
 
+	const hide = () => {
+		if (Array.isArray(props.trigger)) {
+			setShowStates(Array(props.trigger.length).fill(false))
+		} else {
+			setShowStates([false])
+		}
+	}
+
+	const hideOnClickHandler = () => hide()
+
 	createRenderEffect(() => {
 		if (isManual(props.trigger)) {
 			setShowStates([props.trigger.visible])
@@ -74,13 +85,12 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 
 		lastEventHandlers.forEach(([ev, handler]) => ref.removeEventListener(ev, handler))
+		ref.removeEventListener("click", hideOnClickHandler)
 
-		let eventHandlers: FloatTriggerEventHandlers
+		hide()
 
-		if (Array.isArray(props.trigger)) {
-			setShowStates(Array(props.trigger.length).fill(false))
-
-			eventHandlers = props.trigger.reduce(
+		const eventHandlers = Array.isArray(props.trigger)
+			? props.trigger.reduce(
 				(acc, trigger, index) => [
 					...acc,
 					...getFloatTriggerEventHandlers(trigger, (show) => {
@@ -89,11 +99,10 @@ export const Float: Component<FloatProps> = (_props) => {
 				],
 				[] as FloatTriggerEventHandlers,
 			)
-		} else {
-			eventHandlers = getFloatTriggerEventHandlers(props.trigger, (show) => setShowStates([show]))
-		}
+			: getFloatTriggerEventHandlers(props.trigger, (show) => setShowStates([show]))
 
 		eventHandlers.forEach(([ev, handler]) => ref.addEventListener(ev, handler))
+		ref.addEventListener("click", hideOnClickHandler)
 
 		lastEventHandlers = eventHandlers
 	})
