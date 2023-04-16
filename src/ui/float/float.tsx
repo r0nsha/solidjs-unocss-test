@@ -35,8 +35,11 @@ export type FloatProps = {
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps({ trigger: "hover" as FloatTrigger }, _props)
 
+	const shouldShow = () => typeof props.trigger === "object" && props.trigger.visible
+
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
+	const [show, setShow] = createSignal(shouldShow)
 
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
@@ -45,21 +48,21 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
-	const show = () => {
-		// TODO: trigger array
-		// if (Array.isArray(props.trigger)) {
-		// 	throw new Error("todo")
-		// } else
-		if (typeof props.trigger === "object") {
-			return props.trigger.visible
-		} else {
-			throw new Error("TODO: triggers")
-			// switch (props.trigger) {
-			// 	case "hover":
-			// 		break
-			// }
-		}
-	}
+	// const show = () => {
+	// 	// TODO: trigger array
+	// 	// if (Array.isArray(props.trigger)) {
+	// 	// 	throw new Error("todo")
+	// 	// } else
+	// 	if (typeof props.trigger === "object") {
+	// 		return props.trigger.visible
+	// 	} else {
+	// 		throw new Error("TODO: triggers")
+	// 		// switch (props.trigger) {
+	// 		// 	case "hover":
+	// 		// 		break
+	// 		// }
+	// 	}
+	// }
 
 	// throw new Error("TODO: triggers")
 	// createEffect(() => {
@@ -73,7 +76,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={show()}>{props.render(setFloating, position)}</Show>
+			<Show when={shouldShow()}>{props.render(setFloating, position)}</Show>
 		</>
 	)
 }
