@@ -31,7 +31,6 @@ export type FloatProps = {
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 }
 
-// TODO: trigger: focus-within
 // TODO: trigger: click (and key press)
 // TODO: interactive
 // TODO: interactiveBorder

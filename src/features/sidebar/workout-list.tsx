@@ -13,7 +13,7 @@ export const WorkoutList: Component = () => {
 		<div class="flex flex-(col 1) mx-1">
 			<div class="ps-2 pb-1 flex justify-between items-center select-none">
 				<span class="font-bold">{t.workouts()}</span>
-				<Tooltip text={t.create_a_workout()}>
+				<Tooltip text={t.create_a_workout()} trigger="click">
 					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconSquarePlus} />}
 				</Tooltip>
 			</div>

@@ -1,5 +1,3 @@
-import { Setter } from "solid-js"
-
 const floatTriggers = ["hover", "focus", "focusin", "click"] as const
 export type FloatTrigger = typeof floatTriggers[number]
 
