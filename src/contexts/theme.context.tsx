@@ -54,7 +54,7 @@ const useSystemTheme = (): Accessor<SystemTheme> => {
 
 	const [systemTheme, setSystemTheme] = createSignal<SystemTheme>(getSystemTheme(mediaQuery.matches))
 
-	const listener = (e: MediaQueryListEvent) => setSystemTheme(getSystemTheme(e.matches))
+	const listener = (ev: MediaQueryListEvent) => setSystemTheme(getSystemTheme(ev.matches))
 
 	onMount(() => mediaQuery.addEventListener("change", listener))
 	onCleanup(() => mediaQuery.removeEventListener("change", listener))

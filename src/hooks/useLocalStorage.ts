@@ -20,7 +20,7 @@ export const useStorage = <V extends string>(
 
 	const [value, setValue] = createSignal<V | null>(initialValue)
 
-	const listener = (e: StorageEvent) => setValue((_) => e.newValue as V | null)
+	const listener = (ev: StorageEvent) => setValue((_) => ev.newValue as V | null)
 
 	const setItem = (newValue: V) => {
 		storage.setItem(key, newValue)

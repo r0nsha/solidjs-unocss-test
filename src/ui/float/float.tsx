@@ -9,6 +9,8 @@ import {
 	createRenderEffect,
 	createSignal,
 	mergeProps,
+	onCleanup,
+	onMount,
 } from "solid-js"
 import {
 	FloatTrigger,
@@ -69,6 +71,10 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	}
 
+	const triggerIs = (trigger: FloatTrigger) =>
+		!isManual(props.trigger) &&
+		(Array.isArray(props.trigger) ? props.trigger.includes(trigger) : props.trigger === trigger)
+
 	const hideOnClickHandler = () => hide()
 
 	createRenderEffect(() => {
@@ -106,6 +112,21 @@ export const Float: Component<FloatProps> = (_props) => {
 
 		lastEventHandlers = eventHandlers
 	})
+
+	const bodyClickHandler = (ev: MouseEvent) => {
+		const f = floating()
+
+		if (f && !f.contains(ev.target as Node | null)) {
+			if (triggerIs("click")) {
+				hide()
+			}
+
+			//  TODO: onClickOutside
+		}
+	}
+
+	onMount(() => document.body.addEventListener("click", bodyClickHandler))
+	onCleanup(() => document.body.removeEventListener("click", bodyClickHandler))
 
 	return (
 		<>

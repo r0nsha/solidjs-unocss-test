@@ -30,7 +30,9 @@ export const getFloatTriggerProps = (
 				["focusout", hide],
 			]
 		case "click":
-			throw new Error("TODO: click")
-		// return []
+			return [
+				["click", show],
+				["keypress", show],
+			]
 	}
 }
