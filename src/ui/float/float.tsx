@@ -1,7 +1,7 @@
 import { ReferenceElement, autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
 import { Component, JSXElement, Setter, Show, createEffect, createSignal, mergeProps } from "solid-js"
-import { FloatTrigger } from "./triggers"
+import { FloatTrigger, getFloatTriggerProps } from "./triggers"
 
 export type FloatTriggers = FloatTrigger /* | FloatTrigger[] */ | { visible: boolean }
 
@@ -64,14 +64,17 @@ export const Float: Component<FloatProps> = (_props) => {
 	// 	}
 	// }
 
-	// throw new Error("TODO: triggers")
-	// createEffect(() => {
-	// 	const ref = reference()
-	//
-	// 	const triggerHandlers
-	//
-	// 	ref?.removeEventListener()
-	// })
+	createEffect(() => {
+		if (typeof props.trigger === "object") {
+			return
+		}
+
+		const ref = reference()
+
+		const triggerHandler = getFloatTriggerProps(props.trigger)
+
+		ref?.removeEventListener()
+	})
 
 	return (
 		<>
