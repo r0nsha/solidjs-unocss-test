@@ -1,9 +1,23 @@
 import { ReferenceElement, autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
-import { Component, JSXElement, Setter, Show, createEffect, createSignal, mergeProps } from "solid-js"
-import { FloatTrigger, getFloatTriggerProps } from "./triggers"
+import {
+	Component,
+	JSXElement,
+	Setter,
+	Show,
+	createEffect,
+	createRenderEffect,
+	createSignal,
+	mergeProps,
+} from "solid-js"
+import {
+	FloatTrigger,
+	FloatTriggerEventHandlers,
+	getFloatTriggerProps as getFloatTriggerEventHandlers,
+} from "./triggers"
 
-export type FloatTriggers = FloatTrigger /* | FloatTrigger[] */ | { visible: boolean }
+export type ManualFloatTrigger = { visible: boolean }
+export type FloatTriggers = FloatTrigger | FloatTrigger[] | ManualFloatTrigger
 
 export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -17,10 +31,7 @@ export type FloatProps = {
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 }
 
-// TODO: trigger or trigger array
-// TODO: trigger: manual (via prop)
-// TODO: trigger: hover
-// TODO: trigger: focus
+// TODO: trigger array
 // TODO: trigger: focus-within
 // TODO: trigger: click (and key press)
 // TODO: interactive
@@ -35,11 +46,9 @@ export type FloatProps = {
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps({ trigger: "hover" as FloatTrigger }, _props)
 
-	const shouldShow = () => typeof props.trigger === "object" && props.trigger.visible
-
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
-	const [show, setShow] = createSignal(shouldShow)
+	const [showStates, setShowStates] = createSignal<boolean[]>([])
 
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
@@ -48,38 +57,53 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
-	// const show = () => {
-	// 	// TODO: trigger array
-	// 	// if (Array.isArray(props.trigger)) {
-	// 	// 	throw new Error("todo")
-	// 	// } else
-	// 	if (typeof props.trigger === "object") {
-	// 		return props.trigger.visible
-	// 	} else {
-	// 		throw new Error("TODO: triggers")
-	// 		// switch (props.trigger) {
-	// 		// 	case "hover":
-	// 		// 		break
-	// 		// }
-	// 	}
-	// }
+	let lastEventHandlers: FloatTriggerEventHandlers = []
+
+	const isManual = (trigger: FloatTriggers): trigger is ManualFloatTrigger =>
+		typeof trigger === "object" && !Array.isArray(trigger)
+
+	createRenderEffect(() => {
+		if (isManual(props.trigger)) {
+			setShowStates([props.trigger.visible])
+		}
+	})
 
 	createEffect(() => {
-		if (typeof props.trigger === "object") {
+		const ref = reference()
+
+		if (isManual(props.trigger) || !ref) {
 			return
 		}
 
-		const ref = reference()
+		lastEventHandlers.forEach(([ev, handler]) => ref.removeEventListener(ev, handler))
 
-		const triggerHandler = getFloatTriggerProps(props.trigger)
+		let eventHandlers: FloatTriggerEventHandlers
 
-		ref?.removeEventListener()
+		if (Array.isArray(props.trigger)) {
+			setShowStates(Array(props.trigger.length).fill(false))
+
+			eventHandlers = props.trigger.reduce(
+				(acc, trigger, index) => [
+					...acc,
+					...getFloatTriggerEventHandlers(trigger, (show) => {
+						setShowStates((states) => states.map((state, i) => (i === index ? show : state)))
+					}),
+				],
+				[] as FloatTriggerEventHandlers,
+			)
+		} else {
+			eventHandlers = getFloatTriggerEventHandlers(props.trigger, (show) => setShowStates([show]))
+		}
+
+		eventHandlers.forEach(([ev, handler]) => ref.addEventListener(ev, handler))
+
+		lastEventHandlers = eventHandlers
 	})
 
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={shouldShow()}>{props.render(setFloating, position)}</Show>
+			<Show when={showStates().some(Boolean)}>{props.render(setFloating, position)}</Show>
 		</>
 	)
 }

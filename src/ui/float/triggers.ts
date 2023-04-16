@@ -1,22 +1,38 @@
-import { JSX } from "solid-js/jsx-runtime"
+import { Setter } from "solid-js"
 
 const floatTriggers = ["hover", "focus", "focus-within", "click"] as const
 export type FloatTrigger = typeof floatTriggers[number]
 
+export type FloatTriggerEventHandlers = (readonly [
+	keyof HTMLElementEventMap,
+	(this: HTMLElement, ev: Event) => void,
+])[]
+
 export const getFloatTriggerProps = (
 	trigger: FloatTrigger,
-): (readonly [keyof HTMLElementEventMap, (this: HTMLElement, ev: Event) => void])[] => {
+	setShow: (show:boolean)=>void
+): FloatTriggerEventHandlers => {
+	const show = () => setShow(true)
+	const hide = () => setShow(false)
+
 	switch (trigger) {
 		case "hover":
-			return []
+			return [
+				["mouseenter", show],
+				["mouseleave", hide],
+			]
 		case "focus":
-			throw new Error("TODO: focus")
-			// return []
+			return [
+				["focus", show],
+				["blur", hide],
+			]
 		case "focus-within":
-			throw new Error("TODO: focus-within")
-			// return []
+			return [
+				["focusin", show],
+				["focusout", hide],
+			]
 		case "click":
 			throw new Error("TODO: click")
-			// return []
+		// return []
 	}
 }
