@@ -34,13 +34,11 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: trigger: hover
 // TODO: hideOnClick
-// TODO: interactive
-// TODO: trigger: focus
-// TODO: trigger: focusin
 // TODO: trigger: click
 // TODO: trigger: onClickOutside
+// TODO: trigger: click + hover
+// TODO: trigger: click + focus
 // TODO: trigger: click - key press
 // TODO: disabled
 // TODO: interactive
@@ -72,6 +70,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
+	// PERF: calling `hasTrigger` everywhere is inefficient
 	const hasTrigger = (is: FloatTrigger) =>
 		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
@@ -103,7 +102,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const onFocus = (e: FocusEvent) => {
 		focused = true
 
-		if (!hasTrigger("focus")) {
+		if (!hasTrigger("focus") && !hasTrigger("focusin")) {
 			return
 		}
 
@@ -113,7 +112,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const onBlur = (e: FocusEvent) => {
 		focused = false
 
-		if (!hasTrigger("focus")) {
+		if (!hasTrigger("focus") && !hasTrigger("focusin")) {
 			return
 		}
 
@@ -124,7 +123,13 @@ export const Float: Component<FloatProps> = (_props) => {
 		setShow(false)
 	}
 
-	// const onClick = (e: MouseEvent) => { }
+	const onClick = (e: MouseEvent) => {
+		if (!hasTrigger("click")) {
+			return
+		}
+
+		setShow(true)
+	}
 
 	createEffect(() => {
 		const ref = reference()
@@ -137,6 +142,8 @@ export const Float: Component<FloatProps> = (_props) => {
 		ref.addEventListener("mouseleave", onMouseLeave)
 		ref.addEventListener("focus", onFocus)
 		ref.addEventListener("blur", onBlur)
+		ref.addEventListener("focusin", onFocus)
+		ref.addEventListener("focusout", onBlur)
 	})
 
 	createRenderEffect(() => {
