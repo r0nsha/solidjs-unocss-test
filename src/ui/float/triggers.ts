@@ -41,7 +41,13 @@ export const getFloatTriggerProps = (
 			]
 		case "click":
 			return [
-				["click", show],
+				[
+					"click",
+					(e) => {
+						e.stopPropagation()
+						show()
+					},
+				],
 				["keypress", show],
 			]
 	}

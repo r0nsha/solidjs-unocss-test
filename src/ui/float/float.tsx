@@ -1,6 +1,7 @@
-import { ReferenceElement, autoUpdate, flip, shift } from "@floating-ui/dom"
+import { autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
 import {
+	Accessor,
 	Component,
 	JSXElement,
 	Setter,
@@ -9,17 +10,13 @@ import {
 	createRenderEffect,
 	createSignal,
 	mergeProps,
-	onCleanup,
-	onMount,
 } from "solid-js"
 import {
 	FloatTrigger,
-	ManualFloatTrigger,
-	FloatTriggers,
 	FloatTriggerEventHandlers,
+	FloatTriggers,
 	getFloatTriggerProps as getFloatTriggerEventHandlers,
 	manual,
-	triggerIs,
 } from "./triggers"
 
 export type FloatRenderProvided = {
@@ -38,9 +35,11 @@ export type FloatProps = {
 	hideOnClick?: boolean
 	interactive?: boolean
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
+	onClickOutside?: (ev: MouseEvent) => void
 }
 
-// TODO: trigger: click (and key press)
+// TODO: trigger: focus fix
+// TODO: trigger: click - key press
 // TODO: interactive
 // TODO: interactiveBorder
 // TODO: delay
@@ -79,12 +78,6 @@ export const Float: Component<FloatProps> = (_props) => {
 
 	const shown = () => showStates().some(Boolean)
 
-	const triggerIs = (trigger: FloatTrigger) =>
-		!manual(props.trigger) &&
-		(Array.isArray(props.trigger) ? props.trigger.includes(trigger) : props.trigger === trigger)
-
-	const hideOnClickHandler = () => hide()
-
 	createRenderEffect(() => {
 		if (manual(props.trigger)) {
 			setShowStates([props.trigger.visible])
@@ -119,6 +112,8 @@ export const Float: Component<FloatProps> = (_props) => {
 		lastEventHandlers = eventHandlers
 	})
 
+	const hideOnClickHandler = () => hide()
+
 	createEffect(() => {
 		const ref = reference()
 
@@ -135,28 +130,26 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
-	createEffect(() => {
+	const bodyClickHandler = (ev: MouseEvent) => {
 		const f = floating()
 
-		if (f) {
-			f.style.pointerEvents = props.interactive ? "all" : "none"
+		if (f && !f.contains(ev.target as Node | null)) {
+			hide()
+			props.onClickOutside?.(ev)
+		}
+	}
+
+	createEffect(() => {
+		if (shown()) {
+			setTimeout(() => {
+				document.body.addEventListener("click", bodyClickHandler)
+			})
+		} else {
+			document.body.removeEventListener("click", bodyClickHandler)
 		}
 	})
 
-	// const bodyClickHandler = (ev: MouseEvent) => {
-	// 	const f = floating()
-	//
-	// 	if (f && !f.contains(ev.target as Node | null)) {
-	// 		if (triggerIs("click")) {
-	// 			hide()
-	// 		}
-	//
-	// 		//  TODO: onClickOutside
-	// 	}
-	// }
-	//
-	// onMount(() => document.body.addEventListener("click", bodyClickHandler))
-	// onCleanup(() => document.body.removeEventListener("click", bodyClickHandler))
+	useInteractiveStyle(floating, props.interactive)
 
 	return (
 		<>
@@ -164,4 +157,14 @@ export const Float: Component<FloatProps> = (_props) => {
 			<Show when={shown()}>{props.render({ ref: setFloating, position })}</Show>
 		</>
 	)
+}
+
+const useInteractiveStyle = (floating: Accessor<HTMLElement | undefined>, interactive: boolean) => {
+	createEffect(() => {
+		const f = floating()
+
+		if (f) {
+			f.style.pointerEvents = interactive ? "auto" : "none"
+		}
+	})
 }
