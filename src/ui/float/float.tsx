@@ -127,6 +127,14 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
+	createEffect(() => {
+		const f = floating()
+
+		if (f) {
+			f.style.pointerEvents = props.interactive ? "all" : "none"
+		}
+	})
+
 	// const bodyClickHandler = (ev: MouseEvent) => {
 	// 	const f = floating()
 	//
