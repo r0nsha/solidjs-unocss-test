@@ -22,17 +22,18 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 			options={{
 				middleware: [offset({ mainAxis: 4 })],
 			}}
-			render={(ref, position) => (
+			render={(provided) => (
 				<div
-					ref={ref}
+					ref={provided.ref}
 					style={{
-						position: position.strategy,
-						top: `${position.y ?? 0}px`,
-						left: `${position.x ?? 0}px`,
+						position: provided.position.strategy,
+						top: `${provided.position.y ?? 0}px`,
+						left: `${provided.position.x ?? 0}px`,
 					}}
 					class={classNames(
 						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
+						provided.interactive ? "pointer-events-auto" : "pointer-events-none",
 					)}
 				>
 					<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>

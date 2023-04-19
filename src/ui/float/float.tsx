@@ -22,12 +22,18 @@ import {
 	triggerIs,
 } from "./triggers"
 
+export type FloatRenderProvided = {
+	ref: Setter<HTMLElement | undefined>
+	position: UseFloatingResult
+	interactive: boolean
+}
+
 export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
 }
 
 export type FloatProps = {
-	render: (ref: Setter<HTMLElement | undefined>, position: UseFloatingResult) => JSXElement
+	render: (provided: FloatRenderProvided) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
 	trigger?: FloatTriggers
 	hideOnClick?: boolean
@@ -46,7 +52,10 @@ export type FloatProps = {
 // TODO: onClickOutside
 // TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
-	const props = mergeProps({ trigger: "hover" as FloatTrigger, hideOnClick: true }, _props)
+	const props = mergeProps(
+		{ trigger: "hover" as FloatTrigger, interactive: false, hideOnClick: true },
+		_props,
+	)
 
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
@@ -127,14 +136,6 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
-	createEffect(() => {
-		const f = floating()
-
-		if (f) {
-			f.style.pointerEvents = props.interactive ? "all" : "none"
-		}
-	})
-
 	// const bodyClickHandler = (ev: MouseEvent) => {
 	// 	const f = floating()
 	//
@@ -153,7 +154,9 @@ export const Float: Component<FloatProps> = (_props) => {
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={shown()}>{props.render(setFloating, position)}</Show>
+			<Show when={shown()}>
+				{props.render({ ref: setFloating, position, interactive: props.interactive })}
+			</Show>
 		</>
 	)
 }
