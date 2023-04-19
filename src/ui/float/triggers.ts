@@ -1,5 +1,15 @@
 const floatTriggers = ["hover", "focus", "focusin", "click"] as const
+
 export type FloatTrigger = typeof floatTriggers[number]
+
+export type ManualFloatTrigger = { visible: boolean }
+export type FloatTriggers = FloatTrigger | FloatTrigger[] | ManualFloatTrigger
+
+export const manual = (trigger: FloatTriggers): trigger is ManualFloatTrigger =>
+	typeof trigger === "object" && !Array.isArray(trigger)
+
+export const triggerIs = (trigger: FloatTriggers, is: FloatTrigger) =>
+	!manual(trigger) && (Array.isArray(trigger) ? trigger.includes(is) : trigger === is)
 
 export type FloatTriggerEventHandlers = (readonly [
 	keyof HTMLElementEventMap,

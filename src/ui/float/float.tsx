@@ -14,12 +14,13 @@ import {
 } from "solid-js"
 import {
 	FloatTrigger,
+	ManualFloatTrigger,
+	FloatTriggers,
 	FloatTriggerEventHandlers,
 	getFloatTriggerProps as getFloatTriggerEventHandlers,
+	manual,
+	triggerIs,
 } from "./triggers"
-
-export type ManualFloatTrigger = { visible: boolean }
-export type FloatTriggers = FloatTrigger | FloatTrigger[] | ManualFloatTrigger
 
 export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -45,7 +46,7 @@ export type FloatProps = {
 // TODO: onClickOutside
 // TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
-	const props = mergeProps({ trigger: "hover" as FloatTrigger }, _props)
+	const props = mergeProps({ trigger: "hover" as FloatTrigger, hideOnClick: true }, _props)
 
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
@@ -60,9 +61,6 @@ export const Float: Component<FloatProps> = (_props) => {
 
 	let lastEventHandlers: FloatTriggerEventHandlers = []
 
-	const isManual = (trigger: FloatTriggers): trigger is ManualFloatTrigger =>
-		typeof trigger === "object" && !Array.isArray(trigger)
-
 	const hide = () => {
 		if (Array.isArray(props.trigger)) {
 			setShowStates(Array(props.trigger.length).fill(false))
@@ -71,14 +69,16 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	}
 
+	const shown = () => showStates().some(Boolean)
+
 	const triggerIs = (trigger: FloatTrigger) =>
-		!isManual(props.trigger) &&
+		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(trigger) : props.trigger === trigger)
 
 	const hideOnClickHandler = () => hide()
 
 	createRenderEffect(() => {
-		if (isManual(props.trigger)) {
+		if (manual(props.trigger)) {
 			setShowStates([props.trigger.visible])
 		}
 	})
@@ -86,12 +86,11 @@ export const Float: Component<FloatProps> = (_props) => {
 	createEffect(() => {
 		const ref = reference()
 
-		if (isManual(props.trigger) || !ref) {
+		if (manual(props.trigger) || !ref) {
 			return
 		}
 
 		lastEventHandlers.forEach(([ev, handler]) => ref.removeEventListener(ev, handler))
-		ref.removeEventListener("click", hideOnClickHandler)
 
 		hide()
 
@@ -108,30 +107,45 @@ export const Float: Component<FloatProps> = (_props) => {
 			: getFloatTriggerEventHandlers(props.trigger, (show) => setShowStates([show]))
 
 		eventHandlers.forEach(([ev, handler]) => ref.addEventListener(ev, handler))
-		ref.addEventListener("click", hideOnClickHandler)
 
 		lastEventHandlers = eventHandlers
 	})
 
-	const bodyClickHandler = (ev: MouseEvent) => {
-		const f = floating()
+	createEffect(() => {
+		const ref = reference()
 
-		if (f && !f.contains(ev.target as Node | null)) {
-			if (triggerIs("click")) {
-				hide()
-			}
-
-			//  TODO: onClickOutside
+		if (manual(props.trigger) || !ref) {
+			return
 		}
-	}
 
-	onMount(() => document.body.addEventListener("click", bodyClickHandler))
-	onCleanup(() => document.body.removeEventListener("click", bodyClickHandler))
+		if (props.hideOnClick) {
+			if (shown()) {
+				ref.addEventListener("click", hideOnClickHandler)
+			} else {
+				ref.removeEventListener("click", hideOnClickHandler)
+			}
+		}
+	})
+
+	// const bodyClickHandler = (ev: MouseEvent) => {
+	// 	const f = floating()
+	//
+	// 	if (f && !f.contains(ev.target as Node | null)) {
+	// 		if (triggerIs("click")) {
+	// 			hide()
+	// 		}
+	//
+	// 		//  TODO: onClickOutside
+	// 	}
+	// }
+	//
+	// onMount(() => document.body.addEventListener("click", bodyClickHandler))
+	// onCleanup(() => document.body.removeEventListener("click", bodyClickHandler))
 
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={showStates().some(Boolean)}>{props.render(setFloating, position)}</Show>
+			<Show when={shown()}>{props.render(setFloating, position)}</Show>
 		</>
 	)
 }

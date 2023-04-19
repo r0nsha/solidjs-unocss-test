@@ -1,4 +1,3 @@
-import { IconFileDescription } from "@tabler/icons-solidjs"
 import { Component } from "solid-js"
 import { Divider } from "../../ui/divider"
 import { ThemeToggle } from "./theme-toggle"
