@@ -23,6 +23,8 @@ export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
 }
 
+export type FloatDelay = number | { in?: number; out?: number }
+
 export type FloatProps = {
 	render: (provided: FloatRenderProvided) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
@@ -31,17 +33,17 @@ export type FloatProps = {
 	disabled?: boolean
 	hideOnClick?: boolean
 	interactive?: boolean
+	delay?: FloatDelay
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
+// TODO: interactive
 // TODO: interactiveBorder
-// TODO: delay
 // TODO: onShow
 // TODO: onShown
 // TODO: onHide
 // TODO: onHidden
-// TODO: onClickOutside
 // TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps(
@@ -74,8 +76,17 @@ export const Float: Component<FloatProps> = (_props) => {
 		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
 
-	const show = () => setVisible(true)
-	const hide = () => setVisible(false)
+	let scheduledSetVisible: number | undefined
+
+	const scheduleSetVisible = (value: boolean) => {
+		clearTimeout(scheduledSetVisible)
+
+		const delay = typeof props.delay === "number" ? props.delay : props.delay?.[value ? "in" : "out"] ?? 0
+		scheduledSetVisible = setTimeout(() => setVisible(value), delay)
+	}
+
+	const show = () => scheduleSetVisible(true)
+	const hide = () => scheduleSetVisible(false)
 	const toggle = () => (visible() ? hide() : show())
 
 	const onMouseEnter = (ev: MouseEvent) => {

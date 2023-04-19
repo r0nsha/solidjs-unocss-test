@@ -1,5 +1,5 @@
 import { IconFileDescription, IconSquarePlus } from "@tabler/icons-solidjs"
-import { Component, createSignal } from "solid-js"
+import { Component } from "solid-js"
 import { Button } from "../../ui/button"
 import { ListItem } from "../../ui/list-item"
 import { useI18n } from "../../locale/i18n.context"
