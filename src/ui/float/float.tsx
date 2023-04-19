@@ -11,7 +11,7 @@ import {
 	mergeProps,
 } from "solid-js"
 import { MaybePromise } from "../../types/promise"
-import { FloatTrigger, FloatTriggers, manual } from "./triggers"
+import { FloatTrigger, FloatTriggers, manual } from "./trigger"
 import { Key } from "../../utils/key"
 
 export type FloatRenderProvided = {
