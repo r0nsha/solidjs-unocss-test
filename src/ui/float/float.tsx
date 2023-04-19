@@ -12,6 +12,7 @@ import {
 } from "solid-js"
 import { MaybePromise } from "../../types/promise"
 import { FloatTrigger, FloatTriggers, manual } from "./triggers"
+import { Key } from "../../utils/key"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -26,14 +27,13 @@ export type FloatProps = {
 	render: (provided: FloatRenderProvided) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
 	trigger?: FloatTriggers
+	triggerKeys?: Key[]
 	hideOnClick?: boolean
 	interactive?: boolean
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: trigger: click + hover
-// TODO: trigger: click + focus
 // TODO: trigger: click - key press
 // TODO: disabled
 // TODO: interactiveBorder
@@ -46,7 +46,12 @@ export type FloatProps = {
 // TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps(
-		{ trigger: "hover" as FloatTrigger, interactive: false, hideOnClick: true },
+		{
+			trigger: "hover" as FloatTrigger,
+			triggerKeys: [Key.Space, Key.Enter],
+			interactive: false,
+			hideOnClick: true,
+		},
 		_props,
 	)
 
@@ -72,6 +77,7 @@ export const Float: Component<FloatProps> = (_props) => {
 
 	const show = () => setVisible(true)
 	const hide = () => setVisible(false)
+	const toggle = () => (visible() ? hide() : show())
 
 	const onMouseEnter = (ev: MouseEvent) => {
 		lastTriggerEvent = ev
@@ -138,6 +144,16 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	}
 
+	const onKeyUp = (ev: KeyboardEvent) => {
+		if (props.triggerKeys?.includes(ev.key as Key)) {
+			lastTriggerEvent = ev
+
+			if (hasTrigger("click")) {
+				toggle()
+			}
+		}
+	}
+
 	createEffect(() => {
 		const ref = reference()
 
@@ -150,6 +166,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		ref.addEventListener("focus", onFocus)
 		ref.addEventListener("blur", onBlur)
 		ref.addEventListener("mouseup", onMouseUp)
+		ref.addEventListener("keyup", onKeyUp)
 	})
 
 	createRenderEffect(() => {
