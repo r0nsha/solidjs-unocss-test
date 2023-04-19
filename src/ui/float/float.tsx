@@ -167,30 +167,6 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	}
 
-	// const hideOnKeypressHandler = (e: KeyboardEvent) => {
-	// 	if (isFloatTriggerKey(e.key as Key)) {
-	// 		hide()
-	// 	}
-	// }
-
-	// createEffect(() => {
-	// 	const ref = reference()
-	//
-	// 	if (manual(props.trigger) || !ref) {
-	// 		return
-	// 	}
-	//
-	// 	if (props.hideOnClick) {
-	// 		if (visible()) {
-	// 			ref.addEventListener("mouseup", hideOnClickHandler)
-	// 			// ref.addEventListener("keypress", hideOnKeypressHandler)
-	// 		} else {
-	// 			ref.removeEventListener("mouseup", hideOnClickHandler)
-	// 			// ref.removeEventListener("keypress", hideOnKeypressHandler)
-	// 		}
-	// 	}
-	// })
-
 	const bodyClickHandler = (ev: MouseEvent) => {
 		const ref = reference()
 		const f = floating()
@@ -217,13 +193,13 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
-	// createEffect(() => {
-	// 	const ref = reference()
-	//
-	// 	if (ref && props.interactive) {
-	// 		ref.addEventListener("mousedown", (e) => e.preventDefault())
-	// 	}
-	// })
+	createEffect(() => {
+		const f = floating()
+
+		if (f && props.interactive) {
+			f.addEventListener("mousedown", (e) => e.preventDefault())
+		}
+	})
 
 	return (
 		<>
