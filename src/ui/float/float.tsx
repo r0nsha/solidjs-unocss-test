@@ -18,6 +18,7 @@ import {
 	getFloatTriggerProps as getFloatTriggerEventHandlers,
 	manual,
 } from "./triggers"
+import { MaybePromise } from "../../types/promise"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -35,11 +36,12 @@ export type FloatProps = {
 	hideOnClick?: boolean
 	interactive?: boolean
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
-	onClickOutside?: (ev: MouseEvent) => void
+	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
 // TODO: trigger: focus fix
 // TODO: trigger: click - key press
+// TODO: disabled
 // TODO: interactive
 // TODO: interactiveBorder
 // TODO: delay
@@ -112,8 +114,6 @@ export const Float: Component<FloatProps> = (_props) => {
 		lastEventHandlers = eventHandlers
 	})
 
-	const hideOnClickHandler = () => hide()
-
 	createEffect(() => {
 		const ref = reference()
 
@@ -123,17 +123,18 @@ export const Float: Component<FloatProps> = (_props) => {
 
 		if (props.hideOnClick) {
 			if (shown()) {
-				ref.addEventListener("click", hideOnClickHandler)
+				setTimeout(() => ref.addEventListener("click", hide))
 			} else {
-				ref.removeEventListener("click", hideOnClickHandler)
+				ref.removeEventListener("click", hide)
 			}
 		}
 	})
 
 	const bodyClickHandler = (ev: MouseEvent) => {
+		const ref = reference()
 		const f = floating()
 
-		if (f && !f.contains(ev.target as Node | null)) {
+		if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
 			hide()
 			props.onClickOutside?.(ev)
 		}
@@ -141,15 +142,31 @@ export const Float: Component<FloatProps> = (_props) => {
 
 	createEffect(() => {
 		if (shown()) {
-			setTimeout(() => {
-				document.body.addEventListener("click", bodyClickHandler)
-			})
+			setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
 		} else {
-			document.body.removeEventListener("click", bodyClickHandler)
+			setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
 		}
 	})
 
-	useInteractiveStyle(floating, props.interactive)
+	createEffect(() => {
+		const f = floating()
+
+		if (f) {
+			f.style.pointerEvents = props.interactive ? "auto" : "none"
+		}
+	})
+
+	createEffect(() => {
+		const ref = reference()
+
+		if (ref && props.interactive) {
+			ref.addEventListener("mousedown", (e) => e.preventDefault())
+		}
+	})
+
+	createEffect(() => {
+		// console.log(showStates())
+	})
 
 	return (
 		<>
@@ -157,14 +174,4 @@ export const Float: Component<FloatProps> = (_props) => {
 			<Show when={shown()}>{props.render({ ref: setFloating, position })}</Show>
 		</>
 	)
-}
-
-const useInteractiveStyle = (floating: Accessor<HTMLElement | undefined>, interactive: boolean) => {
-	createEffect(() => {
-		const f = floating()
-
-		if (f) {
-			f.style.pointerEvents = interactive ? "auto" : "none"
-		}
-	})
 }

@@ -20,8 +20,15 @@ export const getFloatTriggerProps = (
 	trigger: FloatTrigger,
 	setShow: (show: boolean) => void,
 ): FloatTriggerEventHandlers => {
-	const show = () => setShow(true)
-	const hide = () => setShow(false)
+	const show = (e: Event) => {
+		e.stopPropagation()
+		setShow(true)
+	}
+	const hide = (e: Event) => {
+		console.log("wut")
+		e.stopPropagation()
+		setShow(false)
+	}
 
 	switch (trigger) {
 		case "hover":
@@ -41,13 +48,7 @@ export const getFloatTriggerProps = (
 			]
 		case "click":
 			return [
-				[
-					"click",
-					(e) => {
-						e.stopPropagation()
-						show()
-					},
-				],
+				["click", show],
 				["keypress", show],
 			]
 	}
