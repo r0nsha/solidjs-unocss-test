@@ -34,13 +34,10 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: trigger: click
-// TODO: trigger: onClickOutside
 // TODO: trigger: click + hover
 // TODO: trigger: click + focus
 // TODO: trigger: click - key press
 // TODO: disabled
-// TODO: interactive
 // TODO: interactiveBorder
 // TODO: delay
 // TODO: onShow
@@ -122,7 +119,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		setShow(false)
 	}
 
-	const onClick = (e: MouseEvent) => {
+	const onMouseUp = (e: MouseEvent) => {
 		if (!hasTrigger("click")) {
 			return
 		}
@@ -143,6 +140,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		ref.addEventListener("blur", onBlur)
 		ref.addEventListener("focusin", onFocus)
 		ref.addEventListener("focusout", onBlur)
+		ref.addEventListener("mouseup", onMouseUp)
 	})
 
 	createRenderEffect(() => {
@@ -168,40 +166,40 @@ export const Float: Component<FloatProps> = (_props) => {
 
 		if (props.hideOnClick) {
 			if (show()) {
-				ref.addEventListener("click", hideOnClickHandler)
+				ref.addEventListener("mouseup", hideOnClickHandler)
 				// ref.addEventListener("keypress", hideOnKeypressHandler)
 			} else {
-				ref.removeEventListener("click", hideOnClickHandler)
+				ref.removeEventListener("mouseup", hideOnClickHandler)
 				// ref.removeEventListener("keypress", hideOnKeypressHandler)
 			}
 		}
 	})
 
-	// const bodyClickHandler = (ev: MouseEvent) => {
-	// 	const ref = reference()
-	// 	const f = floating()
-	//
-	// 	if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
-	// 		hide()
-	// 		props.onClickOutside?.(ev)
-	// 	}
-	// }
-	//
-	// createEffect(() => {
-	// 	if (shown()) {
-	// 		setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
-	// 	} else {
-	// 		setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
-	// 	}
-	// })
+	const bodyClickHandler = (ev: MouseEvent) => {
+		const ref = reference()
+		const f = floating()
 
-	// createEffect(() => {
-	// 	const f = floating()
-	//
-	// 	if (f) {
-	// 		f.style.pointerEvents = props.interactive ? "auto" : "none"
-	// 	}
-	// })
+		if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
+			setShow(false)
+			props.onClickOutside?.(ev)
+		}
+	}
+
+	createEffect(() => {
+		if (show()) {
+			setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
+		} else {
+			setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
+		}
+	})
+
+	createEffect(() => {
+		const f = floating()
+
+		if (f) {
+			f.style.pointerEvents = props.interactive ? "auto" : "none"
+		}
+	})
 
 	// createEffect(() => {
 	// 	const ref = reference()
