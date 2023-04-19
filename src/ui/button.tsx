@@ -13,10 +13,10 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	disabled?: boolean
 }
 const sharedClass =
-	"h-8 flex truncate justify-center items-center gap-1.5 text-sm font-bold border-none transition-all duration-100 select-none"
+	"h-8 flex truncate justify-center items-center gap-1.5 text-sm font-bold rounded-2 border-none transition-all duration-100 select-none"
 
-const textClass = "w-[fit-content] min-w-20 px-3 rounded-2"
-const iconClass = "w-8 rounded-[50%]"
+const textClass = "w-[fit-content] min-w-20 px-3"
+const iconClass = "w-8"
 
 const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", string>> = {
 	solid: {

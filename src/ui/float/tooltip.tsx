@@ -18,6 +18,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 		<Float
 			trigger={["hover", "focus"]}
 			interactive={false}
+			delay={{ in: 500 }}
 			{...float}
 			options={{
 				middleware: [offset({ mainAxis: 4 })],

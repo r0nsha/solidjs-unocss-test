@@ -1,4 +1,4 @@
-import { IconFileDescription, IconSquarePlus } from "@tabler/icons-solidjs"
+import { IconFileDescription, IconPlus } from "@tabler/icons-solidjs"
 import { Component } from "solid-js"
 import { Button } from "../../ui/button"
 import { ListItem } from "../../ui/list-item"
@@ -14,7 +14,7 @@ export const WorkoutList: Component = () => {
 			<div class="ps-2 pb-1 flex justify-between items-center select-none">
 				<span class="font-bold">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
-					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconSquarePlus} />}
+					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconPlus} />}
 				</Tooltip>
 			</div>
 			<Divider />
