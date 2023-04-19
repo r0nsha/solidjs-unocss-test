@@ -22,8 +22,6 @@ export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
 }
 
-type EventHandlers = (readonly [keyof HTMLElementEventMap, (e: Event) => void])[]
-
 export type FloatProps = {
 	render: (provided: FloatRenderProvided) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
@@ -52,12 +50,13 @@ export const Float: Component<FloatProps> = (_props) => {
 		_props,
 	)
 
+	let lastTriggerEvent: Event | null = null
 	let hovered = false
 	let focused = false
 
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
-	const [show, setShow] = createSignal(false)
+	const [visible, setVisible] = createSignal(false)
 
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
@@ -71,44 +70,53 @@ export const Float: Component<FloatProps> = (_props) => {
 		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
 
-	const onMouseEnter = (e: MouseEvent) => {
+	const hasAnyFocusTrigger = () => hasTrigger("focus") || hasTrigger("focusin")
+
+	const show = () => setVisible(true)
+	const hide = () => setVisible(false)
+
+	const onMouseEnter = (ev: MouseEvent) => {
+		lastTriggerEvent = ev
 		hovered = true
 
 		if (!hasTrigger("hover")) {
 			return
 		}
 
-		setShow(true)
+		show()
 	}
 
-	const onMouseLeave = (e: MouseEvent) => {
+	const onMouseLeave = (ev: MouseEvent) => {
+		lastTriggerEvent = ev
 		hovered = false
 
 		if (!hasTrigger("hover")) {
 			return
 		}
 
-		if (hasTrigger("focus") && focused) {
+		if (hasAnyFocusTrigger() && focused) {
 			return
 		}
 
-		setShow(false)
+		hide()
 	}
 
-	const onFocus = (e: FocusEvent) => {
+	const onFocus = (ev: FocusEvent) => {
+		lastTriggerEvent = ev
 		focused = true
 
-		if (!hasTrigger("focus") && !hasTrigger("focusin")) {
+		if (!hasAnyFocusTrigger()) {
 			return
 		}
 
-		setShow(true)
+		show()
 	}
 
-	const onBlur = (e: FocusEvent) => {
+	const onBlur = (ev: FocusEvent) => {
+		lastTriggerEvent = ev
 		focused = false
 
-		if (!hasTrigger("focus") && !hasTrigger("focusin")) {
+		if (!hasAnyFocusTrigger()) {
 			return
 		}
 
@@ -116,15 +124,22 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		setShow(false)
+		hide()
 	}
 
-	const onMouseUp = (e: MouseEvent) => {
+	const onMouseUp = (ev: MouseEvent) => {
+		const wasFocused = lastTriggerEvent?.type === "focus"
+		lastTriggerEvent = ev
+
 		if (!hasTrigger("click")) {
 			return
 		}
 
-		setShow(true)
+		if (hasAnyFocusTrigger() && focused) {
+			return
+		}
+
+		show()
 	}
 
 	createEffect(() => {
@@ -145,11 +160,18 @@ export const Float: Component<FloatProps> = (_props) => {
 
 	createRenderEffect(() => {
 		if (manual(props.trigger)) {
-			setShow(props.trigger.visible)
+			setVisible(props.trigger.visible)
 		}
 	})
 
-	const hideOnClickHandler = () => setShow(false)
+	const hideOnClickHandler = (ev: Event) => {
+		if (hasTrigger("focus") || hasTrigger("focusin")) {
+			const t = ev.currentTarget as HTMLElement | null
+			t?.blur()
+		} else {
+			hide()
+		}
+	}
 
 	// const hideOnKeypressHandler = (e: KeyboardEvent) => {
 	// 	if (isFloatTriggerKey(e.key as Key)) {
@@ -165,7 +187,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 
 		if (props.hideOnClick) {
-			if (show()) {
+			if (visible()) {
 				ref.addEventListener("mouseup", hideOnClickHandler)
 				// ref.addEventListener("keypress", hideOnKeypressHandler)
 			} else {
@@ -180,13 +202,13 @@ export const Float: Component<FloatProps> = (_props) => {
 		const f = floating()
 
 		if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
-			setShow(false)
+			hide()
 			props.onClickOutside?.(ev)
 		}
 	}
 
 	createEffect(() => {
-		if (show()) {
+		if (visible()) {
 			setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
 		} else {
 			setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
@@ -212,7 +234,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={show()}>{props.render({ ref: setFloating, position })}</Show>
+			<Show when={visible()}>{props.render({ ref: setFloating, position })}</Show>
 		</>
 	)
 }
