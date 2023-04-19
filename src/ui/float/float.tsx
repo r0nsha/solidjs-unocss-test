@@ -25,7 +25,6 @@ import {
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
 	position: UseFloatingResult
-	interactive: boolean
 }
 
 export type FloatChildrenProvided = {
@@ -136,6 +135,14 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
+	createEffect(() => {
+		const f = floating()
+
+		if (f) {
+			f.style.pointerEvents = props.interactive ? "all" : "none"
+		}
+	})
+
 	// const bodyClickHandler = (ev: MouseEvent) => {
 	// 	const f = floating()
 	//
@@ -154,9 +161,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={shown()}>
-				{props.render({ ref: setFloating, position, interactive: props.interactive })}
-			</Show>
+			<Show when={shown()}>{props.render({ ref: setFloating, position })}</Show>
 		</>
 	)
 }
