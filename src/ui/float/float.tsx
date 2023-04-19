@@ -71,10 +71,12 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
-	// PERF: calling `hasTrigger` everywhere is inefficient
 	const hasTrigger = (is: FloatTrigger) =>
 		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
+
+	const isCursorOverRefOrFloat = (ev: MouseEvent) =>
+		floating()?.contains(ev.target as Node | null) || reference()?.contains(ev.target as Node | null)
 
 	let scheduledSetVisible: number | undefined
 
@@ -220,13 +222,12 @@ export const Float: Component<FloatProps> = (_props) => {
 	})
 
 	const bodyClickHandler = (ev: MouseEvent) => {
-		const ref = reference()
-		const f = floating()
-
-		if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
-			hide()
-			props.onClickOutside?.(ev)
+		if (isCursorOverRefOrFloat(ev)) {
+			return
 		}
+
+		hide()
+		props.onClickOutside?.(ev)
 	}
 
 	createEffect(() => {
