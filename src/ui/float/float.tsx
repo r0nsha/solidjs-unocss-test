@@ -34,7 +34,6 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: hideOnClick
 // TODO: trigger: click
 // TODO: trigger: onClickOutside
 // TODO: trigger: click + hover
@@ -152,29 +151,31 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 	})
 
+	const hideOnClickHandler = () => setShow(false)
+
 	// const hideOnKeypressHandler = (e: KeyboardEvent) => {
 	// 	if (isFloatTriggerKey(e.key as Key)) {
 	// 		hide()
 	// 	}
 	// }
 
-	// createEffect(() => {
-	// 	const ref = reference()
-	//
-	// 	if (manual(props.trigger) || !ref) {
-	// 		return
-	// 	}
-	//
-	// 	if (props.hideOnClick) {
-	// 		if (shown()) {
-	// 			ref.addEventListener("mouseup", hide)
-	// 			ref.addEventListener("keypress", hideOnKeypressHandler)
-	// 		} else {
-	// 			ref.removeEventListener("mouseup", hide)
-	// 			ref.removeEventListener("keypress", hideOnKeypressHandler)
-	// 		}
-	// 	}
-	// })
+	createEffect(() => {
+		const ref = reference()
+
+		if (manual(props.trigger) || !ref) {
+			return
+		}
+
+		if (props.hideOnClick) {
+			if (show()) {
+				ref.addEventListener("click", hideOnClickHandler)
+				// ref.addEventListener("keypress", hideOnKeypressHandler)
+			} else {
+				ref.removeEventListener("click", hideOnClickHandler)
+				// ref.removeEventListener("keypress", hideOnKeypressHandler)
+			}
+		}
+	})
 
 	// const bodyClickHandler = (ev: MouseEvent) => {
 	// 	const ref = reference()
