@@ -33,6 +33,8 @@ export type FloatProps = {
 	disabled?: boolean
 	hideOnClick?: boolean
 	interactive?: boolean
+	interactiveBorder?: number
+	interactiveDebounce?: number
 	delay?: FloatDelay
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
@@ -40,10 +42,13 @@ export type FloatProps = {
 
 // TODO: interactive
 // TODO: interactiveBorder
+// TODO: interactiveDebounce
 // TODO: onShow
 // TODO: onShown
 // TODO: onHide
 // TODO: onHidden
+// TODO: maxWidth
+// TODO: maxHeight
 // TODO: presence animation (scale + shift + fade): using Motion One
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps(
@@ -51,6 +56,9 @@ export const Float: Component<FloatProps> = (_props) => {
 			trigger: "hover" as FloatTrigger,
 			triggerKeys: [Key.Space, Key.Enter] as Key[],
 			interactive: false,
+			interactiveBorder: 4,
+			interactiveDebounce: 0,
+			delay: 0,
 			hideOnClick: true,
 		},
 		_props,
@@ -83,7 +91,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const scheduleSetVisible = (value: boolean) => {
 		clearTimeout(scheduledSetVisible)
 
-		const delay = typeof props.delay === "number" ? props.delay : props.delay?.[value ? "in" : "out"] ?? 0
+		const delay = typeof props.delay === "number" ? props.delay : props.delay[value ? "in" : "out"] ?? 0
 		scheduledSetVisible = setTimeout(() => setVisible(value), delay)
 	}
 
