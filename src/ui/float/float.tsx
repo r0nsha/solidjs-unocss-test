@@ -70,8 +70,6 @@ export const Float: Component<FloatProps> = (_props) => {
 		!manual(props.trigger) &&
 		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
 
-	const hasAnyFocusTrigger = () => hasTrigger("focus") || hasTrigger("focusin")
-
 	const show = () => setVisible(true)
 	const hide = () => setVisible(false)
 
@@ -94,7 +92,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		if (hasAnyFocusTrigger() && focused) {
+		if (hasTrigger("focus") && focused) {
 			return
 		}
 
@@ -105,7 +103,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		lastTriggerEvent = ev
 		focused = true
 
-		if (!hasAnyFocusTrigger()) {
+		if (!hasTrigger("focus")) {
 			return
 		}
 
@@ -116,7 +114,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		lastTriggerEvent = ev
 		focused = false
 
-		if (!hasAnyFocusTrigger()) {
+		if (!hasTrigger("focus")) {
 			return
 		}
 
@@ -128,18 +126,16 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onMouseUp = (ev: MouseEvent) => {
-		const wasFocused = lastTriggerEvent?.type === "focus"
+		if (props.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
+			hide()
+			return
+		}
+
 		lastTriggerEvent = ev
 
-		if (!hasTrigger("click")) {
-			return
+		if (hasTrigger("click")) {
+			show()
 		}
-
-		if (hasAnyFocusTrigger() && focused) {
-			return
-		}
-
-		show()
 	}
 
 	createEffect(() => {
@@ -153,8 +149,6 @@ export const Float: Component<FloatProps> = (_props) => {
 		ref.addEventListener("mouseleave", onMouseLeave)
 		ref.addEventListener("focus", onFocus)
 		ref.addEventListener("blur", onBlur)
-		ref.addEventListener("focusin", onFocus)
-		ref.addEventListener("focusout", onBlur)
 		ref.addEventListener("mouseup", onMouseUp)
 	})
 
@@ -179,23 +173,23 @@ export const Float: Component<FloatProps> = (_props) => {
 	// 	}
 	// }
 
-	createEffect(() => {
-		const ref = reference()
-
-		if (manual(props.trigger) || !ref) {
-			return
-		}
-
-		if (props.hideOnClick) {
-			if (visible()) {
-				ref.addEventListener("mouseup", hideOnClickHandler)
-				// ref.addEventListener("keypress", hideOnKeypressHandler)
-			} else {
-				ref.removeEventListener("mouseup", hideOnClickHandler)
-				// ref.removeEventListener("keypress", hideOnKeypressHandler)
-			}
-		}
-	})
+	// createEffect(() => {
+	// 	const ref = reference()
+	//
+	// 	if (manual(props.trigger) || !ref) {
+	// 		return
+	// 	}
+	//
+	// 	if (props.hideOnClick) {
+	// 		if (visible()) {
+	// 			ref.addEventListener("mouseup", hideOnClickHandler)
+	// 			// ref.addEventListener("keypress", hideOnKeypressHandler)
+	// 		} else {
+	// 			ref.removeEventListener("mouseup", hideOnClickHandler)
+	// 			// ref.removeEventListener("keypress", hideOnKeypressHandler)
+	// 		}
+	// 	}
+	// })
 
 	const bodyClickHandler = (ev: MouseEvent) => {
 		const ref = reference()
