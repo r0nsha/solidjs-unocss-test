@@ -159,7 +159,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	})
 
 	const hideOnClickHandler = (ev: Event) => {
-		if (hasTrigger("focus") || hasTrigger("focusin")) {
+		if (hasTrigger("focus")) {
 			const t = ev.currentTarget as HTMLElement | null
 			t?.blur()
 		} else {

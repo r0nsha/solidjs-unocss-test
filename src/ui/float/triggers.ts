@@ -1,4 +1,4 @@
-const floatTriggers = ["hover", "focus", "focusin", "click"] as const
+const floatTriggers = ["hover", "focus", "click"] as const
 
 export type FloatTrigger = typeof floatTriggers[number]
 
