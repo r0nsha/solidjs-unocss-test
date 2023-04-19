@@ -1,3 +1,5 @@
+import { Key } from "../../utils/key"
+
 const floatTriggers = ["hover", "focus", "focusin", "click"] as const
 
 export type FloatTrigger = typeof floatTriggers[number]
@@ -20,14 +22,13 @@ export const getFloatTriggerProps = (
 	trigger: FloatTrigger,
 	setShow: (show: boolean) => void,
 ): FloatTriggerEventHandlers => {
-	const show = (e: Event) => {
+	const set = (show: boolean) => (e: Event) => {
 		e.stopPropagation()
-		setShow(true)
+		setShow(show)
 	}
-	const hide = (e: Event) => {
-		e.stopPropagation()
-		setShow(false)
-	}
+
+	const show = set(true)
+	const hide = set(false)
 
 	switch (trigger) {
 		case "hover":
@@ -48,8 +49,17 @@ export const getFloatTriggerProps = (
 		case "click":
 			return [
 				["mouseup", show],
-				["keypress", show],
+				[
+					"keypress",
+					(e) => {
+						if (isFloatTriggerKey((e as KeyboardEvent).key as Key)) {
+							show(e)
+						}
+					},
+				],
 				["touchend", show],
 			]
 	}
 }
+
+export const isFloatTriggerKey = (key: Key): boolean => key === Key.Space || key === Key.Enter

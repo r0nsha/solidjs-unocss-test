@@ -16,6 +16,7 @@ import {
 	FloatTriggerEventHandlers,
 	FloatTriggers,
 	getFloatTriggerProps as getFloatTriggerEventHandlers,
+	isFloatTriggerKey,
 	manual,
 } from "./triggers"
 import { MaybePromise } from "../../types/promise"
@@ -116,9 +117,9 @@ export const Float: Component<FloatProps> = (_props) => {
 	})
 
 	const hideOnKeypressHandler = (e: KeyboardEvent) => {
-		if (e.key === Key.Space) {
+		if (isFloatTriggerKey(e.key as Key)) {
+			hide()
 		}
-		hide()
 	}
 
 	createEffect(() => {
