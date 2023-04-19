@@ -19,6 +19,7 @@ import {
 	manual,
 } from "./triggers"
 import { MaybePromise } from "../../types/promise"
+import { Key } from "../../utils/key"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -114,6 +115,12 @@ export const Float: Component<FloatProps> = (_props) => {
 		lastEventHandlers = eventHandlers
 	})
 
+	const hideOnKeypressHandler = (e: KeyboardEvent) => {
+		if (e.key === Key.Space) {
+		}
+		hide()
+	}
+
 	createEffect(() => {
 		const ref = reference()
 
@@ -123,9 +130,11 @@ export const Float: Component<FloatProps> = (_props) => {
 
 		if (props.hideOnClick) {
 			if (shown()) {
-				setTimeout(() => ref.addEventListener("click", hide))
+				ref.addEventListener("mouseup", hide)
+				ref.addEventListener("keypress", hideOnKeypressHandler)
 			} else {
-				ref.removeEventListener("click", hide)
+				ref.removeEventListener("mouseup", hide)
+				ref.removeEventListener("keypress", hideOnKeypressHandler)
 			}
 		}
 	})

@@ -25,7 +25,6 @@ export const getFloatTriggerProps = (
 		setShow(true)
 	}
 	const hide = (e: Event) => {
-		console.log("wut")
 		e.stopPropagation()
 		setShow(false)
 	}
@@ -48,8 +47,9 @@ export const getFloatTriggerProps = (
 			]
 		case "click":
 			return [
-				["click", show],
+				["mouseup", show],
 				["keypress", show],
+				["touchend", show],
 			]
 	}
 }
