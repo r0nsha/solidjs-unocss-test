@@ -1,5 +1,5 @@
 import { IconFileDescription, IconSquarePlus } from "@tabler/icons-solidjs"
-import { Component } from "solid-js"
+import { Component, createSignal } from "solid-js"
 import { Button } from "../../ui/button"
 import { ListItem } from "../../ui/list-item"
 import { useI18n } from "../../locale/i18n.context"
@@ -13,7 +13,7 @@ export const WorkoutList: Component = () => {
 		<div class="flex flex-(col 1) mx-1">
 			<div class="ps-2 pb-1 flex justify-between items-center select-none">
 				<span class="font-bold">{t.workouts()}</span>
-				<Tooltip text={t.create_a_workout()} trigger={["click", "focus"]} interactive>
+				<Tooltip text={t.create_a_workout()}>
 					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconSquarePlus} />}
 				</Tooltip>
 			</div>

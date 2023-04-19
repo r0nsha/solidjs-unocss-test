@@ -28,14 +28,13 @@ export type FloatProps = {
 	children: (provided: FloatChildrenProvided) => JSXElement
 	trigger?: FloatTriggers
 	triggerKeys?: Key[]
+	disabled?: boolean
 	hideOnClick?: boolean
 	interactive?: boolean
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: trigger: click - key press
-// TODO: disabled
 // TODO: interactiveBorder
 // TODO: delay
 // TODO: onShow
@@ -48,7 +47,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps(
 		{
 			trigger: "hover" as FloatTrigger,
-			triggerKeys: [Key.Space, Key.Enter],
+			triggerKeys: [Key.Space, Key.Enter] as Key[],
 			interactive: false,
 			hideOnClick: true,
 		},
@@ -80,6 +79,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	const toggle = () => (visible() ? hide() : show())
 
 	const onMouseEnter = (ev: MouseEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		lastTriggerEvent = ev
 		hovered = true
 
@@ -91,6 +94,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onMouseLeave = (ev: MouseEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		lastTriggerEvent = ev
 		hovered = false
 
@@ -106,6 +113,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onFocus = (ev: FocusEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		lastTriggerEvent = ev
 		focused = true
 
@@ -117,6 +128,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onBlur = (ev: FocusEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		lastTriggerEvent = ev
 		focused = false
 
@@ -132,6 +147,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onMouseUp = (ev: MouseEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		if (props.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
 			hide()
 			return
@@ -145,6 +164,10 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onKeyUp = (ev: KeyboardEvent) => {
+		if (props.disabled) {
+			return
+		}
+
 		if (props.triggerKeys?.includes(ev.key as Key)) {
 			lastTriggerEvent = ev
 
@@ -170,19 +193,20 @@ export const Float: Component<FloatProps> = (_props) => {
 	})
 
 	createRenderEffect(() => {
+		if (props.disabled) {
+			return
+		}
+
 		if (manual(props.trigger)) {
 			setVisible(props.trigger.visible)
 		}
 	})
 
-	const hideOnClickHandler = (ev: Event) => {
-		if (hasTrigger("focus")) {
-			const t = ev.currentTarget as HTMLElement | null
-			t?.blur()
-		} else {
-			hide()
+	createEffect(() => {
+		if (props.disabled) {
+			setVisible(false)
 		}
-	}
+	})
 
 	const bodyClickHandler = (ev: MouseEvent) => {
 		const ref = reference()
