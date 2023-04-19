@@ -1,7 +1,6 @@
 import { autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
 import {
-	Accessor,
 	Component,
 	JSXElement,
 	Setter,
@@ -11,16 +10,8 @@ import {
 	createSignal,
 	mergeProps,
 } from "solid-js"
-import {
-	FloatTrigger,
-	FloatTriggerEventHandlers,
-	FloatTriggers,
-	getFloatTriggerProps as getFloatTriggerEventHandlers,
-	isFloatTriggerKey,
-	manual,
-} from "./triggers"
 import { MaybePromise } from "../../types/promise"
-import { Key } from "../../utils/key"
+import { FloatTrigger, FloatTriggers, manual } from "./triggers"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -30,6 +21,8 @@ export type FloatRenderProvided = {
 export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
 }
+
+type EventHandlers = (readonly [keyof HTMLElementEventMap, (e: Event) => void])[]
 
 export type FloatProps = {
 	render: (provided: FloatRenderProvided) => JSXElement
@@ -41,7 +34,13 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: trigger: focus fix
+// TODO: trigger: hover
+// TODO: hideOnClick
+// TODO: interactive
+// TODO: trigger: focus
+// TODO: trigger: focusin
+// TODO: trigger: click
+// TODO: trigger: onClickOutside
 // TODO: trigger: click - key press
 // TODO: disabled
 // TODO: interactive
@@ -59,9 +58,12 @@ export const Float: Component<FloatProps> = (_props) => {
 		_props,
 	)
 
+	let hovered = false
+	let focused = false
+
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
-	const [showStates, setShowStates] = createSignal<boolean[]>([])
+	const [show, setShow] = createSignal(false)
 
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
@@ -70,118 +72,141 @@ export const Float: Component<FloatProps> = (_props) => {
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
 
-	let lastEventHandlers: FloatTriggerEventHandlers = []
+	const hasTrigger = (is: FloatTrigger) =>
+		!manual(props.trigger) &&
+		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
 
-	const hide = () => {
-		if (Array.isArray(props.trigger)) {
-			setShowStates(Array(props.trigger.length).fill(false))
-		} else {
-			setShowStates([false])
+	const onMouseEnter = (e: MouseEvent) => {
+		hovered = true
+
+		if (!hasTrigger("hover")) {
+			return
 		}
+
+		setShow(true)
 	}
 
-	const shown = () => showStates().some(Boolean)
+	const onMouseLeave = (e: MouseEvent) => {
+		hovered = false
+
+		if (!hasTrigger("hover")) {
+			return
+		}
+
+		if (hasTrigger("focus") && focused) {
+			return
+		}
+
+		setShow(false)
+	}
+
+	const onFocus = (e: FocusEvent) => {
+		focused = true
+
+		if (!hasTrigger("focus")) {
+			return
+		}
+
+		setShow(true)
+	}
+
+	const onBlur = (e: FocusEvent) => {
+		focused = false
+
+		if (!hasTrigger("focus")) {
+			return
+		}
+
+		if (hasTrigger("hover") && hovered) {
+			return
+		}
+
+		setShow(false)
+	}
+
+	// const onClick = (e: MouseEvent) => { }
+
+	createEffect(() => {
+		const ref = reference()
+
+		if (manual(props.trigger) || !ref) {
+			return
+		}
+
+		ref.addEventListener("mouseenter", onMouseEnter)
+		ref.addEventListener("mouseleave", onMouseLeave)
+		ref.addEventListener("focus", onFocus)
+		ref.addEventListener("blur", onBlur)
+	})
 
 	createRenderEffect(() => {
 		if (manual(props.trigger)) {
-			setShowStates([props.trigger.visible])
+			setShow(props.trigger.visible)
 		}
 	})
 
-	createEffect(() => {
-		const ref = reference()
+	// const hideOnKeypressHandler = (e: KeyboardEvent) => {
+	// 	if (isFloatTriggerKey(e.key as Key)) {
+	// 		hide()
+	// 	}
+	// }
 
-		if (manual(props.trigger) || !ref) {
-			return
-		}
+	// createEffect(() => {
+	// 	const ref = reference()
+	//
+	// 	if (manual(props.trigger) || !ref) {
+	// 		return
+	// 	}
+	//
+	// 	if (props.hideOnClick) {
+	// 		if (shown()) {
+	// 			ref.addEventListener("mouseup", hide)
+	// 			ref.addEventListener("keypress", hideOnKeypressHandler)
+	// 		} else {
+	// 			ref.removeEventListener("mouseup", hide)
+	// 			ref.removeEventListener("keypress", hideOnKeypressHandler)
+	// 		}
+	// 	}
+	// })
 
-		lastEventHandlers.forEach(([ev, handler]) => ref.removeEventListener(ev, handler))
+	// const bodyClickHandler = (ev: MouseEvent) => {
+	// 	const ref = reference()
+	// 	const f = floating()
+	//
+	// 	if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
+	// 		hide()
+	// 		props.onClickOutside?.(ev)
+	// 	}
+	// }
+	//
+	// createEffect(() => {
+	// 	if (shown()) {
+	// 		setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
+	// 	} else {
+	// 		setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
+	// 	}
+	// })
 
-		hide()
+	// createEffect(() => {
+	// 	const f = floating()
+	//
+	// 	if (f) {
+	// 		f.style.pointerEvents = props.interactive ? "auto" : "none"
+	// 	}
+	// })
 
-		const eventHandlers = Array.isArray(props.trigger)
-			? props.trigger.reduce(
-				(acc, trigger, index) => [
-					...acc,
-					...getFloatTriggerEventHandlers(trigger, (show) => {
-						setShowStates((states) => states.map((state, i) => (i === index ? show : state)))
-					}),
-				],
-				[] as FloatTriggerEventHandlers,
-			)
-			: getFloatTriggerEventHandlers(props.trigger, (show) => setShowStates([show]))
-
-		eventHandlers.forEach(([ev, handler]) => ref.addEventListener(ev, handler))
-
-		lastEventHandlers = eventHandlers
-	})
-
-	const hideOnKeypressHandler = (e: KeyboardEvent) => {
-		if (isFloatTriggerKey(e.key as Key)) {
-			hide()
-		}
-	}
-
-	createEffect(() => {
-		const ref = reference()
-
-		if (manual(props.trigger) || !ref) {
-			return
-		}
-
-		if (props.hideOnClick) {
-			if (shown()) {
-				ref.addEventListener("mouseup", hide)
-				ref.addEventListener("keypress", hideOnKeypressHandler)
-			} else {
-				ref.removeEventListener("mouseup", hide)
-				ref.removeEventListener("keypress", hideOnKeypressHandler)
-			}
-		}
-	})
-
-	const bodyClickHandler = (ev: MouseEvent) => {
-		const ref = reference()
-		const f = floating()
-
-		if (f && !f.contains(ev.target as Node | null) && ref && !ref.contains(ev.target as Node | null)) {
-			hide()
-			props.onClickOutside?.(ev)
-		}
-	}
-
-	createEffect(() => {
-		if (shown()) {
-			setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
-		} else {
-			setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
-		}
-	})
-
-	createEffect(() => {
-		const f = floating()
-
-		if (f) {
-			f.style.pointerEvents = props.interactive ? "auto" : "none"
-		}
-	})
-
-	createEffect(() => {
-		const ref = reference()
-
-		if (ref && props.interactive) {
-			ref.addEventListener("mousedown", (e) => e.preventDefault())
-		}
-	})
-
-	createEffect(() => {
-		// console.log(showStates())
-	})
+	// createEffect(() => {
+	// 	const ref = reference()
+	//
+	// 	if (ref && props.interactive) {
+	// 		ref.addEventListener("mousedown", (e) => e.preventDefault())
+	// 	}
+	// })
 
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={shown()}>{props.render({ ref: setFloating, position })}</Show>
+			<Show when={show()}>{props.render({ ref: setFloating, position })}</Show>
 		</>
 	)
 }
