@@ -11,7 +11,7 @@ import {
 	mergeProps,
 } from "solid-js"
 import { MaybePromise } from "../../types/promise"
-import { FloatTrigger, FloatTriggers, manual } from "./trigger"
+import { FloatTrigger, FloatTriggers, isCursorOutsideInteractiveBorder, manual } from "./trigger"
 import { Key } from "../../utils/key"
 
 export type FloatRenderProvided = {
@@ -75,6 +75,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
 		whileElementsMounted: autoUpdate,
+		placement: "bottom",
 		...props.options,
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
@@ -99,7 +100,12 @@ export const Float: Component<FloatProps> = (_props) => {
 	const hide = () => scheduleSetVisible(false)
 	const toggle = () => (visible() ? hide() : show())
 
+	const addInteractiveMouseMove = () => document.addEventListener("mousemove", onMouseMove)
+	const removeInteractiveMouseMove = () => document.removeEventListener("mousemove", onMouseMove)
+
 	const onMouseEnter = (ev: MouseEvent) => {
+		removeInteractiveMouseMove()
+
 		if (props.disabled) {
 			return
 		}
@@ -130,7 +136,25 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		hide()
+		if (props.interactive) {
+			addInteractiveMouseMove()
+		} else {
+			hide()
+		}
+	}
+
+	const onMouseMove = (ev: MouseEvent) => {
+		const f = floating()
+
+		if (!f || isCursorOverRefOrFloat(ev)) {
+			return
+		}
+
+		if (isCursorOutsideInteractiveBorder(ev, props.interactiveBorder, position, f)) {
+			hide()
+		} else {
+			show()
+		}
 	}
 
 	const onFocus = (ev: FocusEvent) => {
@@ -239,10 +263,15 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	createEffect(() => {
+		if (manual(props.trigger)) {
+			return
+		}
+
 		if (visible()) {
 			setTimeout(() => document.body.addEventListener("click", bodyClickHandler))
 		} else {
 			setTimeout(() => document.body.removeEventListener("click", bodyClickHandler))
+			removeInteractiveMouseMove()
 		}
 	})
 
@@ -250,7 +279,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		const f = floating()
 
 		if (f) {
-			f.style.pointerEvents = props.interactive ? "auto" : "none"
+			// f.style.pointerEvents = props.interactive ? "auto" : "none"
 		}
 	})
 

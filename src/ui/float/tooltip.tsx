@@ -1,4 +1,4 @@
-import { Component, splitProps } from "solid-js"
+import { Component, Show, splitProps } from "solid-js"
 import { Float, FloatProps } from "./float"
 import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
@@ -16,12 +16,15 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 
 	return (
 		<Float
-			trigger={["hover", "focus"]}
+			// trigger={["hover", "focus"]}
+			trigger={{ visible: true }}
 			interactive={false}
-			delay={{ in: 500 }}
+			interactiveBorder={4}
+			delay={{ in: 500, out: 100 }}
 			{...float}
 			options={{
 				middleware: [offset({ mainAxis: 4 })],
+				...(float.options ?? {}),
 			}}
 			render={(provided) => (
 				<div
@@ -32,16 +35,20 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 						left: `${provided.position.x ?? 0}px`,
 					}}
 					class={classNames(
-						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
+						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium select-all",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
 					)}
 				>
-					<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>
-						{local.text}
-					</span>
-					<span class={classNames(theme() === "dark" ? "color-on-secondary" : "color-surface-400")}>
-						{local.subtext}
-					</span>
+					<Show when={local.text}>
+						<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>
+							{local.text}
+						</span>
+					</Show>
+					<Show when={local.subtext}>
+						<span class={classNames(theme() === "dark" ? "color-on-secondary" : "color-surface-400")}>
+							{local.subtext}
+						</span>
+					</Show>
 				</div>
 			)}
 		/>
