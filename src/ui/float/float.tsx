@@ -13,6 +13,7 @@ import {
 import { MaybePromise } from "../../types/promise"
 import { FloatTrigger, FloatTriggers, isCursorOutsideInteractiveBorder, manual } from "./trigger"
 import { Key } from "../../utils/key"
+import { ZIndex } from "../../utils/z-index"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
@@ -36,6 +37,7 @@ export type FloatProps = {
 	interactiveBorder?: number
 	interactiveDebounce?: number
 	delay?: FloatDelay
+	zIndex?: number
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
@@ -55,11 +57,13 @@ export const Float: Component<FloatProps> = (_props) => {
 		{
 			trigger: "hover" as FloatTrigger,
 			triggerKeys: [Key.Space, Key.Enter] as Key[],
+			disabled: false,
+			hideOnClick: true,
 			interactive: false,
 			interactiveBorder: 4,
 			interactiveDebounce: 0,
 			delay: 0,
-			hideOnClick: true,
+			zIndex: ZIndex.float,
 		},
 		_props,
 	)
@@ -279,17 +283,19 @@ export const Float: Component<FloatProps> = (_props) => {
 		const f = floating()
 
 		if (f) {
-			// f.style.pointerEvents = props.interactive ? "auto" : "none"
+			f.style.pointerEvents = props.interactive ? "auto" : "none"
+			f.style.userSelect = props.interactive ? "auto" : "none"
+			f.style.zIndex = props.zIndex.toString()
 		}
 	})
 
-	createEffect(() => {
-		const f = floating()
-
-		if (f && props.interactive) {
-			f.addEventListener("mousedown", (e) => e.preventDefault())
-		}
-	})
+	// createEffect(() => {
+	// 	const f = floating()
+	//
+	// 	if (f && props.interactive) {
+	// 		// f.addEventListener("mousedown", (e) => e.preventDefault())
+	// 	}
+	// })
 
 	return (
 		<>

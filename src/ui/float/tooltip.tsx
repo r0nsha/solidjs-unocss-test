@@ -35,7 +35,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 						left: `${provided.position.x ?? 0}px`,
 					}}
 					class={classNames(
-						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium select-all",
+						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
 					)}
 				>
