@@ -35,16 +35,12 @@ export type FloatProps = {
 	hideOnClick?: boolean
 	interactive?: boolean
 	interactiveBorder?: number
-	interactiveDebounce?: number
 	delay?: FloatDelay
 	zIndex?: number
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: interactive
-// TODO: interactiveBorder
-// TODO: interactiveDebounce
 // TODO: onShow
 // TODO: onShown
 // TODO: onHide
@@ -61,7 +57,6 @@ export const Float: Component<FloatProps> = (_props) => {
 			hideOnClick: true,
 			interactive: false,
 			interactiveBorder: 4,
-			interactiveDebounce: 0,
 			delay: 0,
 			zIndex: ZIndex.float,
 		},
@@ -79,7 +74,6 @@ export const Float: Component<FloatProps> = (_props) => {
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
 		whileElementsMounted: autoUpdate,
-		placement: "bottom",
 		...props.options,
 		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
 	})
@@ -288,14 +282,6 @@ export const Float: Component<FloatProps> = (_props) => {
 			f.style.zIndex = props.zIndex.toString()
 		}
 	})
-
-	// createEffect(() => {
-	// 	const f = floating()
-	//
-	// 	if (f && props.interactive) {
-	// 		// f.addEventListener("mousedown", (e) => e.preventDefault())
-	// 	}
-	// })
 
 	return (
 		<>

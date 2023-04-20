@@ -42,15 +42,16 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 					)}
 				>
 					<Show when={local.text}>
-						<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>
+						<div class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>
 							{local.text}
-						</span>
+						</div>
 					</Show>
 					<Show when={local.subtext}>
 						<span class={classNames(theme() === "dark" ? "color-on-secondary" : "color-surface-400")}>
 							{local.subtext}
 						</span>
 					</Show>
+					<span> WTF IS GOING ON</span>
 				</div>
 			)}
 		/>
