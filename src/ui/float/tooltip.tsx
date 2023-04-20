@@ -3,6 +3,7 @@ import { Float, FloatProps } from "./float"
 import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
+import { ZIndex } from "../../utils/z-index"
 
 export type TooltipProps = Omit<FloatProps, "render"> & {
 	text: string
@@ -21,6 +22,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 			interactive={false}
 			interactiveBorder={4}
 			delay={{ in: 500, out: 100 }}
+			zIndex={ZIndex.tooltip}
 			{...float}
 			options={{
 				middleware: [offset({ mainAxis: 4 })],
