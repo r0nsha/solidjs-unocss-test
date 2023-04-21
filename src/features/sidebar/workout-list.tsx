@@ -15,7 +15,9 @@ export const WorkoutList: Component = () => {
 				<span class="font-bold select-none">{t.workouts()}</span>
 				<Tooltip
 					text={t.create_a_workout()}
+					subtext="Ctrl+N"
 					interactive
+					trigger={{ visible: true }}
 					onShow={() => console.log("show")}
 					onHide={() => console.log("hide")}
 				>

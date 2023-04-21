@@ -38,6 +38,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 					class={classNames(
 						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
+						provided.class,
 					)}
 				>
 					<Show when={local.text}>

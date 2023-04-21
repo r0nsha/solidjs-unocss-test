@@ -31,8 +31,8 @@ body {
     --surface-900: #424242;
     --surface-950: #2e2e2e;
 
-    --on-primary: rgba(0, 0, 0, 0.87);
-    --on-secondary: rgba(0, 0, 0, 0.6);
+    --on-primary: #222222;
+    --on-secondary: #666666;
 
     --primary-50: #fff2f1;
     --primary-100: #ffe1df;
@@ -108,8 +108,8 @@ body {
     --surface-900: #696969;
     --surface-950: #818181;
 
-    --on-primary: rgba(255, 255, 255, 0.87);
-    --on-secondary: rgba(255, 255, 255, 0.6);
+    --on-primary: #dddddd;
+    --on-secondary: #999999;
 
     --primary-50: #290c0a;
     --primary-100: #542421;
@@ -195,13 +195,15 @@ body {
   }
 }
 
-// Selection
-*::selection {
-  color: var(--on-primary);
-  background: var(--info-100);
-}
+* {
+  // Selection highlight color
+  &::selection {
+    color: var(--on-primary);
+    background: var(--info-100);
+  }
 
-// Default focus outline
-*:focus-visible {
-  outline: 2px solid var(--on-primary);
+  // Default focus outline
+  &:focus-visible {
+    outline: 2px solid var(--on-primary);
+  }
 }

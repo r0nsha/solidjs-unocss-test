@@ -18,6 +18,7 @@ import { ZIndex } from "../../utils/z-index"
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
 	position: UseFloatingResult
+	class: string | undefined
 }
 
 export type FloatChildrenProvided = {
@@ -29,6 +30,7 @@ export type FloatDelay = number | { in?: number; out?: number }
 export type FloatProps = {
 	render: (provided: FloatRenderProvided) => JSXElement
 	children: (provided: FloatChildrenProvided) => JSXElement
+	class?: string
 	trigger?: FloatTriggers
 	triggerKeys?: Key[]
 	disabled?: boolean
@@ -43,8 +45,6 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: onShow
-// TODO: onHide
 // TODO: maxWidth
 // TODO: maxHeight
 // TODO: presence animation (scale + shift + fade): using Motion One
@@ -305,7 +305,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	return (
 		<>
 			{props.children({ ref: setReference })}
-			<Show when={visible()}>{props.render({ ref: setFloating, position })}</Show>
+			<Show when={visible()}>{props.render({ ref: setFloating, position, class: props.class })}</Show>
 		</>
 	)
 }
