@@ -13,14 +13,7 @@ export const WorkoutList: Component = () => {
 		<div class="flex flex-(col 1) mx-1">
 			<div class="ps-2 pb-1 flex justify-between items-center">
 				<span class="font-bold select-none">{t.workouts()}</span>
-				<Tooltip
-					text={t.create_a_workout()}
-					subtext="Ctrl+N"
-					interactive
-					trigger={{ visible: true }}
-					onShow={() => console.log("show")}
-					onHide={() => console.log("hide")}
-				>
+				<Tooltip text={t.create_a_workout()}>
 					{(provided) => <Button {...provided} variant="ghost" colorScheme="neutral" icon={IconPlus} />}
 				</Tooltip>
 			</div>

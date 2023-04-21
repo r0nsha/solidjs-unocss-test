@@ -9,16 +9,19 @@ import {
 	createRenderEffect,
 	createSignal,
 	mergeProps,
+	splitProps,
 } from "solid-js"
 import { MaybePromise } from "../../types/promise"
 import { FloatTrigger, FloatTriggers, isCursorOutsideInteractiveBorder, manual } from "./trigger"
 import { Key } from "../../utils/key"
 import { ZIndex } from "../../utils/z-index"
+import { Presence } from "@motionone/solid"
 
 export type FloatRenderProvided = {
 	ref: Setter<HTMLElement | undefined>
 	position: UseFloatingResult
 	class: string | undefined
+	onTransitionComplete: () => MaybePromise<void>
 }
 
 export type FloatChildrenProvided = {
@@ -41,15 +44,14 @@ export type FloatProps = {
 	zIndex?: number
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
 	onShow?: () => MaybePromise<void>
+	onShown?: () => MaybePromise<void>
 	onHide?: () => MaybePromise<void>
+	onHidden?: () => MaybePromise<void>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: presence animation (scale + shift + fade): using Motion One
-// TODO: onShown
-// TODO: onHidden
-export const Float: Component<FloatProps> = (_props) => {
-	const props = mergeProps(
+export const Float: Component<FloatProps> = (props) => {
+	const merged = mergeProps(
 		{
 			trigger: "hover" as FloatTrigger,
 			triggerKeys: [Key.Space, Key.Enter] as Key[],
@@ -60,8 +62,10 @@ export const Float: Component<FloatProps> = (_props) => {
 			delay: 0,
 			zIndex: ZIndex.float,
 		},
-		_props,
+		props,
 	)
+
+	const [events, other] = splitProps(merged, ["onShow", "onShown", "onHide", "onHidden", "onClickOutside"])
 
 	let lastTriggerEvent: Event | null = null
 	let hovered = false
@@ -74,13 +78,13 @@ export const Float: Component<FloatProps> = (_props) => {
 	const position = useFloating(reference, floating, {
 		strategy: "fixed",
 		whileElementsMounted: autoUpdate,
-		...props.options,
-		middleware: [flip(), shift(), ...(props.options?.middleware ?? [])],
+		...other.options,
+		middleware: [flip(), shift(), ...(other.options?.middleware ?? [])],
 	})
 
 	const hasTrigger = (is: FloatTrigger) =>
-		!manual(props.trigger) &&
-		(Array.isArray(props.trigger) ? props.trigger.includes(is) : props.trigger === is)
+		!manual(other.trigger) &&
+		(Array.isArray(other.trigger) ? other.trigger.includes(is) : other.trigger === is)
 
 	const isCursorOverRefOrFloat = (ev: MouseEvent) =>
 		floating()?.contains(ev.target as Node | null) || reference()?.contains(ev.target as Node | null)
@@ -90,13 +94,13 @@ export const Float: Component<FloatProps> = (_props) => {
 	const scheduleSetVisible = (value: boolean) => {
 		clearTimeout(scheduledSetVisible)
 
-		const delay = typeof props.delay === "number" ? props.delay : props.delay[value ? "in" : "out"] ?? 0
+		const delay = typeof other.delay === "number" ? other.delay : other.delay[value ? "in" : "out"] ?? 0
 		scheduledSetVisible = setTimeout(() => {
 			setVisible(value)
 			if (value) {
-				props.onShow?.()
+				events.onShow?.()
 			} else {
-				props.onHide?.()
+				events.onHide?.()
 			}
 		}, delay)
 	}
@@ -111,7 +115,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	const onMouseEnter = (ev: MouseEvent) => {
 		removeInteractiveMouseMove()
 
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
@@ -126,7 +130,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onMouseLeave = (ev: MouseEvent) => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
@@ -141,7 +145,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		if (props.interactive) {
+		if (other.interactive) {
 			addInteractiveMouseMove()
 		} else {
 			scheduleHide()
@@ -155,7 +159,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		if (isCursorOutsideInteractiveBorder(ev, props.interactiveBorder, position, f)) {
+		if (isCursorOutsideInteractiveBorder(ev, other.interactiveBorder, position, f)) {
 			scheduleHide()
 		} else {
 			scheduleShow()
@@ -163,7 +167,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onFocus = (ev: FocusEvent) => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
@@ -178,7 +182,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onBlur = (ev: FocusEvent) => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
@@ -197,11 +201,11 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onMouseUp = (ev: MouseEvent) => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
-		if (props.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
+		if (other.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
 			scheduleHide()
 			return
 		}
@@ -214,11 +218,11 @@ export const Float: Component<FloatProps> = (_props) => {
 	}
 
 	const onKeyUp = (ev: KeyboardEvent) => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
-		if (props.triggerKeys?.includes(ev.key as Key)) {
+		if (other.triggerKeys?.includes(ev.key as Key)) {
 			lastTriggerEvent = ev
 
 			if (hasTrigger("click")) {
@@ -230,7 +234,7 @@ export const Float: Component<FloatProps> = (_props) => {
 	createEffect(() => {
 		const ref = reference()
 
-		if (manual(props.trigger) || !ref) {
+		if (manual(other.trigger) || !ref) {
 			return
 		}
 
@@ -243,17 +247,17 @@ export const Float: Component<FloatProps> = (_props) => {
 	})
 
 	createRenderEffect(() => {
-		if (props.disabled) {
+		if (other.disabled) {
 			return
 		}
 
-		if (manual(props.trigger)) {
-			setVisible(props.trigger.visible)
+		if (manual(other.trigger)) {
+			setVisible(other.trigger.visible)
 		}
 	})
 
 	createEffect(() => {
-		if (props.disabled) {
+		if (other.disabled) {
 			setVisible(false)
 		}
 	})
@@ -264,11 +268,11 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 
 		scheduleHide()
-		props.onClickOutside?.(ev)
+		events.onClickOutside?.(ev)
 	}
 
 	createEffect(() => {
-		if (manual(props.trigger)) {
+		if (manual(other.trigger)) {
 			return
 		}
 
@@ -284,26 +288,43 @@ export const Float: Component<FloatProps> = (_props) => {
 		const f = floating()
 
 		if (f) {
-			f.style.pointerEvents = props.interactive ? "auto" : "none"
-			f.style.userSelect = props.interactive ? "auto" : "none"
-			f.style.zIndex = props.zIndex.toString()
+			f.style.pointerEvents = other.interactive ? "auto" : "none"
+			f.style.userSelect = other.interactive ? "auto" : "none"
+			f.style.zIndex = other.zIndex.toString()
 		}
 	})
 
 	createEffect(() => {
-		if (manual(props.trigger)) {
+		if (manual(other.trigger)) {
 			if (visible()) {
-				props.onShow?.()
+				events.onShow?.()
 			} else {
-				props.onHide?.()
+				events.onHide?.()
 			}
 		}
 	})
 
+	const onTransitionComplete = () => {
+		if (visible()) {
+			events.onShown?.()
+		} else {
+			events.onHidden?.()
+		}
+	}
+
 	return (
 		<>
-			{props.children({ ref: setReference })}
-			<Show when={visible()}>{props.render({ ref: setFloating, position, class: props.class })}</Show>
+			{other.children({ ref: setReference })}
+			<Presence exitBeforeEnter>
+				<Show when={visible()}>
+					{other.render({
+						ref: setFloating,
+						position,
+						class: other.class,
+						onTransitionComplete,
+					})}
+				</Show>
+			</Presence>
 		</>
 	)
 }

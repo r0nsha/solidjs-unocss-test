@@ -4,6 +4,7 @@ import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
+import { Motion } from "@motionone/solid"
 
 export type TooltipProps = Omit<FloatProps, "render"> & {
 	text: string
@@ -20,7 +21,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 			trigger={["hover", "focus"]}
 			interactive={false}
 			interactiveBorder={4}
-			delay={{ in: 500, out: 100 }}
+			delay={{ in: 300, out: 100 }}
 			zIndex={ZIndex.tooltip}
 			{...float}
 			options={{
@@ -28,7 +29,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 				...(float.options ?? {}),
 			}}
 			render={(provided) => (
-				<div
+				<Motion.div
 					ref={provided.ref}
 					style={{
 						position: provided.position.strategy,
@@ -40,6 +41,11 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
 						provided.class,
 					)}
+					initial={{ opacity: 0, scale: 0.85 }}
+					animate={{ opacity: 1, scale: 1 }}
+					exit={{ opacity: 0, scale: 0.85 }}
+					transition={{ duration: 0.1 }}
+					onMotionComplete={provided.onTransitionComplete}
 				>
 					<Show when={local.text}>
 						<div>
@@ -53,7 +59,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 							{local.subtext}
 						</span>
 					</Show>
-				</div>
+				</Motion.div>
 			)}
 		/>
 	)
