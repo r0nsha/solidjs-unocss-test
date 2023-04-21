@@ -17,8 +17,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 
 	return (
 		<Float
-			// trigger={["hover", "focus"]}
-			trigger={{ visible: true }}
+			trigger={["hover", "focus"]}
 			interactive={false}
 			interactiveBorder={4}
 			delay={{ in: 500, out: 100 }}
