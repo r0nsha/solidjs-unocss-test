@@ -38,16 +38,18 @@ export type FloatProps = {
 	delay?: FloatDelay
 	zIndex?: number
 	options?: UseFloatingOptions<HTMLElement, HTMLElement>
+	onShow?: () => MaybePromise<void>
+	onHide?: () => MaybePromise<void>
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
 // TODO: onShow
-// TODO: onShown
 // TODO: onHide
-// TODO: onHidden
 // TODO: maxWidth
 // TODO: maxHeight
 // TODO: presence animation (scale + shift + fade): using Motion One
+// TODO: onShown
+// TODO: onHidden
 export const Float: Component<FloatProps> = (_props) => {
 	const props = mergeProps(
 		{
@@ -91,12 +93,19 @@ export const Float: Component<FloatProps> = (_props) => {
 		clearTimeout(scheduledSetVisible)
 
 		const delay = typeof props.delay === "number" ? props.delay : props.delay[value ? "in" : "out"] ?? 0
-		scheduledSetVisible = setTimeout(() => setVisible(value), delay)
+		scheduledSetVisible = setTimeout(() => {
+			setVisible(value)
+			if (value) {
+				props.onShow?.()
+			} else {
+				props.onHide?.()
+			}
+		}, delay)
 	}
 
-	const show = () => scheduleSetVisible(true)
-	const hide = () => scheduleSetVisible(false)
-	const toggle = () => (visible() ? hide() : show())
+	const scheduleShow = () => scheduleSetVisible(true)
+	const scheduleHide = () => scheduleSetVisible(false)
+	const scheduleToggle = () => (visible() ? scheduleHide() : scheduleShow())
 
 	const addInteractiveMouseMove = () => document.addEventListener("mousemove", onMouseMove)
 	const removeInteractiveMouseMove = () => document.removeEventListener("mousemove", onMouseMove)
@@ -115,7 +124,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		show()
+		scheduleShow()
 	}
 
 	const onMouseLeave = (ev: MouseEvent) => {
@@ -137,7 +146,7 @@ export const Float: Component<FloatProps> = (_props) => {
 		if (props.interactive) {
 			addInteractiveMouseMove()
 		} else {
-			hide()
+			scheduleHide()
 		}
 	}
 
@@ -149,9 +158,9 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 
 		if (isCursorOutsideInteractiveBorder(ev, props.interactiveBorder, position, f)) {
-			hide()
+			scheduleHide()
 		} else {
-			show()
+			scheduleShow()
 		}
 	}
 
@@ -167,7 +176,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		show()
+		scheduleShow()
 	}
 
 	const onBlur = (ev: FocusEvent) => {
@@ -186,7 +195,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		hide()
+		scheduleHide()
 	}
 
 	const onMouseUp = (ev: MouseEvent) => {
@@ -195,14 +204,14 @@ export const Float: Component<FloatProps> = (_props) => {
 		}
 
 		if (props.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
-			hide()
+			scheduleHide()
 			return
 		}
 
 		lastTriggerEvent = ev
 
 		if (hasTrigger("click")) {
-			show()
+			scheduleShow()
 		}
 	}
 
@@ -215,7 +224,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			lastTriggerEvent = ev
 
 			if (hasTrigger("click")) {
-				toggle()
+				scheduleToggle()
 			}
 		}
 	}
@@ -256,7 +265,7 @@ export const Float: Component<FloatProps> = (_props) => {
 			return
 		}
 
-		hide()
+		scheduleHide()
 		props.onClickOutside?.(ev)
 	}
 
@@ -280,6 +289,16 @@ export const Float: Component<FloatProps> = (_props) => {
 			f.style.pointerEvents = props.interactive ? "auto" : "none"
 			f.style.userSelect = props.interactive ? "auto" : "none"
 			f.style.zIndex = props.zIndex.toString()
+		}
+	})
+
+	createEffect(() => {
+		if (manual(props.trigger)) {
+			if (visible()) {
+				props.onShow?.()
+			} else {
+				props.onHide?.()
+			}
 		}
 	})
 
