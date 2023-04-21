@@ -45,8 +45,6 @@ export type FloatProps = {
 	onClickOutside?: (ev: MouseEvent) => MaybePromise<void>
 }
 
-// TODO: maxWidth
-// TODO: maxHeight
 // TODO: presence animation (scale + shift + fade): using Motion One
 // TODO: onShown
 // TODO: onHidden
