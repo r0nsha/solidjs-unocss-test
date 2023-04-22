@@ -5,7 +5,6 @@
 		"moduleResolution": "node",
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"types": ["vite/client"],
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"noEmit": true,
@@ -13,6 +12,10 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowJs": false
+		"allowJs": false,
+		"types": ["vite/client"],
+		"paths": {
+			"~/*": ["./src/*"]
+		}
 	}
 }
