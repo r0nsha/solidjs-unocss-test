@@ -76,6 +76,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 
 	return (
 		<button
+			aria-label={local.text}
 			{...html}
 			disabled={local.disabled}
 			class={classNames(
