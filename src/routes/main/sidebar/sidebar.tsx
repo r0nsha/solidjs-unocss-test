@@ -5,7 +5,7 @@ import { WorkoutList } from "./workout-list"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-60 border-e-(2 solid surface-100) flex flex-(col shrink-0)">
+		<div class="w-60 min-h-0 border-e-(2 solid surface-100) flex flex-(col shrink-0)">
 			<Title />
 			<WorkoutList />
 			<div class="mx-1">

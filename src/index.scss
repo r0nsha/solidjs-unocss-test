@@ -1,7 +1,7 @@
 html,
 body,
 #root {
-  height: 100%;
+  @apply w-full h-full;
 }
 
 body {
@@ -177,7 +177,7 @@ body {
 * {
   // Firefox
   scrollbar-width: auto;
-  scrollbar-color: var(--surface-500) var(--surface-100);
+  scrollbar-color: var(--surface-400) var(--surface-100);
 
   // Chromium/Safari
   &::-webkit-scrollbar {
@@ -189,7 +189,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--surface-500);
+    background: var(--surface-400);
     border-radius: 2px;
   }
 }
