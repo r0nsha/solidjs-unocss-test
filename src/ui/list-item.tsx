@@ -29,6 +29,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 				local.disabled
 					? "opacity-50"
 					: "hover:(bg-surface-200 color-on-primary) active:bg-surface-300 focus-visible:bg-surface-100",
+				html.class
 			)}
 		>
 			<Show when={local.prefixIcon} fallback={local.prefix}>

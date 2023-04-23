@@ -14,8 +14,8 @@ export const WorkoutList: Component = () => {
 	const addWorkout = () => setWorkouts([...workouts, { publicId: nanoid(), name: "" }])
 
 	return (
-		<div class="flex flex-(col 1) mx-1">
-			<div class="ps-2 pb-1 flex justify-between items-center">
+		<div class="min-h-0 flex flex-(col 1)">
+			<div class="ps-2 pb-1 flex justify-between items-center mx-1">
 				<span class="font-bold select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
@@ -29,7 +29,7 @@ export const WorkoutList: Component = () => {
 					)}
 				</Tooltip>
 			</div>
-			<Divider />
+			<Divider class="mx-1" />
 			<div class="min-h-0 flex flex-(col 1) gap-1 py-2 overflow-y-auto">
 				<For each={workouts}>{(workout) => <WorkoutItem workout={workout} />}</For>
 			</div>
@@ -49,5 +49,5 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 		return name !== "" ? name : t.untitled()
 	}
 
-	return <ListItem prefixIcon={IconFileDescription} text={name()} />
+	return <ListItem class="mx-1" prefixIcon={IconFileDescription} text={name()} />
 }
