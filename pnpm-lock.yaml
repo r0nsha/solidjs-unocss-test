@@ -19,6 +19,9 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
+  nanoid:
+    specifier: ^4.0.2
+    version: 4.0.2
   solid-floating-ui:
     specifier: ^0.2.1
     version: 0.2.1(@floating-ui/dom@1.2.6)(solid-js@1.7.3)
@@ -1611,6 +1614,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /node-fetch-native@1.1.0:
     resolution: {integrity: sha512-nl5goFCig93JZ9FIV8GHT9xpNqXbxQUzkOmKIMKmncsBH9jhg7qKex8hirpymkBFmNQ114chEEG5lS4wgK2I+Q==}

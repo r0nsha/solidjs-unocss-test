@@ -18,6 +18,7 @@
 		"@tabler/icons-solidjs": "^2.15.0",
 		"@unocss/reset": "^0.51.2",
 		"classnames": "^2.3.2",
+		"nanoid": "^4.0.2",
 		"solid-floating-ui": "^0.2.1",
 		"solid-js": "^1.7.3"
 	},
