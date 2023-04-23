@@ -1,10 +1,10 @@
 import { IconFileDescription, IconPlus } from "@tabler/icons-solidjs"
 import { Component } from "solid-js"
-import { Button } from "../../ui/button"
-import { ListItem } from "../../ui/list-item"
-import { useI18n } from "../../locale/i18n.context"
-import { Divider } from "../../ui/divider"
-import { Tooltip } from "../../ui/float/tooltip"
+import { Button } from "../../../ui/button"
+import { ListItem } from "../../../ui/list-item"
+import { useI18n } from "../../../locale/i18n.context"
+import { Divider } from "../../../ui/divider"
+import { Tooltip } from "../../../ui/float/tooltip"
 
 export const WorkoutList: Component = () => {
 	const [t] = useI18n()

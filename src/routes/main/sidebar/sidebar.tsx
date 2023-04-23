@@ -1,5 +1,5 @@
 import { Component } from "solid-js"
-import { Divider } from "../../ui/divider"
+import { Divider } from "../../../ui/divider"
 import { ThemeToggle } from "./theme-toggle"
 import { WorkoutList } from "./workout-list"
 

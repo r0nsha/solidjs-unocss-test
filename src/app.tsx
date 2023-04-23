@@ -1,7 +1,7 @@
 import { Component } from "solid-js"
 import { I18nProvider } from "./locale/i18n.context"
 import { ThemeProvider } from "./contexts/theme.context"
-import { Main } from "./components/main/main"
+import { Main } from "./routes/main/main"
 
 export const App: Component = () => {
 	return (

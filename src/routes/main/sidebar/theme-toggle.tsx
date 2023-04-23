@@ -1,6 +1,6 @@
-import { useTheme } from "../../contexts/theme.context"
-import { useI18n } from "../../locale/i18n.context"
-import { Toggle } from "../../ui/toggle"
+import { useTheme } from "../../../contexts/theme.context"
+import { useI18n } from "../../../locale/i18n.context"
+import { Toggle } from "../../../ui/toggle"
 
 export const ThemeToggle = () => {
 	const [t] = useI18n()
