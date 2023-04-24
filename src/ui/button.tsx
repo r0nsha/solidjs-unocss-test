@@ -51,7 +51,7 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		primary:
 			"bg-transparent color-primary-500 outline-(width-0 transparent) hover:(bg-primary-50 color-primary-600) active:bg-primary-100 focus-visible:(bg-primary-50 outline-(width-2 solid primary-300))",
 		neutral:
-			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-surface-100 color-on-primary) active:bg-surface-200 focus-visible:(bg-surface-100 outline-(width-2 solid surface-300))",
+			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-surface-100 color-on-primary) active:bg-surface-200 focus-visible:(bg-surface-100 outline-(width-2 solid on-primary))",
 		success:
 			"bg-transparent color-success-500 outline-(width-0 transparent) hover:(bg-success-50 color-success-600) active:bg-success-100 focus-visible:(bg-success-50 outline-(width-2 solid success-300))",
 		warning:
