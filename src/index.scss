@@ -277,8 +277,7 @@ body {
 * {
   // Selection highlight color
   &::selection {
-    color: var(--on-primary);
-    background: var(--info-100);
+    background: var(--info-200);
   }
 
   // Default focus outline
