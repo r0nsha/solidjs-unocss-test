@@ -5,7 +5,7 @@ export type ToggleProps = {
 	checked?: boolean
 	// TODO:
 	// disabled?: boolean
-	onChange?: (newValue: boolean, event: Event) => void
+	onChange?: (newValue: boolean, event: MouseEvent) => void
 }
 
 export const Toggle: Component<ToggleProps> = (props) => {

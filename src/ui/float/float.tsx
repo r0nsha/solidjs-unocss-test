@@ -1,6 +1,7 @@
 import { autoUpdate, flip, shift } from "@floating-ui/dom"
-import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
+import { UseFloatingOptions, useFloating } from "solid-floating-ui"
 import {
+	Accessor,
 	Component,
 	JSX,
 	JSXElement,
@@ -27,6 +28,8 @@ export type FloatRenderProvided = {
 		onMotionComplete: (ev: MotionEvent) => MaybePromise<void>
 	}
 	class: string | undefined
+	visible: Accessor<boolean>
+	setVisibility: (value: boolean) => void
 }
 
 export type FloatChildrenProvided = {
@@ -93,6 +96,7 @@ export const Float: Component<FloatProps> = (props) => {
 		floating()?.contains(ev.target as Node | null) || reference()?.contains(ev.target as Node | null)
 
 	const setVisibility = (value: boolean) => {
+		console.log("wut")
 		setVisible(value)
 		if (value) {
 			events.onShow?.()
@@ -259,7 +263,6 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
-		scheduleHide()
 		setVisibility(false)
 		events.onClickOutside?.(ev)
 	}
@@ -321,6 +324,8 @@ export const Float: Component<FloatProps> = (props) => {
 	})
 
 	provided.class = other.class
+	provided.visible = visible
+	provided.setVisibility = setVisibility
 
 	return (
 		<>

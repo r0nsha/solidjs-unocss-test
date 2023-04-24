@@ -6,15 +6,42 @@ import { ListItem } from "../../../ui/list-item"
 import { IconSettings } from "@tabler/icons-solidjs"
 import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
+import { useTheme } from "../../../contexts/theme.context"
+import { Toggle } from "../../../ui/toggle"
 
 export const Sidebar: Component = () => {
 	const [t] = useI18n()
+
+	const { theme, setTheme } = useTheme()
+
+	const isDark = () => theme() === "dark"
+	const toggleTheme = (newValue: boolean) => setTheme(newValue ? "dark" : "light")
 
 	return (
 		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<Title />
 			<div class="flex flex-col mt-2 mb-4">
-				<Menu options={{ placement: "bottom-start" }} content={<>Hello</>}>
+				<Menu
+					options={{ placement: "bottom-start" }}
+					content={
+						<>
+							<Menu.Item
+								closeMode="none"
+								text={t.dark_mode()}
+								suffix={
+									<Toggle
+										checked={isDark()}
+										onChange={(newValue, ev) => {
+											// ev.stopPropagation()
+											toggleTheme(newValue)
+										}}
+									/>
+								}
+								onClick={() => toggleTheme(isDark())}
+							/>
+						</>
+					}
+				>
 					{(provided) => (
 						<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
 					)}
