@@ -83,7 +83,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 				local.small ? "h-6 rounded-1" : "h-8 rounded-2",
 			)}
 		>
-			{props.icon?.({ class: "flex-shrink-0", size: local.small ? 16 : 20 })}
+			{local.icon?.({ class: "flex-shrink-0", size: local.small ? 16 : 20 })}
 			<Show when={local.text}>
 				<span>{local.text}</span>
 			</Show>

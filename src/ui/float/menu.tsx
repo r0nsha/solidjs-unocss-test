@@ -1,4 +1,4 @@
-import { Component, JSXElement, Show, splitProps } from "solid-js"
+import { Component, JSXElement, splitProps } from "solid-js"
 import { Float, FloatProps } from "./float"
 import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
@@ -42,7 +42,7 @@ export const Menu: Component<MenuProps> = (props) => {
 					exit={{ opacity: 0, scale: 0.85 }}
 					transition={{ duration: 0.1 }}
 				>
-					{props.content}
+					{local.content}
 				</Motion.div>
 			)}
 		/>
