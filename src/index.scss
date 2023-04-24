@@ -254,22 +254,20 @@ body {
 
   // Chromium/Safari
   &::-webkit-scrollbar {
-    width: 1.25rem;
-    height: 1.25rem;
+    @apply w-2.5 h-2.5;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--surface-hover);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--surface-300);
-    border: solid 6px var(--surface-50);
-    border-radius: 1rem;
+    background: var(--surface-active);
+    border-radius: 2.5px;
     transition: background 100ms ease;
 
     &:hover {
-      background: var(--surface-400);
+      background: var(--surface-500);
     }
   }
 }
