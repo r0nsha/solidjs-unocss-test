@@ -1,3 +1,5 @@
+@use "sass:color";
+
 html,
 body,
 #root {
@@ -17,6 +19,11 @@ body {
   }
 }
 
+@mixin make-interactive-colors($name, $color) {
+  --#{$name}-hover: #{color.change($color, $alpha: 0.15)};
+  --#{$name}-active: #{color.change($color, $alpha: 0.3)};
+}
+
 .theme {
   &-light {
     --surface-50: #ffffff;
@@ -30,6 +37,7 @@ body {
     --surface-800: #4a4a4a;
     --surface-900: #424242;
     --surface-950: #2e2e2e;
+    @include make-interactive-colors("surface", #828282);
 
     --on-primary: #222222;
     --on-secondary: #666666;
@@ -45,6 +53,7 @@ body {
     --primary-800: #a5190f;
     --primary-900: #881c14;
     --primary-950: #4b0904;
+    @include make-interactive-colors("primary", #ff5043);
 
     --success-50: #effef6;
     --success-100: #dafeeb;
@@ -57,6 +66,7 @@ body {
     --success-800: #116a40;
     --success-900: #105736;
     --success-950: #02311d;
+    @include make-interactive-colors("success", #15bf6c);
 
     --info-50: #eefbff;
     --info-100: #d9f6ff;
@@ -69,6 +79,7 @@ body {
     --info-800: #156db8;
     --info-900: #175c91;
     --info-950: #133858;
+    @include make-interactive-colors("info", #2fbeff);
 
     --warning-50: #fffce5;
     --warning-100: #fff9c2;
@@ -81,6 +92,7 @@ body {
     --warning-800: #8a480a;
     --warning-900: #753b0f;
     --warning-950: #431d04;
+    @include make-interactive-colors("warning", #ffb700);
 
     --danger-50: #fef2f3;
     --danger-100: #ffe1e3;
@@ -93,6 +105,7 @@ body {
     --danger-800: #9d1720;
     --danger-900: #821a21;
     --danger-950: #47080c;
+    @include make-interactive-colors("danger", #f42c3a);
   }
 
   &-dark {
