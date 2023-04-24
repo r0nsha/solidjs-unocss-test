@@ -19,50 +19,13 @@ export const WorkoutList: Component = () => {
 				<span class="font-bold select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
-						<>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="primary"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="neutral"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="success"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="info"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="warning"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-							<Button
-								{...provided}
-								variant="ghost"
-								colorScheme="danger"
-								icon={IconPlus}
-								onClick={addWorkout}
-							/>
-						</>
+						<Button
+							{...provided}
+							variant="ghost"
+							colorScheme="neutral"
+							icon={IconPlus}
+							onClick={addWorkout}
+						/>
 					)}
 				</Tooltip>
 			</div>
