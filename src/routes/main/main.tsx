@@ -13,7 +13,7 @@ export const Main: Component = () => {
 					<span class="text-lg font-bold">Starting Strength</span>
 				</div>
 				<Divider />
-				<div class="flex-1 px-[calc(0.75rem+6vw)] py-8 overflow-y-auto">
+				<div class="flex-1 px-12 py-8 overflow-y-auto">
 					<span class="color-on-secondary">Write something...</span>
 				</div>
 			</div>
