@@ -51,7 +51,6 @@ body {
 
 .theme {
   &-light {
-    // TODO: make a mixin for these...
     @include make-color-palette(
       surface,
       $c-50: #ffffff,
