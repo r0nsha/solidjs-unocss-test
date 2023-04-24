@@ -9,6 +9,7 @@ export type ListItemProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	suffixIcon?: IconComponent
 	suffix?: JSXElement
 	disabled?: boolean
+	selected?: boolean
 }
 
 export const ListItem: Component<ListItemProps> = (props) => {
@@ -19,6 +20,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 		"suffixIcon",
 		"suffix",
 		"disabled",
+		"selected",
 	])
 
 	return (
@@ -31,6 +33,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 					? "opacity-50"
 					: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:bg-surface-hover",
 				html.class,
+				local.selected && !local.disabled && "bg-surface-active! color-on-primary!",
 			)}
 		>
 			<Show when={local.prefixIcon} fallback={local.prefix}>

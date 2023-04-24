@@ -4,6 +4,9 @@ dependencies:
   '@floating-ui/dom':
     specifier: ^1.2.6
     version: 1.2.6
+  '@motionone/dom':
+    specifier: ^10.15.5
+    version: 10.15.5
   '@motionone/solid':
     specifier: ^10.16.0
     version: 10.16.0(solid-js@1.7.3)

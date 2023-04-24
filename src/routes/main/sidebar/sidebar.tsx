@@ -2,12 +2,19 @@ import { Component } from "solid-js"
 import { Divider } from "../../../ui/divider"
 import { ThemeToggle } from "./theme-toggle"
 import { WorkoutList } from "./workout-list"
+import { ListItem } from "../../../ui/list-item"
+import { IconSettings } from "@tabler/icons-solidjs"
+import { useI18n } from "../../../locale/i18n.context"
 
 export const Sidebar: Component = () => {
+	const [t] = useI18n()
+
 	return (
 		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<Title />
-			<div class="h-8" />
+			<div class="flex flex-col mt-2 mb-4">
+				<ListItem class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
+			</div>
 			<WorkoutList />
 			<Divider />
 			<ThemeToggle />
@@ -16,7 +23,7 @@ export const Sidebar: Component = () => {
 }
 
 const Title: Component = () => (
-	<div class="h-10 flex items-center gap-2 px-4">
+	<div class="h-10 flex items-center gap-2 px-3">
 		<div class="w-5 h-5 bg-primary-300 rounded-1" />
 		<span class="text-sm font-medium">Your name here...</span>
 	</div>

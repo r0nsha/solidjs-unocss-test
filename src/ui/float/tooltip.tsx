@@ -30,12 +30,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 			}}
 			render={(provided) => (
 				<Motion.div
-					ref={provided.ref}
-					style={{
-						position: provided.position.strategy,
-						top: `${provided.position.y ?? 0}px`,
-						left: `${provided.position.x ?? 0}px`,
-					}}
+					{...provided()}
 					class={classNames(
 						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
@@ -45,7 +40,6 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.85 }}
 					transition={{ duration: 0.1 }}
-					onMotionComplete={provided.onTransitionComplete}
 				>
 					<Show when={local.text}>
 						<div>

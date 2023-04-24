@@ -2,7 +2,7 @@ import { Side } from "@floating-ui/dom"
 import { UseFloatingResult } from "solid-floating-ui"
 import { Rect } from "../../utils/rect"
 
-const floatTriggers = ["hover", "focus", "click"] as const
+const floatTriggers = ["hover", "focus", "click", "context"] as const
 
 export type FloatTrigger = typeof floatTriggers[number]
 

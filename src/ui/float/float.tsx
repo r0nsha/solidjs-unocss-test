@@ -2,6 +2,7 @@ import { autoUpdate, flip, shift } from "@floating-ui/dom"
 import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
 import {
 	Component,
+	JSX,
 	JSXElement,
 	Setter,
 	Show,
@@ -16,12 +17,15 @@ import { FloatTrigger, FloatTriggers, isCursorOutsideInteractiveBorder, manual }
 import { Key } from "../../utils/key"
 import { ZIndex } from "../../utils/z-index"
 import { Presence } from "@motionone/solid"
+import { MotionEvent } from "@motionone/dom"
 
 export type FloatRenderProvided = {
-	ref: Setter<HTMLElement | undefined>
-	position: UseFloatingResult
+	(): {
+		ref: Setter<HTMLElement | undefined>
+		style: JSX.CSSProperties
+		onMotionComplete: (ev: MotionEvent) => MaybePromise<void>
+	}
 	class: string | undefined
-	onTransitionComplete: () => MaybePromise<void>
 }
 
 export type FloatChildrenProvided = {
@@ -75,7 +79,6 @@ export const Float: Component<FloatProps> = (props) => {
 	const [visible, setVisible] = createSignal(false)
 
 	const position = useFloating(reference, floating, {
-		strategy: "fixed",
 		whileElementsMounted: autoUpdate,
 		...other.options,
 		middleware: [flip(), shift(), ...(other.options?.middleware ?? [])],
@@ -207,6 +210,7 @@ export const Float: Component<FloatProps> = (props) => {
 
 		lastTriggerEvent = ev
 
+		console.log(ev.button)
 		if (hasTrigger("click")) {
 			scheduleShow()
 		}
@@ -309,18 +313,23 @@ export const Float: Component<FloatProps> = (props) => {
 		}
 	}
 
+	const provided: FloatRenderProvided = () => ({
+		ref: setFloating,
+		style: {
+			position: position.strategy,
+			top: `${position.y ?? 0}px`,
+			left: `${position.x ?? 0}px`,
+		},
+		onMotionComplete: onTransitionComplete,
+	})
+
+	provided.class = other.class
+
 	return (
 		<>
 			{other.children({ ref: setReference })}
 			<Presence exitBeforeEnter>
-				<Show when={visible()}>
-					{other.render({
-						ref: setFloating,
-						position,
-						class: other.class,
-						onTransitionComplete,
-					})}
-				</Show>
+				<Show when={visible()}>{other.render(provided)}</Show>
 			</Presence>
 		</>
 	)
