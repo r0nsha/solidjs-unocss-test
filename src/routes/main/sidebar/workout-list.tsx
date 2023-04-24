@@ -48,7 +48,7 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 
 	const name = () => {
 		const name = props.workout.name.trim()
-		return name !== "" ? name : t.untitled()
+		return name !== "" ? name : t.untitled() + "dsadasdaswe123321321312213v 321i2j3oi12 j43joi4j24oi"
 	}
 
 	return <ListItem class="mx-1" prefixIcon={IconFileDescription} text={name()} />

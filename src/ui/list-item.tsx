@@ -35,7 +35,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 			<Show when={local.prefixIcon} fallback={local.prefix}>
 				{local.prefixIcon?.({ size: 20 })}
 			</Show>
-			<span class="flex-1 font-medium">{local.text}</span>
+			<span class="flex-1 font-medium truncate">{local.text}</span>
 			<Show when={local.suffixIcon} fallback={local.suffix}>
 				{local.suffixIcon?.({ size: 20 })}
 			</Show>

@@ -13,7 +13,7 @@ export const Divider: Component<DividerProps> = (_props) => {
 
 	return (
 		<div
-			class={classNames("bg-surface-200", props.class)}
+			class={classNames("bg-surface-200 transition-(colors opacity) duration-100", props.class)}
 			classList={{
 				"w-full": props.orientation === "horizontal",
 				"h-0.35": props.orientation === "horizontal",

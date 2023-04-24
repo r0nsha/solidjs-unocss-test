@@ -247,25 +247,26 @@ body {
 * {
   // Firefox
   scrollbar-width: auto;
-  scrollbar-color: var(--surface-300) var(--surface-100);
+  scrollbar-color: var(--surface-300) transparent;
   transition: background 100ms ease;
 
   &:hover {
-    scrollbar-color: var(--surface-400) var(--surface-100);
+    scrollbar-color: var(--surface-400) transparent;
   }
 
   // Chromium/Safari
   &::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 1.25rem;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--surface-100);
+    background: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
     background: var(--surface-300);
-    border-radius: 2px;
+    border: solid 6px var(--surface-50);
+    border-radius: 1rem;
     transition: background 100ms ease;
 
     &:hover {
