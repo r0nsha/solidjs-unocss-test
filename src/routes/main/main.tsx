@@ -13,10 +13,8 @@ export const Main: Component = () => {
 					<span class="text-lg font-bold">Starting Strength</span>
 				</div>
 				<Divider />
-				<div class="flex-1 py-8 flex justify-center overflow-y-auto">
-					<div class="w-full px-3 lg:(w-auto min-w-lg px-[5vw]) bg-surface-100 flex-shrink-1">
-						Write something...
-					</div>
+				<div class="flex-1 px-[calc(0.75rem+6vw)] py-8 overflow-y-auto">
+					<span class="color-on-secondary">Write something...</span>
 				</div>
 			</div>
 		</div>
