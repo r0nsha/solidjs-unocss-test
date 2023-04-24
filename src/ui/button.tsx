@@ -7,16 +7,12 @@ export type ButtonVariant = "solid" | "outline" | "ghost"
 
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant: ButtonVariant
+	small?: boolean
 	colorScheme?: ColorScheme
 	icon?: IconComponent
 	text?: string
 	disabled?: boolean
 }
-const sharedClass =
-	"h-8 flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-bold rounded-2 border-none transition-(colors opacity) duration-100 select-none"
-
-const textClass = "w-[fit-content] min-w-20 px-3"
-const iconClass = "w-8"
 
 const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", string>> = {
 	solid: {
@@ -72,7 +68,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 		_props,
 	)
 
-	const [local, html] = splitProps(props, ["variant", "colorScheme", "icon", "text", "disabled"])
+	const [local, html] = splitProps(props, ["variant", "small", "colorScheme", "icon", "text", "disabled"])
 
 	return (
 		<button
@@ -80,13 +76,14 @@ export const Button: Component<ButtonProps> = (_props) => {
 			{...html}
 			disabled={local.disabled}
 			class={classNames(
-				sharedClass,
+				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-bold border-none transition-(colors opacity) duration-100 select-none",
 				variantClasses[local.variant][local.disabled ? "disabled" : local.colorScheme],
 				html.class,
-				local.text ? textClass : iconClass,
+				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",
+				local.small ? "h-6 rounded-1" : "h-8 rounded-2",
 			)}
 		>
-			{props.icon?.({ class: "flex-shrink-0", size: 20 })}
+			{props.icon?.({ class: "flex-shrink-0", size: local.small ? 16 : 20 })}
 			<Show when={local.text}>
 				<span>{local.text}</span>
 			</Show>
