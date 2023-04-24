@@ -46,7 +46,7 @@ body {
   --#{$name}-900: #{$c-900};
   --#{$name}-950: #{$c-950};
   --#{$name}-hover: #{color.change($interactive-base, $alpha: 0.15)};
-  --#{$name}-active: #{color.change($interactive-base, $alpha: 0.225)};
+  --#{$name}-active: #{color.change($interactive-base, $alpha: 0.25)};
 }
 
 .theme {
