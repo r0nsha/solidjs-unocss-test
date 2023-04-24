@@ -247,7 +247,6 @@ body {
   // Firefox
   scrollbar-width: auto;
   scrollbar-color: var(--surface-300) transparent;
-  transition: background 100ms ease;
 
   &:hover {
     scrollbar-color: var(--surface-400) transparent;
