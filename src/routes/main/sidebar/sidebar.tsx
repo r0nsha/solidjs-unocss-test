@@ -1,5 +1,4 @@
 import { Component } from "solid-js"
-import { Divider } from "../../../ui/divider"
 import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
 import { IconSettings } from "@tabler/icons-solidjs"
