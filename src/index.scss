@@ -26,6 +26,7 @@ body {
 
 .theme {
   &-light {
+    // TODO: make a mixin for these...
     --surface-50: #ffffff;
     --surface-100: #f5f5f5;
     --surface-200: #e0e0e0;
@@ -120,6 +121,7 @@ body {
     --surface-800: #545454;
     --surface-900: #696969;
     --surface-950: #818181;
+    @include make-interactive-colors("surface", #404040);
 
     --on-primary: #dddddd;
     --on-secondary: #999999;
@@ -135,6 +137,7 @@ body {
     --primary-800: #eb948e;
     --primary-900: #eea5a0;
     --primary-950: #f0ada8;
+    @include make-interactive-colors("primary", #da362b);
 
     --success-50: #031c11;
     --success-100: #11412a;
@@ -147,6 +150,7 @@ body {
     --success-800: #a8f5cf;
     --success-900: #cbfbe1;
     --success-950: #dffbec;
+    @include make-interactive-colors("success", #1da563);
 
     --info-50: #082336;
     --info-100: #0c3c5a;
@@ -159,6 +163,7 @@ body {
     --info-800: #a8dffa;
     --info-900: #cfeafc;
     --info-950: #ddf1fd;
+    @include make-interactive-colors("info", #1193d0);
 
     --warning-50: #2d1206;
     --warning-100: #5c2d14;
@@ -171,6 +176,7 @@ body {
     --warning-800: #f8d97c;
     --warning-900: #fbebb1;
     --warning-950: #fbf3d5;
+    @include make-interactive-colors("warning", #d08a11);
 
     --danger-50: #26080a;
     --danger-100: #611f23;
@@ -183,6 +189,7 @@ body {
     --danger-800: #f8afb4;
     --danger-900: #fac6ca;
     --danger-950: #f8d8da;
+    @include make-interactive-colors("danger", #df202d);
   }
 }
 
