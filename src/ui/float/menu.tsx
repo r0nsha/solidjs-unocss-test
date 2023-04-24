@@ -5,35 +5,38 @@ import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
 import { Motion } from "@motionone/solid"
-import { FloatTrigger } from "./trigger"
+import { sameWidth } from "./middleware"
+import { ListItem, ListItemProps } from "../list-item"
+
+export type MenuCloseMode = "all" | "parent" | "none" | number
 
 export type MenuProps = Omit<FloatProps, "render"> & {
-	trigger?: FloatTrigger
+	// TODO: closeMode
+	close?: MenuCloseMode
 	content?: JSXElement
 }
 
-export const Menu: Component<MenuProps> = (props) => {
+export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
 	const [local, float] = splitProps(props, ["content"])
 
 	const { theme } = useTheme()
 
 	return (
 		<Float
-			trigger={["hover", "focus"]}
-			interactive={false}
+			trigger="click"
+			interactive
 			interactiveBorder={4}
-			delay={{ in: 300, out: 100 }}
-			zIndex={ZIndex.tooltip}
+			zIndex={ZIndex.menu}
 			{...float}
 			options={{
-				middleware: [offset({ mainAxis: 4 })],
+				middleware: [offset({ mainAxis: 4 }), sameWidth()],
 				...(float.options ?? {}),
 			}}
 			render={(provided) => (
 				<Motion.div
 					{...provided()}
 					class={classNames(
-						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
+						"flex flex-col p-1 rounded-1 drop-shadow text-sm font-medium",
 						theme() === "dark" ? "bg-surface-200" : "bg-surface-50",
 						provided.class,
 					)}
@@ -47,4 +50,15 @@ export const Menu: Component<MenuProps> = (props) => {
 			)}
 		/>
 	)
+}
+
+export type MenuItemProps = ListItemProps & {
+	// TODO: closeMode
+	close?: MenuCloseMode
+}
+
+Menu.Item = (props: MenuItemProps) => {
+	const [local, other] = splitProps(props, ["close"])
+
+	return <ListItem {...other} />
 }
