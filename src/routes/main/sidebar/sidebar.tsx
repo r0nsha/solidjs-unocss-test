@@ -20,6 +20,7 @@ export const Sidebar: Component = () => {
 			<div class="flex flex-col mt-2 mb-4">
 				<Menu
 					options={{ placement: "bottom-start" }}
+					// FIXME: menu abruptly closes when changing themes
 					content={
 						<>
 							<Menu.Item
