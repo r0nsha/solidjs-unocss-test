@@ -21,13 +21,21 @@ export type MenuCloseMode = "all" | "parent" | "none" | number
 
 export type MenuProps = Omit<FloatProps, "render"> & {
 	// TODO: closeMode
+<<<<<<< HEAD
 	closeMode?: MenuCloseMode
+=======
+	close?: MenuCloseMode
+>>>>>>> e6b915b53dc11fa124639b71b0cd3d540c095d10
 	content?: JSXElement
 }
 
 export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
+<<<<<<< HEAD
 	const merged = mergeProps({ closeMode: "parent" } satisfies Partial<MenuProps>, props)
 	const [local, float] = splitProps(merged, ["closeMode", "content"])
+=======
+	const [local, float] = splitProps(props, ["content"])
+>>>>>>> e6b915b53dc11fa124639b71b0cd3d540c095d10
 
 	const { theme } = useTheme()
 
@@ -42,6 +50,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 				middleware: [offset({ mainAxis: 4 }), sameWidth()],
 				...(float.options ?? {}),
 			}}
+<<<<<<< HEAD
 			render={(provided) => {
 				const parent = useContext(MenuContext)
 
@@ -112,10 +121,29 @@ Menu.Item = (props: MenuItemProps) => {
 				const onClick = other.onClick as JSX.EventHandler<HTMLButtonElement, MouseEvent> | undefined
 				onClick?.(ev)
 			}}
+=======
+			render={(provided) => (
+				<Motion.div
+					{...provided()}
+					class={classNames(
+						"flex flex-col p-1 rounded-1 drop-shadow text-sm font-medium",
+						theme() === "dark" ? "bg-surface-200" : "bg-surface-50",
+						provided.class,
+					)}
+					initial={{ opacity: 0, scale: 0.85 }}
+					animate={{ opacity: 1, scale: 1 }}
+					exit={{ opacity: 0, scale: 0.85 }}
+					transition={{ duration: 0.1 }}
+				>
+					{local.content}
+				</Motion.div>
+			)}
+>>>>>>> e6b915b53dc11fa124639b71b0cd3d540c095d10
 		/>
 	)
 }
 
+<<<<<<< HEAD
 type MenuContextValue = {
 	parent: MenuContextValue | undefined
 	visible: Accessor<boolean>
@@ -130,4 +158,15 @@ export const useMenuContext = () => {
 	const value = useContext(MenuContext)
 	if (!value) throw new Error("useTheme must be used within a ThemeProvider")
 	return value
+=======
+export type MenuItemProps = ListItemProps & {
+	// TODO: closeMode
+	close?: MenuCloseMode
+}
+
+Menu.Item = (props: MenuItemProps) => {
+	const [local, other] = splitProps(props, ["close"])
+
+	return <ListItem {...other} />
+>>>>>>> e6b915b53dc11fa124639b71b0cd3d540c095d10
 }
