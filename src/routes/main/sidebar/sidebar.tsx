@@ -14,9 +14,6 @@ export const Sidebar: Component = () => {
 
 	const { theme, setTheme } = useTheme()
 
-	const isDark = () => theme() === "dark"
-	const toggleTheme = (newValue: boolean) => setTheme(newValue ? "dark" : "light")
-
 	return (
 		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<Title />
@@ -31,14 +28,10 @@ export const Sidebar: Component = () => {
 								text={t.dark_mode()}
 								suffix={
 									<Toggle
-										checked={isDark()}
-										onChange={(newValue, ev) => {
-											ev.stopPropagation()
-											toggleTheme(newValue)
-										}}
+										checked={theme() === "dark"}
+										onChange={(newValue) => setTheme(newValue ? "dark" : "light")}
 									/>
 								}
-								onClick={() => toggleTheme(isDark())}
 							/>
 						</>
 					}

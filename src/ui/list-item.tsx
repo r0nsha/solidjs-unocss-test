@@ -9,6 +9,7 @@ export type ListItemProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	suffixIcon?: IconComponent
 	suffix?: JSXElement
 	disabled?: boolean
+	readonly?: boolean
 	selected?: boolean
 }
 
@@ -20,18 +21,21 @@ export const ListItem: Component<ListItemProps> = (props) => {
 		"suffixIcon",
 		"suffix",
 		"disabled",
+		"readonly",
 		"selected",
 	])
 
 	return (
 		<button
 			{...html}
-			disabled={local.disabled}
+			disabled={local.disabled || local.readonly}
 			class={classNames(
 				"h-8 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
 				local.disabled
-					? "opacity-50"
-					: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:bg-surface-hover",
+					? "opacity-50 pointer-events-none"
+					: local.readonly
+						? ""
+						: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:bg-surface-hover",
 				html.class,
 				local.selected && !local.disabled && "bg-surface-active! color-on-primary!",
 			)}

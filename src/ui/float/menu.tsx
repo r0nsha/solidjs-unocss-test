@@ -20,7 +20,6 @@ import { ListItem, ListItemProps } from "../list-item"
 export type MenuCloseMode = "all" | "parent" | "none" | number
 
 export type MenuProps = Omit<FloatProps, "render"> & {
-	// TODO: closeMode
 	closeMode?: MenuCloseMode
 	content?: JSXElement
 }
