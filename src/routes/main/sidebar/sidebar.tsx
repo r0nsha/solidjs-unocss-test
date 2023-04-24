@@ -5,6 +5,7 @@ import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
 import { IconSettings } from "@tabler/icons-solidjs"
 import { useI18n } from "../../../locale/i18n.context"
+import { Menu } from "../../../ui/float/menu"
 
 export const Sidebar: Component = () => {
 	const [t] = useI18n()
@@ -13,7 +14,11 @@ export const Sidebar: Component = () => {
 		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<Title />
 			<div class="flex flex-col mt-2 mb-4">
-				<ListItem class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
+				<Menu options={{ placement: "bottom-start" }} content={<>Hello</>}>
+					{(provided) => (
+						<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
+					)}
+				</Menu>
 			</div>
 			<WorkoutList />
 			<Divider />
