@@ -22,14 +22,16 @@ export const WorkoutList: Component = () => {
 						<Button
 							{...provided}
 							variant="ghost"
-							colorScheme="neutral"
+							colorScheme="primary"
 							icon={IconPlus}
 							onClick={addWorkout}
 						/>
 					)}
 				</Tooltip>
 			</div>
-			<Divider class="mx-1" />
+			<div class="mx-1">
+				<Divider />
+			</div>
 			<div class="min-h-0 flex flex-(col 1) gap-1 py-2 overflow-y-auto">
 				<For each={workouts}>{(workout) => <WorkoutItem workout={workout} />}</For>
 			</div>
