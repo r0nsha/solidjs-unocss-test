@@ -9,18 +9,20 @@ import {
 const colors = ["surface", "primary", "success", "info", "warning", "danger"] as const
 type Color = typeof colors[number]
 
-type ColorPalette = Record<number, string>
+type ColorPalette = Record<string | number, string>
 
-const forEachColorLevel = (fn: (level: number) => void) => {
+const forEachColorLevel = (fn: (level: string | number) => void) => {
 	fn(50)
 	for (let i = 100; i < 1000; i += 100) {
 		fn(i)
 	}
 	fn(950)
+	fn("hover")
+	fn("active")
 }
 
 const colorPalette = (color: Color): ColorPalette => {
-	const palette: Record<number, string> = {}
+	const palette: ColorPalette = {}
 	forEachColorLevel((level) => {
 		palette[level] = `var(--${color}-${level})`
 	})
