@@ -96,7 +96,6 @@ export const Float: Component<FloatProps> = (props) => {
 		floating()?.contains(ev.target as Node | null) || reference()?.contains(ev.target as Node | null)
 
 	const setVisibility = (value: boolean) => {
-		console.log("wut")
 		setVisible(value)
 		if (value) {
 			events.onShow?.()
@@ -107,15 +106,15 @@ export const Float: Component<FloatProps> = (props) => {
 
 	let scheduledSetVisible: number | undefined
 
-	const scheduleSetVisible = (value: boolean) => {
+	const scheduleSetVisibility = (value: boolean) => {
 		clearTimeout(scheduledSetVisible)
 
 		const delay = typeof other.delay === "number" ? other.delay : other.delay[value ? "in" : "out"] ?? 0
 		scheduledSetVisible = setTimeout(() => setVisibility(value), delay)
 	}
 
-	const scheduleShow = () => scheduleSetVisible(true)
-	const scheduleHide = () => scheduleSetVisible(false)
+	const scheduleShow = () => scheduleSetVisibility(true)
+	const scheduleHide = () => scheduleSetVisibility(false)
 	const scheduleToggle = () => (visible() ? scheduleHide() : scheduleShow())
 
 	const addInteractiveMouseMove = () => document.addEventListener("mousemove", onMouseMove)

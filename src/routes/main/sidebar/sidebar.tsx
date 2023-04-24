@@ -27,12 +27,13 @@ export const Sidebar: Component = () => {
 						<>
 							<Menu.Item
 								closeMode="none"
+								readonly
 								text={t.dark_mode()}
 								suffix={
 									<Toggle
 										checked={isDark()}
 										onChange={(newValue, ev) => {
-											// ev.stopPropagation()
+											ev.stopPropagation()
 											toggleTheme(newValue)
 										}}
 									/>
