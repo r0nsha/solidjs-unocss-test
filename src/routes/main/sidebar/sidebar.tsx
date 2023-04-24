@@ -1,6 +1,5 @@
 import { Component } from "solid-js"
 import { Divider } from "../../../ui/divider"
-import { ThemeToggle } from "./theme-toggle"
 import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
 import { IconSettings } from "@tabler/icons-solidjs"
@@ -10,41 +9,11 @@ import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
 
 export const Sidebar: Component = () => {
-	const [t] = useI18n()
-
-	const { theme, setTheme } = useTheme()
-
 	return (
 		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<Title />
-			<div class="flex flex-col mt-2 mb-4">
-				<Menu
-					options={{ placement: "bottom-start" }}
-					// FIXME: menu abruptly closes when changing themes
-					content={
-						<>
-							<Menu.Item
-								closeMode="none"
-								readonly
-								text={t.dark_mode()}
-								suffix={
-									<Toggle
-										checked={theme() === "dark"}
-										onChange={(newValue) => setTheme(newValue ? "dark" : "light")}
-									/>
-								}
-							/>
-						</>
-					}
-				>
-					{(provided) => (
-						<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
-					)}
-				</Menu>
-			</div>
+			<SettingsMenu />
 			<WorkoutList />
-			<Divider />
-			<ThemeToggle />
 		</div>
 	)
 }
@@ -55,3 +24,33 @@ const Title: Component = () => (
 		<span class="text-sm font-medium">Your name here...</span>
 	</div>
 )
+
+const SettingsMenu: Component = () => {
+	const [t] = useI18n()
+
+	return (
+		<div class="flex flex-col mt-2 mb-4">
+			<Menu
+				options={{ placement: "bottom-start" }}
+				// FIXME: menu abruptly closes when changing themes
+				content={
+					<>
+						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
+					</>
+				}
+			>
+				{(provided) => (
+					<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
+				)}
+			</Menu>
+		</div>
+	)
+}
+
+const ThemeToggle: Component = () => {
+	const { theme, setTheme } = useTheme()
+
+	return (
+		<Toggle checked={theme() === "dark"} onChange={(newValue) => setTheme(newValue ? "dark" : "light")} />
+	)
+}
