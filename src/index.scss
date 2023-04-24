@@ -31,7 +31,8 @@ body {
   $c-700,
   $c-800,
   $c-900,
-  $c-950
+  $c-950,
+  $interactive-base: $c-500
 ) {
   --#{$name}-50: #{$c-50};
   --#{$name}-100: #{$c-100};
@@ -44,8 +45,8 @@ body {
   --#{$name}-800: #{$c-800};
   --#{$name}-900: #{$c-900};
   --#{$name}-950: #{$c-950};
-  --#{$name}-hover: #{color.change($c-500, $alpha: 0.15)};
-  --#{$name}-active: #{color.change($c-500, $alpha: 0.3)};
+  --#{$name}-hover: #{color.change($interactive-base, $alpha: 0.15)};
+  --#{$name}-active: #{color.change($interactive-base, $alpha: 0.225)};
 }
 
 .theme {
@@ -158,7 +159,8 @@ body {
       $c-700: #4b4b4b,
       $c-800: #545454,
       $c-900: #696969,
-      $c-950: #818181
+      $c-950: #818181,
+      $interactive-base: #818181
     );
 
     --on-primary: #dddddd;
