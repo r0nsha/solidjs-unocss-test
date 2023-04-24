@@ -69,7 +69,6 @@ export const Float: Component<FloatProps> = (props) => {
 
 	let lastTriggerEvent: Event | null = null
 	let hovered = false
-	let focused = false
 
 	const [reference, setReference] = createSignal<HTMLElement>()
 	const [floating, setFloating] = createSignal<HTMLElement>()
@@ -89,20 +88,22 @@ export const Float: Component<FloatProps> = (props) => {
 	const isCursorOverRefOrFloat = (ev: MouseEvent) =>
 		floating()?.contains(ev.target as Node | null) || reference()?.contains(ev.target as Node | null)
 
+	const setVisibility = (value: boolean) => {
+		setVisible(value)
+		if (value) {
+			events.onShow?.()
+		} else {
+			events.onHide?.()
+		}
+	}
+
 	let scheduledSetVisible: number | undefined
 
 	const scheduleSetVisible = (value: boolean) => {
 		clearTimeout(scheduledSetVisible)
 
 		const delay = typeof other.delay === "number" ? other.delay : other.delay[value ? "in" : "out"] ?? 0
-		scheduledSetVisible = setTimeout(() => {
-			setVisible(value)
-			if (value) {
-				events.onShow?.()
-			} else {
-				events.onHide?.()
-			}
-		}, delay)
+		scheduledSetVisible = setTimeout(() => setVisibility(value), delay)
 	}
 
 	const scheduleShow = () => scheduleSetVisible(true)
@@ -168,7 +169,6 @@ export const Float: Component<FloatProps> = (props) => {
 		}
 
 		lastTriggerEvent = ev
-		focused = true
 
 		if (!hasTrigger("focus")) {
 			return
@@ -183,7 +183,6 @@ export const Float: Component<FloatProps> = (props) => {
 		}
 
 		lastTriggerEvent = ev
-		focused = false
 
 		if (!hasTrigger("focus")) {
 			return
@@ -224,6 +223,8 @@ export const Float: Component<FloatProps> = (props) => {
 			if (hasTrigger("click")) {
 				scheduleToggle()
 			}
+		} else if (ev.key === Key.Escape) {
+			setVisibility(false)
 		}
 	}
 
@@ -263,7 +264,7 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
-		scheduleHide()
+		setVisibility(false)
 		events.onClickOutside?.(ev)
 	}
 

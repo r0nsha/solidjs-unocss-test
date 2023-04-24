@@ -1,4 +1,4 @@
-import { IconFileDescription, IconPlus } from "@tabler/icons-solidjs"
+import { IconFile, IconFileDescription, IconPlus } from "@tabler/icons-solidjs"
 import { Component, For } from "solid-js"
 import { Button } from "../../../ui/button"
 import { ListItem } from "../../../ui/list-item"
@@ -49,5 +49,7 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 		return name !== "" ? name : t.untitled()
 	}
 
-	return <ListItem prefixIcon={IconFileDescription} text={name()} />
+	// TODO: use IconFileDescription if workout is not empty
+
+	return <ListItem prefixIcon={IconFile} text={name()} />
 }

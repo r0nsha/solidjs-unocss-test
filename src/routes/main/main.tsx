@@ -14,7 +14,8 @@ export const Main: Component = () => {
 				</div>
 				<Divider />
 				<div class="flex-1 px-12 py-8 overflow-y-auto">
-					<span class="color-on-secondary">Write something...</span>
+					<div class="text-4xl font-bold mb-8">Starting Strength</div>
+					<div class="color-on-secondary">Write something...</div>
 				</div>
 			</div>
 		</div>

@@ -76,7 +76,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			{...html}
 			disabled={local.disabled}
 			class={classNames(
-				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-bold border-none transition-(colors opacity) duration-100 select-none",
+				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-medium border-none transition-(colors opacity) duration-100 select-none",
 				variantClasses[local.variant][local.disabled ? "disabled" : local.colorScheme],
 				html.class,
 				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",
