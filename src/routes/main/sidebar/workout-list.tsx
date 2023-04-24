@@ -15,7 +15,7 @@ export const WorkoutList: Component = () => {
 
 	return (
 		<div class="min-h-0 flex flex-(col 1)">
-			<div class="px-3 flex justify-between items-center">
+			<div class="ps-5 pe-3 flex justify-between items-center">
 				<span class="text-sm font-bold select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
@@ -30,7 +30,7 @@ export const WorkoutList: Component = () => {
 					)}
 				</Tooltip>
 			</div>
-			<div class="min-h-0 flex flex-(col 1) px-1 py-1 overflow-y-auto">
+			<div class="min-h-0 flex flex-(col 1) px-3 py-2 overflow-y-auto">
 				<For each={workouts}>{(workout) => <WorkoutItem workout={workout} />}</For>
 			</div>
 		</div>

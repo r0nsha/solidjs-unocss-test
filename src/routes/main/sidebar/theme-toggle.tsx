@@ -7,7 +7,7 @@ export const ThemeToggle = () => {
 	const { theme, setTheme } = useTheme()
 
 	return (
-		<div class="px-3 py-6 rounded-1 flex justify-between items-center select-none color-on-secondary">
+		<div class="ps-5 pe-3 py-6 rounded-1 flex justify-between items-center select-none color-on-secondary">
 			<span class="flex-1 text-sm font-bold">{t.dark_mode()}</span>
 			<Toggle checked={theme() === "dark"} onChange={(newValue) => setTheme(newValue ? "dark" : "light")} />
 		</div>
