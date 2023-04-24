@@ -141,10 +141,6 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
-		if (hasTrigger("focus") && focused) {
-			return
-		}
-
 		if (other.interactive) {
 			addInteractiveMouseMove()
 		} else {
