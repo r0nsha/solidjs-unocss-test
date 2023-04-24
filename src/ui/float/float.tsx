@@ -10,6 +10,7 @@ import {
 	createRenderEffect,
 	createSignal,
 	mergeProps,
+	onCleanup,
 	splitProps,
 } from "solid-js"
 import { MaybePromise } from "../../types/promise"
@@ -119,10 +120,6 @@ export const Float: Component<FloatProps> = (props) => {
 	const onMouseEnter = (ev: MouseEvent) => {
 		removeInteractiveMouseMove()
 
-		if (other.disabled) {
-			return
-		}
-
 		lastTriggerEvent = ev
 		hovered = true
 
@@ -134,10 +131,6 @@ export const Float: Component<FloatProps> = (props) => {
 	}
 
 	const onMouseLeave = (ev: MouseEvent) => {
-		if (other.disabled) {
-			return
-		}
-
 		lastTriggerEvent = ev
 		hovered = false
 
@@ -167,10 +160,6 @@ export const Float: Component<FloatProps> = (props) => {
 	}
 
 	const onFocus = (ev: FocusEvent) => {
-		if (other.disabled) {
-			return
-		}
-
 		lastTriggerEvent = ev
 
 		if (!hasTrigger("focus")) {
@@ -181,10 +170,6 @@ export const Float: Component<FloatProps> = (props) => {
 	}
 
 	const onBlur = (ev: FocusEvent) => {
-		if (other.disabled) {
-			return
-		}
-
 		lastTriggerEvent = ev
 
 		if (!hasTrigger("focus")) {
@@ -199,28 +184,19 @@ export const Float: Component<FloatProps> = (props) => {
 	}
 
 	const onMouseUp = (ev: MouseEvent) => {
-		if (other.disabled) {
-			return
-		}
+		lastTriggerEvent = ev
 
 		if (other.hideOnClick && visible() && lastTriggerEvent?.type !== "focus") {
 			scheduleHide()
 			return
 		}
 
-		lastTriggerEvent = ev
-
-		console.log(ev.button)
 		if (hasTrigger("click")) {
 			scheduleShow()
 		}
 	}
 
 	const onKeyUp = (ev: KeyboardEvent) => {
-		if (other.disabled) {
-			return
-		}
-
 		if (other.triggerKeys?.includes(ev.key as Key)) {
 			lastTriggerEvent = ev
 
@@ -228,7 +204,18 @@ export const Float: Component<FloatProps> = (props) => {
 				scheduleToggle()
 			}
 		} else if (ev.key === Key.Escape) {
+			lastTriggerEvent = ev
 			setVisibility(false)
+			ev.preventDefault()
+		}
+	}
+
+	const onContextMenu = (ev: MouseEvent) => {
+		lastTriggerEvent = ev
+
+		if (hasTrigger("contextmenu")) {
+			scheduleShow()
+			ev.preventDefault()
 		}
 	}
 
@@ -239,19 +226,22 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
-		ref.addEventListener("mouseenter", onMouseEnter)
-		ref.addEventListener("mouseleave", onMouseLeave)
-		ref.addEventListener("focus", onFocus)
-		ref.addEventListener("blur", onBlur)
-		ref.addEventListener("mouseup", onMouseUp)
-		ref.addEventListener("keyup", onKeyUp)
+		const addEventListener = <K extends keyof HTMLElementEventMap>(
+			type: K,
+			listener: (ev: HTMLElementEventMap[K]) => void,
+		) => ref.addEventListener(type, (ev) => other.disabled || listener(ev))
+
+		// leaky?
+		addEventListener("mouseenter", onMouseEnter)
+		addEventListener("mouseleave", onMouseLeave)
+		addEventListener("focus", onFocus)
+		addEventListener("blur", onBlur)
+		addEventListener("mouseup", onMouseUp)
+		addEventListener("keyup", onKeyUp)
+		addEventListener("contextmenu", onContextMenu)
 	})
 
 	createRenderEffect(() => {
-		if (other.disabled) {
-			return
-		}
-
 		if (manual(other.trigger)) {
 			setVisible(other.trigger.visible)
 		}
@@ -259,6 +249,7 @@ export const Float: Component<FloatProps> = (props) => {
 
 	createEffect(() => {
 		if (other.disabled) {
+			removeInteractiveMouseMove()
 			setVisible(false)
 		}
 	})
@@ -268,6 +259,7 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
+		scheduleHide()
 		setVisibility(false)
 		events.onClickOutside?.(ev)
 	}
@@ -303,6 +295,11 @@ export const Float: Component<FloatProps> = (props) => {
 				events.onHide?.()
 			}
 		}
+	})
+
+	onCleanup(() => {
+		document.body.removeEventListener("click", bodyClickHandler)
+		removeInteractiveMouseMove()
 	})
 
 	const onTransitionComplete = () => {
