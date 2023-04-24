@@ -22,7 +22,7 @@ export const WorkoutList: Component = () => {
 						<Button
 							{...provided}
 							variant="ghost"
-							colorScheme="primary"
+							colorScheme="neutral"
 							icon={IconPlus}
 							onClick={addWorkout}
 						/>
