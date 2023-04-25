@@ -47,7 +47,7 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		primary:
 			"bg-transparent color-primary-500 outline-(width-0 transparent) hover:(bg-primary-hover color-primary-600) active:bg-primary-active focus-visible:(bg-primary-hover outline-(width-2 solid primary-500))",
 		neutral:
-			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:(bg-surface-hover outline-(width-2 solid surface-300))",
+			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:(bg-surface-hover outline-(width-2 solid on-secondary))",
 		success:
 			"bg-transparent color-success-500 outline-(width-0 transparent) hover:(bg-success-hover color-success-600) active:bg-success-active focus-visible:(bg-success-hover outline-(width-2 solid success-500))",
 		warning:
@@ -76,7 +76,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			{...html}
 			disabled={local.disabled}
 			class={classNames(
-				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-medium border-none transition-all duration-50 select-none",
+				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-medium border-none select-none",
 				variantClasses[local.variant][local.disabled ? "disabled" : local.colorScheme],
 				html.class,
 				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",

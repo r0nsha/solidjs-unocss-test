@@ -12,7 +12,7 @@ export const Toggle: Component<ToggleProps> = (props) => {
 	return (
 		<button
 			class={classNames(
-				"relative w-10 h-4.5 rounded-full flex items-center transition-all duration-50 outline-transparent border-none",
+				"relative w-10 h-4.5 rounded-full flex items-center outline-transparent border-none",
 				props.checked
 					? "bg-primary-500 hover:bg-primary-600 active:bg-primary-700"
 					: "bg-surface-300 hover:bg-surface-400 active:bg-surface-500",

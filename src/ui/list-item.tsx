@@ -30,7 +30,7 @@ export const ListItem: Component<ListItemProps> = (props) => {
 			{...html}
 			disabled={local.disabled || local.readonly}
 			class={classNames(
-				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary transition-all duration-50",
+				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary",
 				local.disabled
 					? "opacity-50 pointer-events-none"
 					: local.readonly
