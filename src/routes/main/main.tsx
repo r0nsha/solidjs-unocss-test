@@ -5,23 +5,6 @@ import { Button } from "../../ui/button"
 import { IconArrowLeft, IconArrowRight, IconDotsVertical } from "@tabler/icons-solidjs"
 import { colorSchemes } from "../../types/color"
 
-// TODO: Tabs:
-// TODO: - add
-// TODO: - remove
-// TODO: - persist
-// TODO: - context menu:
-// TODO: - * close
-// TODO: - * close others
-// TODO: - * pin/unpin
-// TODO: Header:
-// TODO: - move into header.tsx
-// TODO: - title
-// TODO: - backwards/forwards buttons
-// TODO: - more button:
-// TODO: - * close
-// TODO: - * pin/unpin
-// TODO: - * export as: markdown
-// TODO: - * export as: markdown
 export const Main: Component = () => {
 	const [t] = useI18n()
 
