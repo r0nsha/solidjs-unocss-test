@@ -102,17 +102,17 @@ body {
 
     @include make-color-palette(
       info,
-      $c-50: #eefbff,
-      $c-100: #d9f6ff,
-      $c-200: #bbf0ff,
-      $c-300: #8ce8ff,
-      $c-400: #56d7ff,
-      $c-500: #2fbeff,
-      $c-600: #119ff7,
-      $c-700: #1188e4,
-      $c-800: #156db8,
-      $c-900: #175c91,
-      $c-950: #133858
+      $c-50: #f0f5ff,
+      $c-100: #e1ebfe,
+      $c-200: #b9d6fd,
+      $c-300: #7eb4fc,
+      $c-400: #3389fa,
+      $c-500: #0c6ce9,
+      $c-600: #0553c7,
+      $c-700: #0441a4,
+      $c-800: #063684,
+      $c-900: #0b306f,
+      $c-950: #081f49
     );
 
     @include make-color-palette(
@@ -199,17 +199,17 @@ body {
 
     @include make-color-palette(
       info,
-      $c-50: #082336,
-      $c-100: #0c3c5a,
-      $c-200: #08486e,
-      $c-300: #075c8d,
-      $c-400: #0975ae,
-      $c-500: #1193d0,
-      $c-600: #25b2f4,
-      $c-700: #6eccf7,
-      $c-800: #a8dffa,
-      $c-900: #cfeafc,
-      $c-950: #ddf1fd
+      $c-50: #081735,
+      $c-100: #0e2958,
+      $c-200: #0b306a,
+      $c-300: #093986,
+      $c-400: #0a49a9,
+      $c-500: #145bb8,
+      $c-600: #3182ed,
+      $c-700: #71a8f4,
+      $c-800: #a9c9f9,
+      $c-900: #d0dffb,
+      $c-950: #dce8fe
     );
 
     @include make-color-palette(
@@ -291,6 +291,6 @@ body {
 
   // Default focus outline
   &:focus-visible {
-    outline: 2px solid var(--on-primary);
+    outline: 2px solid var(--surface-300);
   }
 }

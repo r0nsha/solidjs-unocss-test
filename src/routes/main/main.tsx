@@ -2,8 +2,10 @@ import { Component } from "solid-js"
 import { Sidebar } from "./sidebar/sidebar"
 import { Divider } from "../../ui/divider"
 import { IconFile } from "@tabler/icons-solidjs"
+import { useI18n } from "../../locale/i18n.context"
 
 export const Main: Component = () => {
+	const [t] = useI18n()
 	return (
 		<div class="w-full h-full flex flex-col">
 			{/* <div class="h-10 px-3 flex items-center gap-3"> */}
@@ -19,9 +21,7 @@ export const Main: Component = () => {
 							<span class="color-on-secondary">Status line | Buttons | Last modified</span>
 						</div>
 						<div class="text-4xl font-bold mb-8">Starting Strength</div>
-						<div class="color-on-secondary">
-							Hello-------------------------------------------------------------------------------------------------Hello
-						</div>
+						<div class="color-on-secondary">{t.workout_placeholder()}</div>
 					</div>
 				</div>
 			</div>

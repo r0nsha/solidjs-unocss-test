@@ -15,7 +15,7 @@ export const WorkoutList: Component = () => {
 	return (
 		<div class="min-h-0 flex flex-(col 1)">
 			<div class="ps-3 pe-1 flex justify-between items-center">
-				<span class="text-sm font-bold color-on-dim select-none">{t.workouts()}</span>
+				<span class="text-sm font-bold color-on-primary select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
 						<Button
@@ -29,8 +29,10 @@ export const WorkoutList: Component = () => {
 					)}
 				</Tooltip>
 			</div>
-			<div class="min-h-0 flex flex-(col 1) px-1 py-1 overflow-y-auto">
-				<For each={workouts}>{(workout) => <WorkoutItem workout={workout} />}</For>
+			<div class="min-h-0 flex flex-(col 1) gap-0.5 px-1 py-1 overflow-y-auto">
+				<For each={workouts}>
+					{(workout, index) => <WorkoutItem workout={workout} selected={index() === 0} />}
+				</For>
 			</div>
 		</div>
 	)
@@ -50,5 +52,5 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 
 	// TODO: use IconFileDescription if workout is not empty
 
-	return <ListItem prefixIcon={IconFile} text={name()} />
+	return <ListItem prefixIcon={IconFile} text={name()} selected={props.selected} />
 }

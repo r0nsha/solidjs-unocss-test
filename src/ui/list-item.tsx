@@ -30,22 +30,22 @@ export const ListItem: Component<ListItemProps> = (props) => {
 			{...html}
 			disabled={local.disabled || local.readonly}
 			class={classNames(
-				"h-8 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
+				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary transition-(colors opacity) duration-100",
 				local.disabled
 					? "opacity-50 pointer-events-none"
 					: local.readonly
 						? ""
-						: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:bg-surface-hover",
+						: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active",
 				html.class,
 				local.selected && !local.disabled && "bg-surface-active! color-on-primary!",
 			)}
 		>
 			<Show when={local.prefixIcon} fallback={local.prefix}>
-				{local.prefixIcon?.({ size: 20 })}
+				{local.prefixIcon?.({ size: 16 })}
 			</Show>
-			<span class="flex-1 font-medium truncate">{local.text}</span>
+			<span class="flex-1 font-normal truncate">{local.text}</span>
 			<Show when={local.suffixIcon} fallback={local.suffix}>
-				{local.suffixIcon?.({ size: 20 })}
+				{local.suffixIcon?.({ size: 16 })}
 			</Show>
 		</button>
 	)

@@ -9,6 +9,7 @@ const en = {
 	workouts: "Workouts",
 	create_a_workout: "Create a workout",
 	untitled: "Untitled",
+	workout_placeholder: "Write something, press '/' for commands..."
 }
 
 // const he: typeof en = {}
