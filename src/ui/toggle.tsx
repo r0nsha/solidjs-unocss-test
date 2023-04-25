@@ -20,10 +20,10 @@ export const Toggle: Component<ToggleProps> = (props) => {
 			onClick={(ev) => props.onChange?.(!props.checked, ev)}
 		>
 			<div
-				class="w-3 h-3 bg-white rounded-[50%] absolute top-[50%] inset-s-1 translate-y-[-50%] transition-inset duration-150"
-				classList={{
-					"inset-s-6": props.checked,
-				}}
+				class={classNames(
+					"w-3 h-3 bg-white rounded-3 absolute top-[50%] translate-y-[-50%] transition-inset duration-150",
+					props.checked ? "inset-s-6" : "inset-s-1",
+				)}
 			/>
 		</button>
 	)
