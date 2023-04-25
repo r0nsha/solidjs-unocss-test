@@ -6,14 +6,13 @@ import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
-import { Divider } from "../../../ui/divider"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-70 min-h-0 bg-surface-50 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
-			<div class="h-4" />
+		<div class="w-70 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
+			<div class="h-2" />
 			<Settings />
-			<Divider class="my-4" />
+			<div class="h-8" />
 			<WorkoutList />
 		</div>
 	)
