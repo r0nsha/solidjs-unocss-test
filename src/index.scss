@@ -291,6 +291,6 @@ body {
 
   // Default focus outline
   &:focus-visible {
-    outline: 2px solid var(--surface-300);
+    outline: 2px solid var(--on-secondary);
   }
 }
