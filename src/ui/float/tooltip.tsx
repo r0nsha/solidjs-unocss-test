@@ -37,7 +37,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 						provided.class,
 					)}
 					animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-					exit={{ opacity: 0, scale: 0.9 }}
+					exit={{ opacity: 0, scale: 0.85 }}
 					transition={{ duration: 0.1 }}
 				>
 					<Show when={local.text}>

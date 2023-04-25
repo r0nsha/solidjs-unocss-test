@@ -1,4 +1,4 @@
-import { Side } from "@floating-ui/dom"
+import { Placement, Side } from "@floating-ui/dom"
 import { UseFloatingResult } from "solid-floating-ui"
 import { Rect } from "../../utils/rect"
 
@@ -27,9 +27,8 @@ export const isCursorOutsideInteractiveBorder = (
 	const { clientX, clientY } = ev
 
 	const floatingRect = Rect.fromDOMRect(floating.getBoundingClientRect())
-	const side = position.placement.split("-")[0] as Side
 
-	switch (side) {
+	switch (basePlacement(position.placement)) {
 		case "top":
 			floatingRect.y2 += interactiveBorder
 		case "right":
@@ -42,3 +41,7 @@ export const isCursorOutsideInteractiveBorder = (
 
 	return !Rect.contains(floatingRect, clientX, clientY)
 }
+
+export type BasePlacement = "top" | "right" | "bottom" | "left"
+
+export const basePlacement = (placement: Placement): Side => placement.split("-")[0] as Side

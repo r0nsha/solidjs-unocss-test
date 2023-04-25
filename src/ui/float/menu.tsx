@@ -9,13 +9,15 @@ import {
 	useContext,
 } from "solid-js"
 import { Float, FloatProps } from "./float"
-import { offset } from "@floating-ui/dom"
+import { Placement, offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
-import { Motion, MotionComponentProps, Options } from "@motionone/solid"
+import { Motion, MotionComponentProps, Options, Variant } from "@motionone/solid"
 import { sameWidth } from "./middleware"
 import { ListItem, ListItemProps } from "../list-item"
+import { basePlacement } from "./trigger"
+import { UseFloatingResult } from "solid-floating-ui"
 
 export type MenuCloseMode = "all" | "parent" | "none" | number
 
@@ -55,9 +57,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
-						animate={{ opacity: [0, 1], scale: [0.9, 1] }}
-						exit={{ opacity: 0, scale: 0.9 }}
-						transition={{ duration: 0.1 }}
+						{...menuAnimation(provided.position)}
 					>
 						<MenuContext.Provider
 							value={{
@@ -93,10 +93,30 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 	)
 }
 
-const menuAnimation = (): Options => {
+const menuAnimation = (position: UseFloatingResult): Options => {
+	const shiftOffset = position.middlewareData.offset?.y ?? 0
+
+	const shiftAnimate: Variant = {}
+	const shiftExit: Variant = {}
+
+	switch (basePlacement(position.placement)) {
+		case "top":
+			shiftAnimate.y = [shiftOffset, 0]
+			shiftExit.y = shiftOffset
+		case "right":
+			shiftAnimate.x = [-shiftOffset, 0]
+			shiftExit.x = -shiftOffset
+		case "bottom":
+			shiftAnimate.y = [-shiftOffset, 0]
+			shiftExit.y = -shiftOffset
+		case "left":
+			shiftAnimate.x = [shiftOffset, 0]
+			shiftExit.x = shiftOffset
+	}
+
 	return {
-		animate: { opacity: [0, 1], scale: [0.95, 1] },
-		exit: { opacity: 0, scale: 0.95 },
+		animate: { ...shiftAnimate, opacity: [0, 1], scale: [0.95, 1] },
+		exit: { ...shiftExit, opacity: 0, scale: 0.9 },
 		transition: { duration: 0.1 },
 	}
 }
