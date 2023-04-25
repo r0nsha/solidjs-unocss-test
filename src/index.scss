@@ -169,17 +169,17 @@ body {
 
     @include make-color-palette(
       primary,
-      $c-50: #290c0a,
-      $c-100: #542421,
-      $c-200: #65241f,
-      $c-300: #812922,
-      $c-400: #9f342d,
-      $c-500: #da362b,
-      $c-600: #de4f45,
-      $c-700: #e67870,
-      $c-800: #eb948e,
-      $c-900: #eea5a0,
-      $c-950: #f0ada8
+      $c-50: #fff2f1,
+      $c-100: #ffe1df,
+      $c-200: #ffc9c5,
+      $c-300: #ffa49d,
+      $c-400: #ff6f64,
+      $c-500: #ff5043,
+      $c-600: #ed2415,
+      $c-700: #c81a0d,
+      $c-800: #a5190f,
+      $c-900: #881c14,
+      $c-950: #4b0904
     );
 
     @include make-color-palette(
