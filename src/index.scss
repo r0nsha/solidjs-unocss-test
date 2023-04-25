@@ -149,17 +149,17 @@ body {
   &-dark {
     @include make-color-palette(
       surface,
-      $c-950: #ededed,
-      $c-900: #d9d9d9,
-      $c-800: #bdbdbd,
-      $c-700: #999999,
-      $c-600: #787878,
-      $c-500: #5c5c5c,
-      $c-400: #474747,
-      $c-300: #383838,
-      $c-200: #2e2e2e,
-      $c-100: #262626,
       $c-50: #1e1e1e,
+      $c-100: #262626,
+      $c-200: #2e2e2e,
+      $c-300: #383838,
+      $c-400: #474747,
+      $c-500: #5c5c5c,
+      $c-600: #787878,
+      $c-700: #999999,
+      $c-800: #bdbdbd,
+      $c-900: #d9d9d9,
+      $c-950: #ededed,
       $interactive-base: #818181
     );
 
@@ -169,17 +169,17 @@ body {
 
     @include make-color-palette(
       primary,
-      $c-50: #fff2f1,
-      $c-100: #ffe1df,
-      $c-200: #ffc9c5,
-      $c-300: #ffa49d,
-      $c-400: #ff6f64,
+      $c-50: #4b0904,
+      $c-100: #881c14,
+      $c-200: #a5190f,
+      $c-300: #c81a0d,
+      $c-400: #ed2415,
       $c-500: #ff5043,
-      $c-600: #ed2415,
-      $c-700: #c81a0d,
-      $c-800: #a5190f,
-      $c-900: #881c14,
-      $c-950: #4b0904
+      $c-600: #ff6f64,
+      $c-700: #ffa49d,
+      $c-800: #ffc9c5,
+      $c-900: #ffe1df,
+      $c-950: #fff2f1
     );
 
     @include make-color-palette(
