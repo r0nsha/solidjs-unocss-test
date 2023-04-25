@@ -17,23 +17,23 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", string>> = {
 	solid: {
 		primary:
-			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-200))",
+			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-300))",
 		neutral:
 			"bg-surface-200 color-on-primary outline-(width-0 transparent) hover:bg-surface-300 active:bg-surface-400 focus-visible:(outline-(width-3 solid surface-300))",
 		success:
-			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-700 focus-visible:(outline-(width-3 solid success-200))",
+			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-700 focus-visible:(outline-(width-3 solid success-300))",
 		warning:
-			"bg-warning-500 color-white outline-(width-0 transparent) hover:bg-warning-600 active:bg-warning-700 focus-visible:(outline-(width-3 solid warning-200))",
-		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-700 focus-visible:(outline-(width-3 solid info-200))",
+			"bg-warning-500 color-white outline-(width-0 transparent) hover:bg-warning-600 active:bg-warning-700 focus-visible:(outline-(width-3 solid warning-300))",
+		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-700 focus-visible:(outline-(width-3 solid info-300))",
 		danger:
-			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-700 focus-visible:(outline-(width-3 solid danger-200))",
+			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-700 focus-visible:(outline-(width-3 solid danger-300))",
 		disabled: "bg-surface-200 color-surface-400 outline-(width-0 transparent)",
 	},
 	outline: {
 		primary:
 			"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:(bg-primary-hover color-primary-600 outline-primary-600) active:(bg-primary-active color-primary-700 outline-primary-700) focus-visible:(bg-primary-hover color-primary-600 outline-primary-600)",
 		neutral:
-			"bg-transparent color-on-secondary outline-(width-2 solid on-secondary offset--2) hover:bg-surface-active active:(bg-surface-200 color-on-primary outline-on-primary) focus-visible:(bg-surface-200 color-on-primary outline-on-primary)",
+			"bg-transparent color-on-secondary outline-(width-2 solid on-secondary offset--2) hover:(bg-surface-active color-on-primary outline-on-primary) active:bg-surface-200 focus-visible:(bg-surface-200 color-on-primary outline-on-primary)",
 		success:
 			"bg-transparent color-success-500 outline-(width-2 solid success-500 offset--2) hover:(bg-success-hover color-success-600 outline-success-600) active:(bg-success-active color-success-700 outline-success-700) focus-visible:(bg-success-hover color-success-600 outline-success-600)",
 		warning:

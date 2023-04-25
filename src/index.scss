@@ -164,8 +164,8 @@ body {
     );
 
     --on-primary: #dddddd;
-    --on-secondary: #999999;
-    --on-dim: #666666;
+    --on-secondary: #aaaaaa;
+    --on-dim: #777777;
 
     @include make-color-palette(
       primary,
