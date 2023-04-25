@@ -7,10 +7,11 @@ import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
 import { Divider } from "../../../ui/divider"
+import { Button } from "../../../ui/button"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-70 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
+		<div class="w-60 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<div class="h-4" />
 			<SettingsMenu />
 			<Divider class="my-4" />
@@ -25,6 +26,7 @@ const SettingsMenu: Component = () => {
 	return (
 		<div class="flex flex-col">
 			<Menu
+				animation="scale"
 				content={
 					<>
 						<Menu.Item
@@ -37,15 +39,7 @@ const SettingsMenu: Component = () => {
 					</>
 				}
 			>
-				{(provided) => (
-					<ListItem
-						ref={provided.ref}
-						class="mx-1"
-						prefixIcon={IconSettingsFilled}
-						text={t.settings()}
-						selected={provided.visible()}
-					/>
-				)}
+				{(provided) => <Button ref={provided.ref} variant="ghost" class="mx-1" icon={IconSettingsFilled} />}
 			</Menu>
 		</div>
 	)

@@ -20,7 +20,7 @@ import { basePlacement } from "./trigger"
 import { UseFloatingResult } from "solid-floating-ui"
 
 export type MenuCloseMode = "all" | "parent" | "none" | number
-export type MenuAnimation = "shift" | "scale"
+export type MenuAnimation = "fade" | "scale" | "shift"
 
 export type MenuProps = Omit<FloatProps, "render" | "trigger"> & {
 	closeMode?: MenuCloseMode
@@ -29,7 +29,7 @@ export type MenuProps = Omit<FloatProps, "render" | "trigger"> & {
 }
 
 export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
-	const merged = mergeProps({ closeMode: "parent", animation: "shift" } satisfies Partial<MenuProps>, props)
+	const merged = mergeProps({ closeMode: "parent", animation: "scale" } satisfies Partial<MenuProps>, props)
 	const [local, float] = splitProps(merged, ["closeMode", "animation", "content"])
 
 	const { theme } = useTheme()
@@ -117,7 +117,7 @@ const menuAnimation = (animation: MenuAnimation, position: UseFloatingResult): O
 					break
 			}
 
-			shiftOffset *= 2
+			shiftOffset *= 1
 
 			switch (placement) {
 				case "top":
@@ -140,7 +140,9 @@ const menuAnimation = (animation: MenuAnimation, position: UseFloatingResult): O
 			break
 		case "scale":
 			shiftAnimate.scale = [0.95, 1]
+			shiftAnimate.transformOrigin = "0"
 			shiftExit.scale = 0.9
+			shiftExit.transformOrigin = "0"
 			break
 	}
 
