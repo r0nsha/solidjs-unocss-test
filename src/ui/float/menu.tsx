@@ -20,15 +20,17 @@ import { basePlacement } from "./trigger"
 import { UseFloatingResult } from "solid-floating-ui"
 
 export type MenuCloseMode = "all" | "parent" | "none" | number
+export type MenuAnimation = "shift" | "scale"
 
-export type MenuProps = Omit<FloatProps, "render"> & {
+export type MenuProps = Omit<FloatProps, "render" | "trigger"> & {
 	closeMode?: MenuCloseMode
+	animation?: MenuAnimation
 	content?: JSXElement
 }
 
 export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
-	const merged = mergeProps({ closeMode: "parent" } satisfies Partial<MenuProps>, props)
-	const [local, float] = splitProps(merged, ["closeMode", "content"])
+	const merged = mergeProps({ closeMode: "parent", animation: "shift" } satisfies Partial<MenuProps>, props)
+	const [local, float] = splitProps(merged, ["closeMode", "animation", "content"])
 
 	const { theme } = useTheme()
 
@@ -58,7 +60,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
-						{...menuAnimation(provided.position)}
+						{...menuAnimation(local.animation, provided.position)}
 					>
 						<MenuContext.Provider
 							value={{
@@ -94,49 +96,57 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 	)
 }
 
-const menuAnimation = (position: UseFloatingResult): Options => {
-	const placement = basePlacement(position.placement)
-
-	let shiftOffset: number
-
-	switch (placement) {
-		case "top":
-		case "bottom":
-			shiftOffset = position.middlewareData.offset?.y ?? 0
-			break
-		case "right":
-		case "left":
-			shiftOffset = position.middlewareData.offset?.x ?? 0
-			break
-	}
-
-	shiftOffset *= 2
-
+const menuAnimation = (animation: MenuAnimation, position: UseFloatingResult): Options => {
 	const shiftAnimate: Variant = {}
 	const shiftExit: Variant = {}
 
-	switch (placement) {
-		case "top":
-			shiftAnimate.y = [shiftOffset, 0]
-			shiftExit.y = shiftOffset
+	switch (animation) {
+		case "shift":
+			const placement = basePlacement(position.placement)
+
+			let shiftOffset: number
+
+			switch (placement) {
+				case "top":
+				case "bottom":
+					shiftOffset = position.middlewareData.offset?.y ?? 0
+					break
+				case "right":
+				case "left":
+					shiftOffset = position.middlewareData.offset?.x ?? 0
+					break
+			}
+
+			shiftOffset *= 2
+
+			switch (placement) {
+				case "top":
+					shiftAnimate.y = [shiftOffset, 0]
+					shiftExit.y = shiftOffset
+					break
+				case "right":
+					shiftAnimate.x = [-shiftOffset, 0]
+					shiftExit.x = -shiftOffset
+					break
+				case "bottom":
+					shiftAnimate.y = [-shiftOffset, 0]
+					shiftExit.y = -shiftOffset
+					break
+				case "left":
+					shiftAnimate.x = [shiftOffset, 0]
+					shiftExit.x = shiftOffset
+					break
+			}
 			break
-		case "right":
-			shiftAnimate.x = [-shiftOffset, 0]
-			shiftExit.x = -shiftOffset
-			break
-		case "bottom":
-			shiftAnimate.y = [-shiftOffset, 0]
-			shiftExit.y = -shiftOffset
-			break
-		case "left":
-			shiftAnimate.x = [shiftOffset, 0]
-			shiftExit.x = shiftOffset
+		case "scale":
+			shiftAnimate.scale = [0.95, 1]
+			shiftExit.scale = 0.9
 			break
 	}
 
 	return {
-		animate: { ...shiftAnimate, opacity: [0, 1], scale: [0.95, 1] },
-		exit: { ...shiftExit, opacity: 0, scale: 0.9 },
+		animate: { ...shiftAnimate, opacity: [0, 1] },
+		exit: { ...shiftExit, opacity: 0 },
 		transition: { duration: 0.1 },
 	}
 }

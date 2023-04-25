@@ -1,7 +1,7 @@
 import { Component } from "solid-js"
 import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
-import { IconSettingsFilled } from "@tabler/icons-solidjs"
+import { IconPalette, IconSettingsFilled } from "@tabler/icons-solidjs"
 import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
@@ -27,7 +27,13 @@ const SettingsMenu: Component = () => {
 			<Menu
 				content={
 					<>
-						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
+						<Menu.Item
+							closeMode="none"
+							readonly
+							prefixIcon={IconPalette}
+							text={t.dark_mode()}
+							suffix={<ThemeToggle />}
+						/>
 					</>
 				}
 			>

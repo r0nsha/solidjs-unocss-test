@@ -13,8 +13,8 @@ export const Main: Component = () => {
 			<Divider />
 			<div class="flex-1 flex">
 				<Sidebar />
-				<div class="flex-1 flex flex-col">
-					<div class="flex-1 px-12 py-6 overflow-y-auto">
+				<div class="flex-1 flex justify-center">
+					<div class="flex flex-col min-w-0 w-full lg:w-[90%] xl:w-[75%] 2xl:w-[60%] px-12 py-6 overflow-y-auto">
 						<div class="mb-8">
 							<span class="color-on-secondary">Status line | Buttons | Last modified</span>
 						</div>
