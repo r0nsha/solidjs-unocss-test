@@ -7,7 +7,6 @@ import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
 import { Divider } from "../../../ui/divider"
-import { Button } from "../../../ui/button"
 
 export const Sidebar: Component = () => {
 	return (
@@ -26,7 +25,6 @@ const SettingsMenu: Component = () => {
 	return (
 		<div class="flex flex-col">
 			<Menu
-				animation="scale"
 				content={
 					<>
 						<Menu.Item
@@ -39,7 +37,15 @@ const SettingsMenu: Component = () => {
 					</>
 				}
 			>
-				{(provided) => <Button ref={provided.ref} variant="ghost" class="mx-1" icon={IconSettingsFilled} />}
+				{(provided) => (
+					<ListItem
+						ref={provided.ref}
+						class="mx-1"
+						prefixIcon={IconSettingsFilled}
+						text={t.settings()}
+						selected={provided.visible()}
+					/>
+				)}
 			</Menu>
 		</div>
 	)

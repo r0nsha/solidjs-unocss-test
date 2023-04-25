@@ -29,7 +29,7 @@ export type MenuProps = Omit<FloatProps, "render" | "trigger"> & {
 }
 
 export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
-	const merged = mergeProps({ closeMode: "parent", animation: "scale" } satisfies Partial<MenuProps>, props)
+	const merged = mergeProps({ closeMode: "parent", animation: "shift" } satisfies Partial<MenuProps>, props)
 	const [local, float] = splitProps(merged, ["closeMode", "animation", "content"])
 
 	const { theme } = useTheme()
