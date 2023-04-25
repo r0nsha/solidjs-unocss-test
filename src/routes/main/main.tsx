@@ -13,13 +13,15 @@ export const Main: Component = () => {
 			<Divider />
 			<div class="flex-1 flex">
 				<Sidebar />
-				<div class="flex-1 flex justify-center">
-					<div class="flex flex-col min-w-0 w-full lg:w-[80%] xl:w-[70%] 2xl:w-225 px-6 lg:px-12 py-6 overflow-y-auto transition-width duration-300">
+				<div class="flex-1 flex lg:justify-center">
+					<div class="flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">
 						<div class="mb-8">
 							<span class="color-on-secondary">Status line | Buttons | Last modified</span>
 						</div>
 						<div class="text-4xl font-bold mb-8">Starting Strength</div>
-						<div class="color-on-secondary">Write something...</div>
+						<div class="color-on-secondary">
+							Hello-------------------------------------------------------------------------------------------------Hello
+						</div>
 					</div>
 				</div>
 			</div>
