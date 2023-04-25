@@ -33,7 +33,7 @@ export const Main: Component = () => {
 						<Button variant="ghost" colorScheme="neutral" small icon={IconArrowLeft} />
 						<Button variant="ghost" colorScheme="neutral" small icon={IconArrowRight} />
 					</div>
-					<span class="color-on-secondary text-sm">Starting Strength</span>
+					<span class="color-on-secondary text-sm select-none">Starting Strength</span>
 					<Button variant="ghost" colorScheme="neutral" small icon={IconDotsVertical} />
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">

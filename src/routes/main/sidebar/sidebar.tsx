@@ -6,6 +6,7 @@ import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
+import { sameWidth } from "../../../ui/float/middleware"
 
 export const Sidebar: Component = () => {
 	return (
@@ -24,6 +25,7 @@ const Settings: Component = () => {
 	return (
 		<div class="flex flex-col px-2">
 			<Menu
+				options={{ middleware: [sameWidth()] }}
 				content={
 					<>
 						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />

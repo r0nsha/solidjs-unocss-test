@@ -25,14 +25,14 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 			zIndex={ZIndex.tooltip}
 			{...float}
 			options={{
-				middleware: [offset({ mainAxis: 4 })],
 				...(float.options ?? {}),
+				middleware: [offset({ mainAxis: 4 }), ...(float.options?.middleware ?? [])],
 			}}
 			render={(provided) => (
 				<Motion.div
 					{...provided.props()}
 					class={classNames(
-						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-md text-sm font-medium",
+						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-lg text-sm font-medium",
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
 						provided.class,
 					)}
