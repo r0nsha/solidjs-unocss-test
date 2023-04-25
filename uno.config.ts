@@ -61,6 +61,7 @@ export default defineConfig({
 			on: {
 				primary: "var(--on-primary)",
 				secondary: "var(--on-secondary)",
+				dim: "var(--on-dim)",
 			},
 		},
 		boxShadow: {

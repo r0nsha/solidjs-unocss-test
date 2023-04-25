@@ -14,8 +14,8 @@ export const WorkoutList: Component = () => {
 
 	return (
 		<div class="min-h-0 flex flex-(col 1)">
-			<div class="ps-4 pe-2 flex justify-between items-center">
-				<span class="text-sm font-bold select-none">{t.workouts()}</span>
+			<div class="ps-3 pe-1 flex justify-between items-center">
+				<span class="text-sm font-bold color-on-dim select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
 						<Button
