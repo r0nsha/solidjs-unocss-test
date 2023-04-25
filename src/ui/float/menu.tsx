@@ -56,8 +56,8 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
-						animate={{ opacity: [0, 1], scale: [0.85, 1] }}
-						exit={{ opacity: 0, scale: 0.85 }}
+						animate={{ opacity: [0, 1], scale: [0.9, 1] }}
+						exit={{ opacity: 0, scale: 0.9 }}
 						transition={{ duration: 0.1 }}
 						onClick={(ev) => {
 							ev.stopPropagation()
