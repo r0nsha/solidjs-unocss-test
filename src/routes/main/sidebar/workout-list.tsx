@@ -15,13 +15,13 @@ export const WorkoutList: Component = () => {
 	return (
 		<div class="min-h-0 flex flex-(col 1)">
 			<div class="ps-4 pe-2 pb-1 flex justify-between items-center">
-				<span class="text-sm font-bold color-on-primary select-none">{t.workouts()}</span>
+				<span class="text-sm font-medium color-on-primary select-none">{t.workouts()}</span>
 				<Tooltip text={t.create_a_workout()}>
 					{(provided) => (
 						<Button
 							{...provided}
-							variant="ghost"
 							small
+							variant="ghost"
 							colorScheme="neutral"
 							icon={IconPlus}
 							onClick={addWorkout}
