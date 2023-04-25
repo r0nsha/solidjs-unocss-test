@@ -36,8 +36,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
 						provided.class,
 					)}
-					initial={{ opacity: 0, scale: 0.85 }}
-					animate={{ opacity: 1, scale: 1 }}
+					animate={{ opacity: [0, 1], scale: [0.85, 1] }}
 					exit={{ opacity: 0, scale: 0.85 }}
 					transition={{ duration: 0.1 }}
 				>

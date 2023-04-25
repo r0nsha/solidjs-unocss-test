@@ -50,15 +50,18 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 				return (
 					<Motion.div
 						{...provided()}
+						id="wut"
 						class={classNames(
 							"flex flex-col p-1 rounded-1 drop-shadow-xl text-sm font-medium",
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
-						initial={{ opacity: 0, scale: 0.85 }}
-						animate={{ opacity: 1, scale: 1 }}
+						animate={{ opacity: [0, 1], scale: [0.85, 1] }}
 						exit={{ opacity: 0, scale: 0.85 }}
 						transition={{ duration: 0.1 }}
+						onClick={(ev) => {
+							ev.stopPropagation()
+						}}
 					>
 						<MenuContext.Provider
 							value={{
