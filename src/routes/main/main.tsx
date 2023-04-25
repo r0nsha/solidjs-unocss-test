@@ -14,7 +14,7 @@ export const Main: Component = () => {
 			<div class="flex-1 flex">
 				<Sidebar />
 				<div class="flex-1 flex justify-center">
-					<div class="flex flex-col min-w-0 w-full lg:w-[90%] xl:w-[75%] 2xl:w-[60%] px-12 py-6 overflow-y-auto">
+					<div class="flex flex-col min-w-0 w-full lg:w-[90%] xl:w-[75%] 2xl:w-[60%] px-6 lg:px-12 py-6 overflow-y-auto transition-width duration-300">
 						<div class="mb-8">
 							<span class="color-on-secondary">Status line | Buttons | Last modified</span>
 						</div>
