@@ -32,7 +32,14 @@ const Settings: Component = () => {
 					</>
 				}
 			>
-				{(provided) => <ListItem ref={provided.ref} prefixIcon={IconSettingsFilled} text={t.settings()} />}
+				{(provided) => (
+					<ListItem
+						ref={provided.ref}
+						prefixIcon={IconSettingsFilled}
+						text={t.settings()}
+						selected={provided.visible()}
+					/>
+				)}
 			</Menu>
 		</div>
 	)
