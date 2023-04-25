@@ -31,7 +31,7 @@ const SettingsMenu: Component = () => {
 		<div class="flex flex-col mt-2 mb-4">
 			<Menu
 				options={{ placement: "bottom-start" }}
-				// FIXME: menu abruptly closes when changing themes
+				// FIXME: menu abruptly closes when changing themes - change `provided` back to a normal struct?
 				content={
 					<>
 						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
