@@ -9,11 +9,11 @@ import {
 	useContext,
 } from "solid-js"
 import { Float, FloatProps } from "./float"
-import { Placement, offset } from "@floating-ui/dom"
+import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
-import { Motion, MotionComponentProps, Options, Variant } from "@motionone/solid"
+import { Motion, Options, Variant } from "@motionone/solid"
 import { sameWidth } from "./middleware"
 import { ListItem, ListItemProps } from "../list-item"
 import { basePlacement } from "./trigger"
@@ -95,24 +95,43 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 }
 
 const menuAnimation = (position: UseFloatingResult): Options => {
-	const shiftOffset = position.middlewareData.offset?.y ?? 0
+	const placement = basePlacement(position.placement)
+
+	let shiftOffset: number
+
+	switch (placement) {
+		case "top":
+		case "bottom":
+			shiftOffset = position.middlewareData.offset?.y ?? 0
+			break
+		case "right":
+		case "left":
+			shiftOffset = position.middlewareData.offset?.x ?? 0
+			break
+	}
+
+	shiftOffset *= 2
 
 	const shiftAnimate: Variant = {}
 	const shiftExit: Variant = {}
 
-	switch (basePlacement(position.placement)) {
+	switch (placement) {
 		case "top":
 			shiftAnimate.y = [shiftOffset, 0]
 			shiftExit.y = shiftOffset
+			break
 		case "right":
 			shiftAnimate.x = [-shiftOffset, 0]
 			shiftExit.x = -shiftOffset
+			break
 		case "bottom":
 			shiftAnimate.y = [-shiftOffset, 0]
 			shiftExit.y = -shiftOffset
+			break
 		case "left":
 			shiftAnimate.x = [shiftOffset, 0]
 			shiftExit.x = shiftOffset
+			break
 	}
 
 	return {
@@ -155,6 +174,6 @@ const MenuContext = createContext<MenuContextValue>()
 
 export const useMenuContext = () => {
 	const value = useContext(MenuContext)
-	if (!value) throw new Error("useTheme must be used within a ThemeProvider")
+	if (!value) throw new Error("useMenuContext must be used within a MenuContext")
 	return value
 }

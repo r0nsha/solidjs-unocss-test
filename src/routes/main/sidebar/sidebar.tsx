@@ -30,6 +30,7 @@ const SettingsMenu: Component = () => {
 	return (
 		<div class="flex flex-col mt-2 mb-4">
 			<Menu
+				options={{ placement: "right-start" }}
 				content={
 					<>
 						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
@@ -37,7 +38,13 @@ const SettingsMenu: Component = () => {
 				}
 			>
 				{(provided) => (
-					<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettings} text={t.settings()} />
+					<ListItem
+						ref={provided.ref}
+						class="mx-1"
+						prefixIcon={IconSettings}
+						text={t.settings()}
+						selected={provided.visible()}
+					/>
 				)}
 			</Menu>
 		</div>

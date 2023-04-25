@@ -35,6 +35,8 @@ export type FloatRenderProvided = {
 
 export type FloatChildrenProvided = {
 	ref: Setter<HTMLElement | undefined>
+	visible: Accessor<boolean>
+	setVisibility: (value: boolean) => void
 }
 
 export type FloatDelay = number | { in?: number; out?: number }
@@ -315,7 +317,7 @@ export const Float: Component<FloatProps> = (props) => {
 
 	return (
 		<>
-			{other.children({ ref: setReference })}
+			{other.children({ ref: setReference, visible, setVisibility })}
 			<Presence exitBeforeEnter>
 				<Show when={visible()}>
 					{other.render({
