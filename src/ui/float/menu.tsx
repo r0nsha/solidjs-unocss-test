@@ -40,6 +40,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 			zIndex={ZIndex.menu}
 			{...float}
 			options={{
+				placement: "bottom-start",
 				middleware: [offset({ mainAxis: 4 }), sameWidth()],
 				...(float.options ?? {}),
 			}}
