@@ -259,26 +259,23 @@ body {
   scrollbar-width: auto;
   scrollbar-color: var(--surface-300) transparent;
 
-  &:hover {
-    scrollbar-color: var(--surface-400) transparent;
-  }
-
   // Chromium/Safari
   &::-webkit-scrollbar {
-    @apply w-2.5 h-2.5;
+    @apply w-2 h-2;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--surface-hover);
+    background: transparent;
+    @apply my-1;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--surface-active);
-    border-radius: 2.5px;
+    background: var(--surface-200);
+    border-radius: 2px;
     transition: background 100ms ease;
 
     &:hover {
-      background: var(--surface-500);
+      background: var(--surface-300);
     }
   }
 }

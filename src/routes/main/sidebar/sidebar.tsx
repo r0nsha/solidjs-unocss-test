@@ -12,18 +12,18 @@ export const Sidebar: Component = () => {
 	return (
 		<div class="w-70 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<div class="h-4" />
-			<SettingsMenu />
+			<Settings />
 			<Divider class="my-4" />
 			<WorkoutList />
 		</div>
 	)
 }
 
-const SettingsMenu: Component = () => {
+const Settings: Component = () => {
 	const [t] = useI18n()
 
 	return (
-		<div class="flex flex-col">
+		<div class="flex flex-col px-2">
 			<Menu
 				content={
 					<>
@@ -37,9 +37,7 @@ const SettingsMenu: Component = () => {
 					</>
 				}
 			>
-				{(provided) => (
-					<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettingsFilled} text={t.settings()} />
-				)}
+				{(provided) => <ListItem ref={provided.ref} prefixIcon={IconSettingsFilled} text={t.settings()} />}
 			</Menu>
 		</div>
 	)
