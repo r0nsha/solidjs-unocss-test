@@ -10,7 +10,7 @@ import { Divider } from "../../../ui/divider"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-70 min-h-0 bg-surface-100 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
+		<div class="w-70 min-h-0 bg-surface-50 border-(e-(1 solid) surface-200) flex flex-(col shrink-0)">
 			<div class="h-4" />
 			<Settings />
 			<Divider class="my-4" />

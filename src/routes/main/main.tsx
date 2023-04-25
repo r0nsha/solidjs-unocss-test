@@ -8,7 +8,7 @@ export const Main: Component = () => {
 		<div class="w-full h-full flex">
 			<Sidebar />
 			<div class="flex-1 flex lg:justify-center">
-				<div class="flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">
+				<div class="flex flex-col min-w-0 max-w-full lg:w-192 px-6 pt-5 overflow-y-auto">
 					<div class="mb-8">
 						<span class="color-on-secondary">Status line | Buttons | Last modified</span>
 					</div>
