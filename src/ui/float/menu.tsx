@@ -55,7 +55,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 					<Motion.div
 						{...provided.props()}
 						class={classNames(
-							"flex flex-col px-1 py-2 rounded-2 shadow-lg shadow-surface-active border-(1 solid surface-200) text-sm font-medium",
+							"flex flex-col px-1 py-2 rounded-2 shadow-xl border-(1 solid surface-200) text-sm font-medium",
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
