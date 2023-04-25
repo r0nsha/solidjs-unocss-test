@@ -1,5 +1,5 @@
 import { autoUpdate, flip, shift } from "@floating-ui/dom"
-import { UseFloatingOptions, useFloating } from "solid-floating-ui"
+import { UseFloatingOptions, UseFloatingResult, useFloating } from "solid-floating-ui"
 import {
 	Accessor,
 	Component,
@@ -22,14 +22,15 @@ import { Presence } from "@motionone/solid"
 import { MotionEvent } from "@motionone/dom"
 
 export type FloatRenderProvided = {
-	(): {
+	position: UseFloatingResult
+	class: string | undefined
+	visible: Accessor<boolean>
+	setVisibility: (value: boolean) => void
+	props: () => {
 		ref: Setter<HTMLElement | undefined>
 		style: JSX.CSSProperties
 		onMotionComplete: (ev: MotionEvent) => MaybePromise<void>
 	}
-	class: string | undefined
-	visible: Accessor<boolean>
-	setVisibility: (value: boolean) => void
 }
 
 export type FloatChildrenProvided = {
@@ -194,8 +195,8 @@ export const Float: Component<FloatProps> = (props) => {
 			return
 		}
 
-		if (hasTrigger("click")) {
-			scheduleShow()
+		if (hasTrigger("click") && ev.button === 0) {
+			scheduleToggle()
 		}
 	}
 
@@ -217,7 +218,7 @@ export const Float: Component<FloatProps> = (props) => {
 		lastTriggerEvent = ev
 
 		if (hasTrigger("contextmenu")) {
-			scheduleShow()
+			scheduleToggle()
 			ev.preventDefault()
 		}
 	}
@@ -312,25 +313,27 @@ export const Float: Component<FloatProps> = (props) => {
 		}
 	}
 
-	const provided: FloatRenderProvided = () => ({
-		ref: setFloating,
-		style: {
-			position: position.strategy,
-			top: `${position.y ?? 0}px`,
-			left: `${position.x ?? 0}px`,
-		},
-		onMotionComplete: onTransitionComplete,
-	})
-
-	provided.class = other.class
-	provided.visible = visible
-	provided.setVisibility = setVisibility
-
 	return (
 		<>
 			{other.children({ ref: setReference })}
 			<Presence exitBeforeEnter>
-				<Show when={visible()}>{other.render(provided)}</Show>
+				<Show when={visible()}>
+					{other.render({
+						position,
+						class: other.class,
+						visible,
+						setVisibility,
+						props: () => ({
+							ref: setFloating,
+							style: {
+								position: position.strategy,
+								top: `${position.y ?? 0}px`,
+								left: `${position.x ?? 0}px`,
+							},
+							onMotionComplete: onTransitionComplete,
+						}),
+					})}
+				</Show>
 			</Presence>
 		</>
 	)

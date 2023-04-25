@@ -13,7 +13,7 @@ import { offset } from "@floating-ui/dom"
 import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
-import { Motion } from "@motionone/solid"
+import { Motion, MotionComponentProps, Options } from "@motionone/solid"
 import { sameWidth } from "./middleware"
 import { ListItem, ListItemProps } from "../list-item"
 
@@ -49,19 +49,15 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 
 				return (
 					<Motion.div
-						{...provided()}
-						id="wut"
+						{...provided.props()}
 						class={classNames(
-							"flex flex-col p-1 rounded-1 drop-shadow-xl text-sm font-medium",
+							"flex flex-col p-1 rounded-1 shadow-menu shadow-surface-active text-sm font-medium",
 							theme() === "dark" ? "bg-surface-300" : "bg-surface-50",
 							provided.class,
 						)}
 						animate={{ opacity: [0, 1], scale: [0.9, 1] }}
 						exit={{ opacity: 0, scale: 0.9 }}
 						transition={{ duration: 0.1 }}
-						onClick={(ev) => {
-							ev.stopPropagation()
-						}}
 					>
 						<MenuContext.Provider
 							value={{
@@ -95,6 +91,14 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 			}}
 		/>
 	)
+}
+
+const menuAnimation = (): Options => {
+	return {
+		animate: { opacity: [0, 1], scale: [0.95, 1] },
+		exit: { opacity: 0, scale: 0.95 },
+		transition: { duration: 0.1 },
+	}
 }
 
 export type MenuItemProps = ListItemProps & {
