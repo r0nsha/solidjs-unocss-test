@@ -30,9 +30,7 @@ export const WorkoutList: Component = () => {
 				</Tooltip>
 			</div>
 			<div class="min-h-0 flex flex-(col 1) gap-0.5 px-1 py-1 overflow-y-auto">
-				<For each={workouts}>
-					{(workout, index) => <WorkoutItem workout={workout} selected={index() === 0} />}
-				</For>
+				<For each={workouts}>{(workout) => <WorkoutItem workout={workout} />}</For>
 			</div>
 		</div>
 	)
@@ -52,5 +50,5 @@ const WorkoutItem: Component<WorkoutItemProps> = (props) => {
 
 	// TODO: use IconFileDescription if workout is not empty
 
-	return <ListItem prefixIcon={IconFile} text={name()} selected={props.selected} />
+	return <ListItem prefixIcon={IconFile} text={name()} />
 }

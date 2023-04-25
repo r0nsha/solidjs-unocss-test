@@ -38,13 +38,7 @@ const SettingsMenu: Component = () => {
 				}
 			>
 				{(provided) => (
-					<ListItem
-						ref={provided.ref}
-						class="mx-1"
-						prefixIcon={IconSettingsFilled}
-						text={t.settings()}
-						selected={provided.visible()}
-					/>
+					<ListItem ref={provided.ref} class="mx-1" prefixIcon={IconSettingsFilled} text={t.settings()} />
 				)}
 			</Menu>
 		</div>
