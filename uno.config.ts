@@ -44,7 +44,7 @@ export default defineConfig({
 			provider: "google",
 			fonts: {
 				sans: {
-					name: "Haffer",
+					name: "Inter",
 					weights: [400, 500, 700],
 				},
 				mono: {
