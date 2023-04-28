@@ -39,6 +39,7 @@ export default defineConfig({
 			} satisfies Record<Alias, RadixColors>,
 			lightSelector: ":root, .theme-light",
 			darkSelector: ".theme-dark",
+			prefix: "--color-",
 		}) as unknown as Preset<{}>,
 	],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
