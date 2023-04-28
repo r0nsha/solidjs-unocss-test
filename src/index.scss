@@ -8,7 +8,7 @@ body,
 
 body {
   margin: 0;
-  @apply bg-surface-50 text-on-primary;
+  @apply bg-neutral-50 text-on-primary;
 
   * {
     @apply font-sans;
@@ -52,7 +52,7 @@ body {
 .theme {
   &-light {
     @include make-color-palette(
-      surface,
+      neutral,
       $c-50: #ffffff,
       $c-100: #f5f5f5,
       $c-200: #e0e0e0,
@@ -148,7 +148,7 @@ body {
 
   &-dark {
     @include make-color-palette(
-      surface,
+      neutral,
       $c-50: #1e1e1e,
       $c-100: #262626,
       $c-200: #2e2e2e,
@@ -257,7 +257,7 @@ body {
 * {
   // Firefox
   scrollbar-width: auto;
-  scrollbar-color: var(--surface-300) transparent;
+  scrollbar-color: var(--neutral-300) transparent;
 
   // Chromium/Safari
   &::-webkit-scrollbar {
@@ -270,12 +270,12 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--surface-200);
+    background: var(--neutral-200);
     border-radius: 2px;
     transition: background 100ms ease;
 
     &:hover {
-      background: var(--surface-300);
+      background: var(--neutral-300);
     }
   }
 }

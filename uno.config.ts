@@ -6,7 +6,7 @@ import {
 	transformerVariantGroup,
 } from "unocss"
 
-const colors = ["surface", "primary", "success", "info", "warning", "danger"] as const
+const colors = ["neutral", "primary", "success", "info", "warning", "danger"] as const
 type Color = typeof colors[number]
 
 type ColorPalette = Record<string | number, string>

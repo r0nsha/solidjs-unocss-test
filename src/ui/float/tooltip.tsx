@@ -33,7 +33,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 					{...provided.props()}
 					class={classNames(
 						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-lg text-sm font-medium",
-						theme() === "dark" ? "bg-surface-300" : "bg-on-primary",
+						theme() === "dark" ? "bg-neutral-300" : "bg-on-primary",
 						provided.class,
 					)}
 					animate={{ opacity: [0, 1], scale: [0.9, 1] }}
@@ -42,13 +42,13 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 				>
 					<Show when={local.text}>
 						<div>
-							<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-surface-200")}>
+							<span class={classNames(theme() === "dark" ? "color-on-primary" : "color-neutral-200")}>
 								{local.text}
 							</span>
 						</div>
 					</Show>
 					<Show when={local.subtext}>
-						<span class={classNames(theme() === "dark" ? "color-on-secondary" : "color-surface-400")}>
+						<span class={classNames(theme() === "dark" ? "color-on-secondary" : "color-neutral-400")}>
 							{local.subtext}
 						</span>
 					</Show>

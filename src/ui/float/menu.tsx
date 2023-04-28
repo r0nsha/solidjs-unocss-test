@@ -56,7 +56,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 						{...provided.props()}
 						class={classNames(
 							"flex flex-col px-1 py-2 rounded-2 shadow-xl border-(1 solid) text-sm font-medium",
-							theme() === "dark" ? "bg-surface-100 border-surface-300" : "bg-surface-100 border-surface-300",
+							theme() === "dark" ? "bg-neutral-100 border-neutral-300" : "bg-neutral-100 border-neutral-300",
 							provided.class,
 						)}
 						{...menuAnimation(local.animation, provided.position)}

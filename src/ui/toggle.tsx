@@ -15,7 +15,7 @@ export const Toggle: Component<ToggleProps> = (props) => {
 				"relative w-10 h-4.5 rounded-full flex items-center outline-transparent border-none",
 				props.checked
 					? "bg-primary-500 hover:bg-primary-600 active:bg-primary-700"
-					: "bg-surface-300 hover:bg-surface-400 active:bg-surface-500",
+					: "bg-neutral-300 hover:bg-neutral-400 active:bg-neutral-500",
 			)}
 			onClick={(ev) => props.onChange?.(!props.checked, ev)}
 		>

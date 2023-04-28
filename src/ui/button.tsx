@@ -19,7 +19,7 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		primary:
 			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-300))",
 		neutral:
-			"bg-surface-200 color-on-primary outline-(width-0 transparent) hover:bg-surface-300 active:bg-surface-400 focus-visible:(outline-(width-3 solid surface-300))",
+			"bg-neutral-200 color-on-primary outline-(width-0 transparent) hover:bg-neutral-300 active:bg-neutral-400 focus-visible:(outline-(width-3 solid neutral-300))",
 		success:
 			"bg-success-500 color-white outline-(width-0 transparent) hover:bg-success-600 active:bg-success-700 focus-visible:(outline-(width-3 solid success-300))",
 		warning:
@@ -27,13 +27,13 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		info: "bg-info-500 color-white outline-(width-0 transparent) hover:bg-info-600 active:bg-info-700 focus-visible:(outline-(width-3 solid info-300))",
 		danger:
 			"bg-danger-500 color-white outline-(width-0 transparent) hover:bg-danger-600 active:bg-danger-700 focus-visible:(outline-(width-3 solid danger-300))",
-		disabled: "bg-surface-200 color-surface-400 outline-(width-0 transparent)",
+		disabled: "bg-neutral-200 color-neutral-400 outline-(width-0 transparent)",
 	},
 	outline: {
 		primary:
 			"bg-transparent color-primary-500 outline-(width-2 solid primary-500 offset--2) hover:(bg-primary-hover color-primary-600 outline-primary-600) active:(bg-primary-active color-primary-700 outline-primary-700) focus-visible:(bg-primary-hover color-primary-600 outline-primary-600)",
 		neutral:
-			"bg-transparent color-on-secondary outline-(width-2 solid on-secondary offset--2) hover:(bg-surface-hover color-on-primary outline-on-primary) active:bg-surface-active focus-visible:(bg-surface-200 color-on-primary outline-on-primary)",
+			"bg-transparent color-on-secondary outline-(width-2 solid on-secondary offset--2) hover:(bg-neutral-hover color-on-primary outline-on-primary) active:bg-neutral-active focus-visible:(bg-neutral-200 color-on-primary outline-on-primary)",
 		success:
 			"bg-transparent color-success-500 outline-(width-2 solid success-500 offset--2) hover:(bg-success-hover color-success-600 outline-success-600) active:(bg-success-active color-success-700 outline-success-700) focus-visible:(bg-success-hover color-success-600 outline-success-600)",
 		warning:
@@ -41,13 +41,13 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		info: "bg-transparent color-info-500 outline-(width-2 solid info-500 offset--2) hover:(bg-info-hover color-info-600 outline-info-600) active:(bg-info-active color-info-700 outline-info-700) focus-visible:(bg-info-hover color-info-600 outline-info-600)",
 		danger:
 			"bg-transparent color-danger-500 outline-(width-2 solid danger-500 offset--2) hover:(bg-danger-hover color-danger-600 outline-danger-600) active:(bg-danger-active color-danger-700 outline-danger-700) focus-visible:(bg-danger-hover color-danger-600 outline-danger-600)",
-		disabled: "bg-transparent color-surface-300 outline-(width-2 solid surface-300 offset--2)",
+		disabled: "bg-transparent color-neutral-300 outline-(width-2 solid neutral-300 offset--2)",
 	},
 	ghost: {
 		primary:
 			"bg-transparent color-primary-500 outline-(width-0 transparent) hover:(bg-primary-hover color-primary-600) active:bg-primary-active focus-visible:(bg-primary-hover outline-(width-2 solid primary-500))",
 		neutral:
-			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-surface-hover color-on-primary) active:bg-surface-active focus-visible:(bg-surface-hover outline-(width-2 solid on-secondary))",
+			"bg-transparent color-on-secondary outline-(width-0 transparent) hover:(bg-neutral-hover color-on-primary) active:bg-neutral-active focus-visible:(bg-neutral-hover outline-(width-2 solid on-secondary))",
 		success:
 			"bg-transparent color-success-500 outline-(width-0 transparent) hover:(bg-success-hover color-success-600) active:bg-success-active focus-visible:(bg-success-hover outline-(width-2 solid success-500))",
 		warning:
@@ -55,7 +55,7 @@ const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", str
 		info: "bg-transparent color-info-500 outline-(width-0 transparent) hover:(bg-info-hover color-info-600) active:bg-info-active focus-visible:(bg-info-hover outline-(width-2 solid info-500))",
 		danger:
 			"bg-transparent color-danger-500 outline-(width-0 transparent) hover:(bg-danger-hover color-danger-600) active:bg-danger-active focus-visible:(bg-danger-hover outline-(width-2 solid danger-500))",
-		disabled: "bg-transparent color-surface-300 outline-(width-0 transparent)",
+		disabled: "bg-transparent color-neutral-300 outline-(width-0 transparent)",
 	},
 }
 

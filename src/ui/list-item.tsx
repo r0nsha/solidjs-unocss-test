@@ -35,9 +35,9 @@ export const ListItem: Component<ListItemProps> = (props) => {
 					? "opacity-50 pointer-events-none"
 					: local.readonly
 						? ""
-						: "hover:(bg-surface-hover color-on-primary) active:bg-surface-active",
+						: "hover:(bg-neutral-hover color-on-primary) active:bg-neutral-active",
 				html.class,
-				local.selected && !local.disabled && "bg-surface-active! color-on-primary!",
+				local.selected && !local.disabled && "bg-neutral-active! color-on-primary!",
 			)}
 		>
 			<Show when={local.prefixIcon} fallback={local.prefix}>
