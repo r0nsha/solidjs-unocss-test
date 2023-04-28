@@ -3,7 +3,7 @@ import { Sidebar } from "./sidebar/sidebar"
 import { useI18n } from "../../locale/i18n.context"
 import { Button } from "../../ui/button"
 import { IconArrowLeft, IconArrowRight, IconDotsVertical } from "@tabler/icons-solidjs"
-import { colorSchemes } from "../../types/color"
+import { colors } from "../../types/color"
 
 export const Main: Component = () => {
 	const [t] = useI18n()
@@ -14,16 +14,16 @@ export const Main: Component = () => {
 			<div class="flex-1 flex flex-col lg:items-center">
 				<div class="h-10 self-stretch flex justify-between items-center px-2">
 					<div class="flex items-center">
-						<Button variant="ghost" colorScheme="neutral" small icon={IconArrowLeft} />
-						<Button variant="ghost" colorScheme="neutral" small icon={IconArrowRight} />
+						<Button variant="ghost" color="neutral" small icon={IconArrowLeft} />
+						<Button variant="ghost" color="neutral" small icon={IconArrowRight} />
 					</div>
 					<span class="color-on-secondary text-sm select-none">Starting Strength</span>
-					<Button variant="ghost" colorScheme="neutral" small icon={IconDotsVertical} />
+					<Button variant="ghost" color="neutral" small icon={IconDotsVertical} />
 				</div>
 				<div class="w-2xl flex flex-wrap gap-4">
 					{(["solid", "outline", "ghost"] as const).map((variant) =>
-						colorSchemes.map((colorScheme) => (
-							<Button variant={variant} colorScheme={colorScheme} text="Button" />
+						colors.map((color) => (
+							<Button variant={variant} color={color} text="Button" />
 						)),
 					)}
 				</div>

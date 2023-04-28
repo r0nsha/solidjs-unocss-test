@@ -1,6 +1,6 @@
 import { Component, JSX, Show, mergeProps, splitProps } from "solid-js"
 import { IconComponent } from "../types/component"
-import { ColorScheme } from "../types/color"
+import { Color } from "../types/color"
 import classNames from "classnames"
 
 export type ButtonVariant = "solid" | "outline" | "ghost"
@@ -8,13 +8,13 @@ export type ButtonVariant = "solid" | "outline" | "ghost"
 export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant: ButtonVariant
 	small?: boolean
-	colorScheme?: ColorScheme
+	color?: Color
 	icon?: IconComponent
 	text?: string
 	disabled?: boolean
 }
 
-const variantClasses: Record<ButtonVariant, Record<ColorScheme | "disabled", string>> = {
+const variantClasses: Record<ButtonVariant, Record<Color | "disabled", string>> = {
 	solid: {
 		primary:
 			"bg-primary-500 color-white outline-(width-0 transparent) hover:bg-primary-600 active:bg-primary-700 focus-visible:(outline-(width-3 solid primary-300))",
@@ -63,12 +63,12 @@ export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(
 		{
 			type: "button",
-			colorScheme: "neutral",
+			color: "neutral",
 		} satisfies Partial<ButtonProps>,
 		_props,
 	)
 
-	const [local, html] = splitProps(props, ["variant", "small", "colorScheme", "icon", "text", "disabled"])
+	const [local, html] = splitProps(props, ["variant", "small", "color", "icon", "text", "disabled"])
 
 	return (
 		<button
@@ -77,7 +77,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			disabled={local.disabled}
 			class={classNames(
 				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-medium border-none select-none",
-				variantClasses[local.variant][local.disabled ? "disabled" : local.colorScheme],
+				variantClasses[local.variant][local.disabled ? "disabled" : local.color],
 				html.class,
 				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",
 				local.small ? "h-6 rounded-1" : "h-8 rounded-1.5",

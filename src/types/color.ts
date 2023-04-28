@@ -1,2 +1,2 @@
-export const colorSchemes = ["primary", "neutral", "success", "info", "warning", "danger"] as const
-export type ColorScheme = typeof colorSchemes[number]
+export const colors = ["primary", "neutral", "success", "info", "warning", "danger"] as const
+export type Color = typeof colors[number]
