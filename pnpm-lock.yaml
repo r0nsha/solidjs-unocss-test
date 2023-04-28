@@ -54,6 +54,9 @@ devDependencies:
   unocss:
     specifier: ^0.50.8
     version: 0.50.8(postcss@8.4.21)(vite@4.2.1)
+  unocss-preset-radix:
+    specifier: ^2.3.0
+    version: 2.3.0
   vite:
     specifier: ^4.2.1
     version: 4.2.1(sass@1.61.0)
@@ -761,6 +764,10 @@ packages:
 
   /@polka/url@1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
+
+  /@radix-ui/colors@0.1.8:
+    resolution: {integrity: sha512-jwRMXYwC0hUo0mv6wGpuw254Pd9p/R6Td5xsRpOmaWkUHlooNWqVcadgyzlRumMq3xfOTXwJReU0Jv+EIy4Jbw==}
     dev: true
 
   /@rollup/pluginutils@5.0.2:
@@ -1934,6 +1941,13 @@ packages:
       '@antfu/utils': 0.5.2
       defu: 6.1.2
       jiti: 1.18.2
+    dev: true
+
+  /unocss-preset-radix@2.3.0:
+    resolution: {integrity: sha512-9ntTcussQhQCe5b/zSCJReVMqp+ydkC4zfep7TWnGgIfobt96HVBXKMAX3sbRtocrwHQvgCEpS3UiOgp34yyXw==}
+    dependencies:
+      '@radix-ui/colors': 0.1.8
+      '@unocss/core': 0.51.2
     dev: true
 
   /unocss@0.50.8(postcss@8.4.21)(vite@4.2.1):
