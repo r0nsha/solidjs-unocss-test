@@ -32,7 +32,7 @@ body {
 * {
   // Firefox
   scrollbar-width: auto;
-  scrollbar-color: var(--color-neutral-3) transparent;
+  scrollbar-color: var(--gray-3) transparent;
 
   // Chromium/Safari
   &::-webkit-scrollbar {
@@ -45,12 +45,12 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--neutral-200);
+    background: var(--gray-2);
     border-radius: 2px;
     transition: background 100ms ease;
 
     &:hover {
-      background: var(--neutral-300);
+      background: var(--gray-3);
     }
   }
 }
@@ -58,7 +58,7 @@ body {
 * {
   // Selection highlight color
   &::selection {
-    background: var(--info-100);
+    @apply bg-blue-3;
   }
 
   // Default focus outline

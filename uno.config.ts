@@ -8,8 +8,9 @@ import {
 } from "unocss"
 import { RadixColors, presetRadix } from "unocss-preset-radix"
 
-const aliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
-type Alias = typeof aliases[number]
+const baseAliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
+type BaseAlias = typeof baseAliases[number]
+type Alias = BaseAlias
 
 export default defineConfig({
 	presets: [
@@ -39,7 +40,7 @@ export default defineConfig({
 			} satisfies Record<Alias, RadixColors>,
 			lightSelector: ":root, .theme-light",
 			darkSelector: ".theme-dark",
-			prefix: "--color-",
+			prefix: "--",
 		}) as unknown as Preset<{}>,
 	],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
