@@ -14,7 +14,7 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	disabled?: boolean
 }
 
-type VariantScheme = "default" | "neutral" | "disabled"
+type VariantScheme = "default" | "neutral"
 
 const variantClasses: Record<ButtonVariant, Record<VariantScheme, string>> = {
 	solid: {
@@ -50,8 +50,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 
 	const [local, html] = splitProps(props, ["variant", "small", "color", "icon", "text", "disabled"])
 
-	const variantScheme = () =>
-		local.disabled ? "disabled" : local.color === "neutral" ? "neutral" : "default"
+	const variantScheme = () => (local.color === "neutral" ? "neutral" : "default")
 
 	return (
 		<button
@@ -65,6 +64,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 				html.class,
 				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",
 				local.small ? "h-6 rounded-1" : "h-8 rounded-1.5",
+				local.disabled && "opacity-50 pointer-events-none",
 			)}
 		>
 			{local.icon?.({ class: "flex-shrink-0", size: local.small ? 16 : 20 })}
