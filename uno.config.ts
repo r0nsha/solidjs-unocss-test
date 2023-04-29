@@ -8,7 +8,7 @@ import {
 } from "unocss"
 import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
-const palette: readonly RadixColors[] = ["gray", "purple", "green", "blue", "orange", "red"] as const
+const palette: readonly RadixColors[] = ["mauve", "purple", "green", "blue", "orange", "red"] as const
 const aliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
 type Alias = typeof aliases[number]
 
@@ -31,7 +31,7 @@ export default defineConfig({
 		presetRadix({
 			palette,
 			aliases: {
-				neutral: "gray",
+				neutral: "mauve",
 				primary: "purple",
 				success: "green",
 				info: "blue",
