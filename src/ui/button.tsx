@@ -18,9 +18,9 @@ const variantClassesNEW: Record<ButtonVariant, string> = {
 	solid:
 		"bg-hue9 color-whiteA-12 outline-(width-0 transparent) hover:bg-hue10 active:bg-hue11 focus-visible:(outline-(width-3 solid hue7))",
 	outline:
-		"bg-hue1 color-hue11 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 outline-hue7) active:outline-hue8 focus-visible:(bg-primary-hover color-primary-600 outline-primary-600)",
+		"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:outline-hue8 focus-visible:(bg-hue2 outline-hue7)",
 	ghost:
-		"bg-transparent color-primary-500 outline-(width-0 transparent) hover:(bg-primary-hover color-primary-600) active:bg-primary-active focus-visible:(bg-primary-hover outline-(width-2 solid primary-500))",
+		"bg-transparent color-hue10 outline-(width-0 transparent) hover:(bg-hue3 color-hue11) active:bg-hue4 focus-visible:(bg-hue3 outline-(width-2 solid hue7))",
 }
 
 // const variantClasses: Record<ButtonVariant, Record<Color | "disabled", string>> = {
