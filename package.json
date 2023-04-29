@@ -1,9 +1,10 @@
 {
-	"name": "hare-web",
+	"name": "hare",
 	"version": "0.1.0",
 	"main": "index.js",
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
+		"tauri": "tauri",
 		"dev": "vite",
 		"build": "vite build",
 		"serve": "vite preview",
@@ -24,6 +25,8 @@
 		"solid-js": "^1.7.3"
 	},
 	"devDependencies": {
+		"@tauri-apps/cli": "^1.2.3",
+		"@types/node": "^18.16.3",
 		"@unocss/preset-web-fonts": "^0.51.2",
 		"@unocss/transformer-directives": "^0.51.2",
 		"@unocss/transformer-variant-group": "^0.51.2",
