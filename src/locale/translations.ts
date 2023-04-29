@@ -9,7 +9,7 @@ const en = {
 	workouts: "Workouts",
 	create_a_workout: "Create a workout",
 	untitled: "Untitled",
-	workout_placeholder: "Add an exercise, write anything or press '/' for commands..."
+	workout_placeholder: "Add an exercise, write anything or press '/' for commands...",
 }
 
 // const he: typeof en = {}

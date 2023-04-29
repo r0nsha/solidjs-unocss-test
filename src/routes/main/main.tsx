@@ -22,9 +22,7 @@ export const Main: Component = () => {
 				</div>
 				<div class="w-2xl flex flex-wrap gap-4">
 					{(["solid", "outline", "ghost"] as const).map((variant) =>
-						colors.map((color) => (
-							<Button variant={variant} color={color} text="Button" />
-						)),
+						colors.map((color) => <Button variant={variant} color={color} text="Button" />),
 					)}
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">

@@ -6,11 +6,11 @@ import {
 	transformerDirectives,
 	transformerVariantGroup,
 } from "unocss"
-import { RadixColors, presetRadix } from "unocss-preset-radix"
+import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
-const baseAliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
-type BaseAlias = typeof baseAliases[number]
-type Alias = BaseAlias
+const palette: readonly RadixColors[] = ["gray", "tomato", "grass", "blue", "amber", "red"] as const
+const aliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
+type Alias = typeof aliases[number]
 
 export default defineConfig({
 	presets: [
@@ -29,7 +29,7 @@ export default defineConfig({
 			},
 		}),
 		presetRadix({
-			palette: ["gray", "tomato", "grass", "blue", "amber", "red"],
+			palette,
 			aliases: {
 				neutral: "gray",
 				primary: "tomato",
