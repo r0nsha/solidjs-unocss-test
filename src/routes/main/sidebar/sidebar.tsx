@@ -11,7 +11,7 @@ import { Divider } from "../../../ui/divider"
 
 export const Sidebar: Component = () => {
 	return (
-		<div class="w-70 min-h-0 bg-neutral-100 border-(e-(1 solid) neutral-200) flex flex-(col shrink-0)">
+		<div class="w-70 min-h-0 bg-neutral-100 flex flex-(col shrink-0)">
 			<div class="h-10" />
 			<WorkoutList />
 			<Divider />

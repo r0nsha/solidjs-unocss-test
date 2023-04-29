@@ -4,6 +4,7 @@ import { useI18n } from "../../locale/i18n.context"
 import { Button } from "../../ui/button"
 import { IconArrowLeft, IconArrowRight, IconDotsVertical } from "@tabler/icons-solidjs"
 import { colors } from "../../types/color"
+import { Divider } from "../../ui/divider"
 
 export const Main: Component = () => {
 	const [t] = useI18n()
@@ -11,6 +12,7 @@ export const Main: Component = () => {
 	return (
 		<div class="w-full h-full flex">
 			<Sidebar />
+			<Divider orientation="vertical" />
 			<div class="flex-1 flex flex-col lg:items-center overflow-y-auto">
 				<div class="sticky top-0 bg-neutral-1 h-10 self-stretch flex justify-between items-center px-2 flex-shrink-0">
 					<div class="flex items-center">
