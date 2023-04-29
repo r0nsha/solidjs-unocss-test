@@ -33,7 +33,7 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 					{...provided.props()}
 					class={classNames(
 						"flex flex-col max-w-sm break-words px-3 py-1 rounded-1 shadow-lg text-sm font-medium",
-						theme() === "dark" ? "bg-neutral-3" : "bg-neutral-12",
+						theme() === "dark" ? "bg-neutral-4" : "bg-neutral-12",
 						provided.class,
 					)}
 					animate={{ opacity: [0, 1], scale: [0.9, 1] }}

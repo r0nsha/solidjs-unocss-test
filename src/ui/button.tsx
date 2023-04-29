@@ -53,12 +53,12 @@ export const Button: Component<ButtonProps> = (_props) => {
 				variantClasses[local.variant],
 				local.color === "neutral" && variantClassNeutralOverrides[local.variant],
 				html.class,
-				local.text ? "w-[fit-content] min-w-20 px-3" : local.size === "sm" ? "w-6" : "w-8",
+				local.text ? "w-[fit-content] min-w-20 px-3" : local.size === "sm" ? "w-7.5" : "w-8",
 				local.size === "sm" ? "h-6 rounded-1" : "h-8 rounded-1.5",
 				local.disabled && "opacity-50 pointer-events-none",
 			)}
 		>
-			{local.icon?.({ class: "flex-shrink-0", size: local.size === "sm" ? 16 : 20 })}
+			{local.icon?.({ class: "flex-shrink-0", size: local.size === "sm" ? 18 : 20 })}
 			<Show when={local.text}>
 				<span>{local.text}</span>
 			</Show>
