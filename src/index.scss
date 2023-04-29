@@ -62,6 +62,6 @@ body {
 
   // Default focus outline
   &:focus-visible {
-    @apply outline-width-2 outline-solid outline-neutral-7;
+    @apply outline-(width-2 solid neutral-10);
   }
 }

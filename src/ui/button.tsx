@@ -25,9 +25,9 @@ const variantClasses: Record<ButtonVariant, Record<VariantScheme, string>> = {
 	},
 	outline: {
 		default:
-			"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:outline-hue8 focus-visible:(bg-hue2 outline-hue7)",
+			"bg-hue1 color-hue10 outline-(width-2 solid hue7 offset--2) hover:(bg-hue2 color-hue11 outline-hue8) active:outline-hue9 focus-visible:(bg-hue2 outline-hue7)",
 		neutral:
-			"bg-hue1 color-hue12 outline-(width-2 solid hue6 offset--2) hover:(bg-hue3 outline-hue7) active:outline-hue8 focus-visible:(bg-hue2 outline-hue7)",
+			"bg-hue1 color-hue12 outline-(width-2 solid hue7 offset--2) hover:(bg-hue3 outline-hue8) active:outline-hue9 focus-visible:(bg-hue2 outline-hue7)",
 	},
 	ghost: {
 		default:

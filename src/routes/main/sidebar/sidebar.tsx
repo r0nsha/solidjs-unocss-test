@@ -1,4 +1,4 @@
-import { Component } from "solid-js"
+import { Component, createSignal } from "solid-js"
 import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
 import { IconSettingsFilled } from "@tabler/icons-solidjs"
@@ -23,8 +23,11 @@ export const Sidebar: Component = () => {
 const Settings: Component = () => {
 	const [t] = useI18n()
 
+	const [x, setX] = createSignal(false)
+
 	return (
 		<div class="flex flex-col px-2 py-4">
+			<Toggle checked={x()} onChange={setX} />
 			<Menu
 				options={{
 					placement: "right-end",

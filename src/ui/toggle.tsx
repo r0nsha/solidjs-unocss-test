@@ -3,8 +3,7 @@ import { Component } from "solid-js"
 
 export type ToggleProps = {
 	checked?: boolean
-	// TODO:
-	// disabled?: boolean
+	disabled?: boolean
 	onChange?: (newValue: boolean, event: MouseEvent) => void
 }
 
@@ -14,9 +13,11 @@ export const Toggle: Component<ToggleProps> = (props) => {
 			class={classNames(
 				"relative w-10 h-4.5 rounded-full flex items-center outline-transparent border-none",
 				props.checked
-					? "bg-primary-500 hover:bg-primary-600 active:bg-primary-700"
-					: "bg-neutral-300 hover:bg-neutral-400 active:bg-neutral-500",
+					? "bg-primary-9 hover:bg-primary-10 active:bg-primary-11"
+					: "bg-neutralA-6 hover:bg-neutralA-7 active:bg-neutralA-8",
+				props.disabled && "opacity-50 pointer-events-none",
 			)}
+			disabled={props.disabled}
 			onClick={(ev) => props.onChange?.(!props.checked, ev)}
 		>
 			<div
