@@ -26,7 +26,7 @@ export const Main: Component = () => {
 					)}
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">
-					<div class="text-4xl font-bold mb-6">Starting Strength</div>
+					<div class="text-5xl font-bold mb-6">Starting Strength</div>
 					<div class="color-on-secondary">{t.workout_placeholder()}</div>
 				</div>
 			</div>
