@@ -1,4 +1,4 @@
-import { Component } from "solid-js"
+import { Component, createSignal } from "solid-js"
 import { Sidebar } from "./sidebar/sidebar"
 import { useI18n } from "../../locale/i18n.context"
 import { Button } from "../../ui/button"
@@ -7,6 +7,8 @@ import { colors } from "../../types/color"
 
 export const Main: Component = () => {
 	const [t] = useI18n()
+
+	const [disabled, setDisabled] = createSignal(false)
 
 	return (
 		<div class="w-full h-full flex">
@@ -22,7 +24,15 @@ export const Main: Component = () => {
 				</div>
 				<div class="w-2xl flex flex-wrap gap-4">
 					{(["solid", "outline", "ghost"] as const).map((variant) =>
-						colors.map((color) => <Button variant={variant} color={color} text="Button" />),
+						colors.map((color) => (
+							<Button
+								variant={variant}
+								color={color}
+								text="Button"
+								disabled={disabled()}
+								onClick={() => setDisabled((d) => !d)}
+							/>
+						)),
 					)}
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6 overflow-y-auto">

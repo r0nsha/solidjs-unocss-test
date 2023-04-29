@@ -8,7 +8,7 @@ import {
 } from "unocss"
 import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
-const palette: readonly RadixColors[] = ["gray", "tomato", "grass", "blue", "amber", "red"] as const
+const palette: readonly RadixColors[] = ["gray", "tomato", "green", "blue", "orange", "red"] as const
 const aliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const
 type Alias = typeof aliases[number]
 
@@ -33,9 +33,9 @@ export default defineConfig({
 			aliases: {
 				neutral: "gray",
 				primary: "tomato",
-				success: "grass",
+				success: "green",
 				info: "blue",
-				warning: "amber",
+				warning: "orange",
 				danger: "red",
 			} satisfies Record<Alias, RadixColors>,
 			lightSelector: ":root, .theme-light",
