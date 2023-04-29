@@ -26,10 +26,14 @@ const variantClasses: Record<ButtonVariant, Record<VariantScheme, string>> = {
 	outline: {
 		default:
 			"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:outline-hue8 focus-visible:(bg-hue2 outline-hue7)",
+		neutral:
+			"bg-hue1 color-hue12 outline-(width-2 solid hue6 offset--2) hover:(bg-hue3 outline-hue7) active:outline-hue8 focus-visible:(bg-hue2 outline-hue7)",
 	},
 	ghost: {
 		default:
 			"bg-transparent color-hue10 outline-(width-0 transparent) hover:(bg-hue3 color-hue11) active:bg-hue4 focus-visible:(bg-hue3 outline-(width-2 solid hue7))",
+		neutral:
+			"bg-transparent color-hue12 outline-(width-0 transparent) hover:bg-hue3 active:bg-hue4 focus-visible:(bg-hue3 outline-(width-2 solid hue7))",
 	},
 }
 
@@ -46,7 +50,8 @@ export const Button: Component<ButtonProps> = (_props) => {
 
 	const [local, html] = splitProps(props, ["variant", "small", "color", "icon", "text", "disabled"])
 
-	const variantScheme = local.disabled ? "disabled" : local.color === "neutral" ? "neutral" : "default"
+	const variantScheme = () =>
+		local.disabled ? "disabled" : local.color === "neutral" ? "neutral" : "default"
 
 	return (
 		<button
@@ -56,7 +61,7 @@ export const Button: Component<ButtonProps> = (_props) => {
 			class={classNames(
 				"flex flex-shrink-0 truncate justify-center items-center gap-1.5 text-sm font-medium border-none select-none",
 				`hue-${local.color}`,
-				variantClasses[local.variant][variantScheme],
+				variantClasses[local.variant][variantScheme()],
 				html.class,
 				local.text ? "w-[fit-content] min-w-20 px-3" : local.small ? "w-6" : "w-8",
 				local.small ? "h-6 rounded-1" : "h-8 rounded-1.5",
