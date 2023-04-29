@@ -37,8 +37,6 @@ const variantClasses: Record<ButtonVariant, Record<VariantScheme, string>> = {
 	},
 }
 
-// TODO: neutral special case
-// TODO: disabled state
 export const Button: Component<ButtonProps> = (_props) => {
 	const props = mergeProps(
 		{

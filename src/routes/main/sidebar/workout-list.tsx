@@ -1,4 +1,4 @@
-import { IconFile, IconFileDescription, IconPlus } from "@tabler/icons-solidjs"
+import { IconFile, IconPlus } from "@tabler/icons-solidjs"
 import { Component, For } from "solid-js"
 import { Button } from "../../../ui/button"
 import { ListItem } from "../../../ui/list-item"

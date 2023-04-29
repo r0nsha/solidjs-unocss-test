@@ -1,9 +1,11 @@
-import { Component, JSX, JSXElement, Show, splitProps } from "solid-js"
+import { Component, JSX, JSXElement, Show, mergeProps, splitProps } from "solid-js"
 import { IconComponent } from "../types/component"
 import classNames from "classnames"
+import { Color } from "../types/color"
 
 export type ListItemProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	text: string
+	color?: Color
 	prefixIcon?: IconComponent
 	prefix?: JSXElement
 	suffixIcon?: IconComponent
@@ -13,9 +15,17 @@ export type ListItemProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 	selected?: boolean
 }
 
-export const ListItem: Component<ListItemProps> = (props) => {
+export const ListItem: Component<ListItemProps> = (_props) => {
+	const props = mergeProps(
+		{
+			color: "neutral",
+		} satisfies Partial<ListItemProps>,
+		_props,
+	)
+
 	const [local, html] = splitProps(props, [
 		"text",
+		"color",
 		"prefixIcon",
 		"prefix",
 		"suffixIcon",
@@ -30,14 +40,14 @@ export const ListItem: Component<ListItemProps> = (props) => {
 			{...html}
 			disabled={local.disabled || local.readonly}
 			class={classNames(
-				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-on-secondary",
+				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-hue10",
+				`hue-${local.color}`,
 				local.disabled
 					? "opacity-50 pointer-events-none"
 					: local.readonly
 						? ""
-						: "hover:(bg-neutral-hover color-on-primary) active:bg-neutral-active",
+						: "hover:(bg-hue4 color-hue11) active:(bg-hue5 color-hue12)",
 				html.class,
-				local.selected && !local.disabled && "bg-neutral-active! color-on-primary!",
 			)}
 		>
 			<Show when={local.prefixIcon} fallback={local.prefix}>
