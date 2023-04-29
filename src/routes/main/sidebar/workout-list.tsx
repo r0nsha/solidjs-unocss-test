@@ -6,11 +6,15 @@ import { useI18n } from "../../../locale/i18n.context"
 import { Tooltip } from "../../../ui/float/tooltip"
 import { Workout, setWorkouts, workouts } from "../../../stores/workouts.store"
 import { nanoid } from "nanoid"
+import { invoke } from "@tauri-apps/api"
 
 export const WorkoutList: Component = () => {
 	const [t] = useI18n()
 
-	const addWorkout = () => setWorkouts([...workouts, { publicId: nanoid(), name: "" }])
+	const addWorkout = () => {
+		invoke("greet", { name: "Ron" }).then((res) => console.log(res))
+		setWorkouts([...workouts, { publicId: nanoid(), name: "" }])
+	}
 
 	return (
 		<div class="min-h-0 flex flex-(col 1)">

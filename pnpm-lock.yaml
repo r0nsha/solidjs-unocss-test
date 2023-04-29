@@ -16,6 +16,9 @@ dependencies:
   '@tabler/icons-solidjs':
     specifier: ^2.15.0
     version: 2.15.0(solid-js@1.7.3)
+  '@tauri-apps/api':
+    specifier: ^1.2.0
+    version: 1.2.0
   '@unocss/reset':
     specifier: ^0.51.2
     version: 0.51.2
@@ -845,6 +848,11 @@ packages:
 
   /@tabler/icons@2.15.0:
     resolution: {integrity: sha512-6fwWrsLOqmeoDPii4O1/tG1lsaNoPigUEx8UrOgTLJ81HazbAy5rfypp7FN9/PGsal4VDU+hevOkaGkE6algTQ==}
+    dev: false
+
+  /@tauri-apps/api@1.2.0:
+    resolution: {integrity: sha512-lsI54KI6HGf7VImuf/T9pnoejfgkNoXveP14pVV7XarrQ46rOejIVJLFqHI9sRReJMGdh2YuCoI3cc/yCWCsrw==}
+    engines: {node: '>= 14.6.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
   /@tauri-apps/cli-darwin-arm64@1.2.3:
