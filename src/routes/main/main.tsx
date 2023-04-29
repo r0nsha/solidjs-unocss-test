@@ -19,7 +19,7 @@ export const Main: Component = () => {
 						<Button variant="ghost" color="neutral" small icon={IconArrowLeft} />
 						<Button variant="ghost" color="neutral" small icon={IconArrowRight} />
 					</div>
-					<span class="color-on-secondary text-sm select-none">Starting Strength</span>
+					<span class="color-neutral-11 text-sm select-none">Starting Strength</span>
 					<Button variant="ghost" color="neutral" small icon={IconDotsVertical} />
 				</div>
 				<div class="w-2xl flex flex-wrap gap-4">
@@ -29,7 +29,7 @@ export const Main: Component = () => {
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6">
 					<div class="text-4xl font-bold mb-6">Starting Strength</div>
-					<div class="color-on-secondary">{t.workout_placeholder()}</div>
+					<div class="color-neutral-10">{t.workout_placeholder()}</div>
 				</div>
 			</div>
 		</div>
