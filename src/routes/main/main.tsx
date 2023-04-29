@@ -16,11 +16,11 @@ export const Main: Component = () => {
 			<div class="flex-1 flex flex-col lg:items-center overflow-y-auto">
 				<div class="sticky top-0 bg-neutral-1 h-10 self-stretch flex justify-between items-center px-2 flex-shrink-0">
 					<div class="flex items-center">
-						<Button variant="ghost" color="neutral" small icon={IconArrowLeft} />
-						<Button variant="ghost" color="neutral" small icon={IconArrowRight} />
+						<Button variant="ghost" color="neutral" size="sm" icon={IconArrowLeft} />
+						<Button variant="ghost" color="neutral" size="sm" icon={IconArrowRight} />
 					</div>
 					<span class="color-neutral-11 text-sm select-none">Starting Strength</span>
-					<Button variant="ghost" color="neutral" small icon={IconDotsVertical} />
+					<Button variant="ghost" color="neutral" size="sm" icon={IconDotsVertical} />
 				</div>
 				<div class="w-2xl flex flex-wrap gap-4">
 					{(["solid", "outline", "ghost"] as const).map((variant) =>

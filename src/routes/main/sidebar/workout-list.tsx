@@ -20,7 +20,7 @@ export const WorkoutList: Component = () => {
 					{(provided) => (
 						<Button
 							{...provided}
-							small
+							size="sm"
 							variant="ghost"
 							color="neutral"
 							icon={IconPlus}
