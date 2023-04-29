@@ -44,4 +44,5 @@ export default defineConfig({
 		}) as unknown as Preset<{}>,
 	],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
+	safelist: [...[...palette, ...aliases].map((c) => `hue-${c}`)],
 })
