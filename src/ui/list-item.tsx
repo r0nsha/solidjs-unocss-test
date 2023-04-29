@@ -40,13 +40,13 @@ export const ListItem: Component<ListItemProps> = (_props) => {
 			{...html}
 			disabled={local.disabled || local.readonly}
 			class={classNames(
-				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-hue10",
+				"h-6 px-2 py-0 bg-transparent border-none outline-transparent rounded-1 text-(sm start) flex flex-shrink-0 items-center gap-2 select-none color-hue11",
 				`hue-${local.color}`,
 				local.disabled
 					? "opacity-50 pointer-events-none"
 					: local.readonly
 						? ""
-						: "hover:(bg-hue4 color-hue11) active:(bg-hue5 color-hue12)",
+						: "hover:(bg-hue5 color-hue12) active:bg-hue6",
 				html.class,
 			)}
 		>

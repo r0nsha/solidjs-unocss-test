@@ -10,7 +10,6 @@ import {
 } from "solid-js"
 import { Float, FloatProps } from "./float"
 import { offset } from "@floating-ui/dom"
-import { useTheme } from "../../contexts/theme.context"
 import classNames from "classnames"
 import { ZIndex } from "../../utils/z-index"
 import { Motion, Options, Variant } from "@motionone/solid"
@@ -30,8 +29,6 @@ export type MenuProps = Omit<FloatProps, "render" | "trigger"> & {
 export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (props) => {
 	const merged = mergeProps({ closeMode: "parent", animation: "shift" } satisfies Partial<MenuProps>, props)
 	const [local, float] = splitProps(merged, ["closeMode", "animation", "content"])
-
-	const { theme } = useTheme()
 
 	return (
 		<Float
@@ -55,8 +52,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 					<Motion.div
 						{...provided.props()}
 						class={classNames(
-							"flex flex-col px-1 py-2 rounded-2 shadow-xl border-(1 solid) text-sm font-medium",
-							theme() === "dark" ? "bg-neutral-100 border-neutral-300" : "bg-neutral-100 border-neutral-300",
+							"flex flex-col px-1 py-2 rounded-2 bg-neutral-2 border-(1 solid neutral-8) shadow-xl text-sm font-medium color-neutral-12",
 							provided.class,
 						)}
 						{...menuAnimation(local.animation, provided.position)}
