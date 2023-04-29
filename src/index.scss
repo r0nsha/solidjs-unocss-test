@@ -40,17 +40,16 @@ body {
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
-    @apply my-1;
+    @apply bg-transparent my-1;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--gray-2);
+    @apply bg-neutral-8;
     border-radius: 2px;
     transition: background 100ms ease;
 
     &:hover {
-      background: var(--gray-3);
+      @apply bg-neutral-9;
     }
   }
 }
