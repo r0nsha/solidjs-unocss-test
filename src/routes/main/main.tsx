@@ -21,8 +21,8 @@ export const Main: Component = () => {
 					<span class="color-neutral-12 text-sm select-none">Starting Strength</span>
 					<Button variant="ghost" color="neutral" size="sm" icon={IconDotsVertical} />
 				</div>
-				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-192 p-6">
-					<div class="text-4xl font-black mb-6">Starting Strength</div>
+				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-224 p-6">
+					<div class="text-4xl font-bold mb-6">Starting Strength</div>
 					<div class="color-neutral-10">{t.workout_placeholder()}</div>
 				</div>
 			</div>
