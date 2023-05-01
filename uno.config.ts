@@ -46,6 +46,5 @@ export default defineConfig({
 	transformers: [transformerVariantGroup(), transformerDirectives()],
 	safelist: [
 		...[...palette, ...aliases].map((c) => `hue-${c}`),
-		...[...palette, ...aliases].map((c) => `hue-${c}A`),
 	],
 })
