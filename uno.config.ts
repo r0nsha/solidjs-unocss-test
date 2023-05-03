@@ -1,4 +1,4 @@
-import { Preset, defineConfig, presetUno, presetWebFonts, transformerDirectives, transformerVariantGroup } from "unocss"
+import { Preset, defineConfig, presetUno, transformerDirectives, transformerVariantGroup } from "unocss"
 import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
 const palette: readonly RadixColors[] = ["mauve", "purple", "green", "blue", "orange", "red"] as const
@@ -36,6 +36,11 @@ export default defineConfig({
 			prefix: "--",
 		}) as unknown as Preset<{}>,
 	],
+	theme: {
+		boxShadow: {
+			menu: "var(--shadow-menu)",
+		},
+	},
 	transformers: [transformerVariantGroup(), transformerDirectives()],
 	safelist: [...[...palette, ...aliases].map((c) => `hue-${c}`)],
 })

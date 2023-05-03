@@ -52,7 +52,7 @@ export const Menu: Component<MenuProps> & { Item: Component<MenuItemProps> } = (
 					<Motion.div
 						{...provided.props()}
 						class={classNames(
-							"flex flex-col px-1 py-2 rounded-2 bg-neutral-2 border-(1 solid neutral-8) shadow-xl text-sm font-medium color-neutral-12",
+							"flex flex-col px-1 py-2 rounded-2 bg-neutral-2 border-(1 solid neutral-7) shadow-menu text-sm font-medium color-neutral-12",
 							provided.class,
 						)}
 						{...menuAnimation(local.animation, provided.position)}

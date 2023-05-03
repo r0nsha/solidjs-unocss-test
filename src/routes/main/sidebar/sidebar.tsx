@@ -1,12 +1,11 @@
 import { Component } from "solid-js"
 import { WorkoutList } from "./workout-list"
 import { ListItem } from "../../../ui/list-item"
-import { IconSettingsFilled } from "@tabler/icons-solidjs"
+import { IconSettings } from "@tabler/icons-solidjs"
 import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
-import { sameWidth } from "../../../ui/float/middleware"
 import { Divider } from "../../../ui/divider"
 
 export const Sidebar: Component = () => {
@@ -26,9 +25,9 @@ const Settings: Component = () => {
 	return (
 		<div class="flex flex-col px-2 py-4">
 			<Menu
+				class="w-60"
 				options={{
 					placement: "right-end",
-					middleware: [sameWidth()],
 				}}
 				content={
 					<>
@@ -39,7 +38,7 @@ const Settings: Component = () => {
 				{(provided) => (
 					<ListItem
 						ref={provided.ref}
-						prefixIcon={IconSettingsFilled}
+						prefixIcon={IconSettings}
 						text={t.settings()}
 						selected={provided.visible()}
 					/>
