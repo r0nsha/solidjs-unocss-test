@@ -1,5 +1,5 @@
 import { Preset, defineConfig, presetUno, transformerDirectives, transformerVariantGroup } from "unocss"
-import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
+import { RadixColors, presetRadix } from "unocss-preset-radix"
 
 const palette: readonly RadixColors[] = ["mauve", "purple", "green", "blue", "orange", "red"] as const
 const aliases = ["neutral", "primary", "success", "info", "warning", "danger"] as const

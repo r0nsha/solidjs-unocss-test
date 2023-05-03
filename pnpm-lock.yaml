@@ -65,7 +65,10 @@ devDependencies:
     version: 5.0.4
   unocss:
     specifier: ^0.50.8
-    version: 0.50.8(postcss@8.4.21)(vite@4.2.1)
+    version: 0.50.8(postcss@8.4.23)(vite@4.2.1)
+  unocss-preset-radix:
+    specifier: ^2.4.0
+    version: 2.4.0
   vite:
     specifier: ^4.2.1
     version: 4.2.1(@types/node@18.16.3)(sass@1.61.0)
@@ -779,6 +782,10 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
+  /@radix-ui/colors@0.1.8:
+    resolution: {integrity: sha512-jwRMXYwC0hUo0mv6wGpuw254Pd9p/R6Td5xsRpOmaWkUHlooNWqVcadgyzlRumMq3xfOTXwJReU0Jv+EIy4Jbw==}
+    dev: true
+
   /@rollup/pluginutils@5.0.2:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
@@ -1052,7 +1059,7 @@ packages:
       sirv: 2.0.2
     dev: true
 
-  /@unocss/postcss@0.50.8(postcss@8.4.21):
+  /@unocss/postcss@0.50.8(postcss@8.4.23):
     resolution: {integrity: sha512-UbFD+25EkmBonZggKuQdunAU+1O6O83NcnMqSalhn4vhsr4yHeD4P+Omr+CnBcuOxkP4h2JYHzfzdpe4DZxKYg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1063,7 +1070,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.2.12
       magic-string: 0.30.0
-      postcss: 8.4.21
+      postcss: 8.4.23
     dev: true
 
   /@unocss/preset-attributify@0.50.8:
@@ -1844,6 +1851,15 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /postcss@8.4.23:
+    resolution: {integrity: sha512-bQ3qMcpF6A/YjR55xtoTr0jGOlnPOKAIMdOWiv0EIT6HVPEaJiJB4NLljSbiHoC2RX7DN5Uvjtpbg1NPdwv1oA==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.6
+      picocolors: 1.0.0
+      source-map-js: 1.0.2
+    dev: true
+
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
@@ -2058,7 +2074,14 @@ packages:
       jiti: 1.18.2
     dev: true
 
-  /unocss@0.50.8(postcss@8.4.21)(vite@4.2.1):
+  /unocss-preset-radix@2.4.0:
+    resolution: {integrity: sha512-xvcXSy2ndzgCo6B6StaGyoS1MkFY+McaErNP9WtNEHygNE97OkcqjB/wkRtHoXaE8JWibnTs6oTqJAp+YiBasQ==}
+    dependencies:
+      '@radix-ui/colors': 0.1.8
+      '@unocss/core': 0.51.2
+    dev: true
+
+  /unocss@0.50.8(postcss@8.4.23)(vite@4.2.1):
     resolution: {integrity: sha512-3yqKkSm/SKCKxFolXNR12Mi64lr4PW95LSHKZ/a9Yzlf2PT1NirAn8/uJ8KoJJBNR2YWobtkLi4UplFz/8IAYA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -2070,7 +2093,7 @@ packages:
       '@unocss/astro': 0.50.8(vite@4.2.1)
       '@unocss/cli': 0.50.8
       '@unocss/core': 0.50.8
-      '@unocss/postcss': 0.50.8(postcss@8.4.21)
+      '@unocss/postcss': 0.50.8(postcss@8.4.23)
       '@unocss/preset-attributify': 0.50.8
       '@unocss/preset-icons': 0.50.8
       '@unocss/preset-mini': 0.50.8

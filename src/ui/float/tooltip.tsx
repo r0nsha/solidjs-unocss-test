@@ -42,13 +42,13 @@ export const Tooltip: Component<TooltipProps> = (props) => {
 				>
 					<Show when={local.text}>
 						<div>
-							<span class={classNames(theme() === "dark" ? "color-neutral-12" : "color-whiteA-12")}>
+							<span class={classNames(theme() === "dark" ? "color-neutral-12" : "color-white-12A")}>
 								{local.text}
 							</span>
 						</div>
 					</Show>
 					<Show when={local.subtext}>
-						<span class={classNames(theme() === "dark" ? "color-neutral-11" : "color-whiteA-11")}>
+						<span class={classNames(theme() === "dark" ? "color-neutral-11" : "color-white-11A")}>
 							{local.subtext}
 						</span>
 					</Show>

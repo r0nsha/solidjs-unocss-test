@@ -26,7 +26,7 @@ const Settings: Component = () => {
 			class="w-60"
 			content={
 				<>
-					<span class="px-2 text-sm font-medium">{t.settings()}</span>
+					<div class="px-2 text-sm font-medium mb-1">{t.settings()}</div>
 					<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
 				</>
 			}

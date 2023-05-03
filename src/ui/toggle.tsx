@@ -14,7 +14,7 @@ export const Toggle: Component<ToggleProps> = (props) => {
 				"relative w-10 h-4.5 rounded-full flex items-center outline-transparent border-none",
 				props.checked
 					? "bg-primary-9 hover:bg-primary-10 active:bg-primary-11 focus-visible:outline-neutral-11"
-					: "bg-neutralA-6 hover:bg-neutralA-7 active:bg-neutralA-8",
+					: "bg-neutral-6A hover:bg-neutral-7A active:bg-neutral-8A",
 				props.disabled && "opacity-50 pointer-events-none",
 			)}
 			disabled={props.disabled}

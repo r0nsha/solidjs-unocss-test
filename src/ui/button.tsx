@@ -22,7 +22,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 	outline:
 		"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:(bg-hue3 outline-hue8) focus-visible:(bg-hue2 outline-hue10) selected:(bg-hue3 outline-hue8)",
 	ghost:
-		"bg-transparent color-hue10 outline-(width-0 transparent offset--2) hover:(bg-hueA-4 color-hue11) active:bg-hueA-5 focus-visible:(bg-hueA-2 outline-(width-2 solid hue10)) selected:bg-hueA-5",
+		"bg-transparent color-hue10 outline-(width-0 transparent offset--2) hover:(bg-hue4A color-hue11) active:bg-hue5A focus-visible:(bg-hue2A outline-(width-2 solid hue10)) selected:bg-hue5A",
 }
 
 const variantClassNeutralOverrides: Record<ButtonVariant, string> = {
