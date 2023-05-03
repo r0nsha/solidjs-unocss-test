@@ -1,4 +1,4 @@
-import { Preset, defineConfig, presetUno, transformerDirectives, transformerVariantGroup } from "unocss"
+import { Preset, defineConfig, presetUno, presetWebFonts, transformerDirectives, transformerVariantGroup } from "unocss"
 import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
 const palette: readonly RadixColors[] = ["mauve", "purple", "green", "blue", "orange", "red"] as const
@@ -15,10 +15,10 @@ export default defineConfig({
 		// 			name: "Inter",
 		// 			weights: [400, 500, 700],
 		// 		},
-		// 		mono: {
-		// 			name: "Noto Sans Mono",
-		// 			weights: [400, 500, 700],
-		// 		},
+		// 		// mono: {
+		// 		// 	name: "Noto Sans Mono",
+		// 		// 	weights: [400, 500, 700],
+		// 		// },
 		// 	},
 		// }),
 		presetRadix({
