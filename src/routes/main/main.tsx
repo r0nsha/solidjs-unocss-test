@@ -18,7 +18,7 @@ export const Main: Component = () => {
 						<Button variant="ghost" color="neutral" size="sm" icon={IconArrowLeft} />
 						<Button variant="ghost" color="neutral" size="sm" icon={IconArrowRight} />
 					</div>
-					<span class="color-neutral-11 text-sm select-none">Stronglifts 5x5 (Phase 3)</span>
+					<span class="color-neutral-11 text-sm select-none cursor-default">Stronglifts 5x5 (Phase 3)</span>
 					<Button variant="ghost" color="neutral" size="sm" icon={IconDotsVertical} />
 				</div>
 				<div class="flex-1 flex flex-col min-w-0 max-w-full lg:w-224 p-6">

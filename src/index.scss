@@ -11,12 +11,13 @@ body {
   @apply bg-neutral-1 text-neutral-12;
 
   * {
-    @apply font-sans;
+    font-family: "Inter";
+    // @apply font-sans;
   }
 
-  code {
-    @apply font-mono;
-  }
+  // code {
+  //   @apply font-mono;
+  // }
 }
 
 // Default box-sizing
@@ -57,7 +58,7 @@ body {
 * {
   // Selection highlight color
   &::selection {
-    @apply bg-info-5;
+    @apply bg-primaryA-5;
   }
 
   // Default focus outline

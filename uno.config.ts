@@ -1,11 +1,4 @@
-import {
-	Preset,
-	defineConfig,
-	presetUno,
-	presetWebFonts,
-	transformerDirectives,
-	transformerVariantGroup,
-} from "unocss"
+import { Preset, defineConfig, presetUno, transformerDirectives, transformerVariantGroup } from "unocss"
 import { RadixColors, presetRadix } from "./vendor/unocss-preset-radix/src"
 
 const palette: readonly RadixColors[] = ["mauve", "purple", "green", "blue", "orange", "red"] as const
@@ -15,19 +8,19 @@ type Alias = typeof aliases[number]
 export default defineConfig({
 	presets: [
 		presetUno(),
-		presetWebFonts({
-			provider: "google",
-			fonts: {
-				sans: {
-					name: "Inter",
-					weights: [400, 500, 700],
-				},
-				mono: {
-					name: "Noto Sans Mono",
-					weights: [400, 500, 700],
-				},
-			},
-		}),
+		// presetWebFonts({
+		// 	provider: "google",
+		// 	fonts: {
+		// 		sans: {
+		// 			name: "Inter",
+		// 			weights: [400, 500, 700],
+		// 		},
+		// 		mono: {
+		// 			name: "Noto Sans Mono",
+		// 			weights: [400, 500, 700],
+		// 		},
+		// 	},
+		// }),
 		presetRadix({
 			palette,
 			aliases: {
@@ -44,7 +37,5 @@ export default defineConfig({
 		}) as unknown as Preset<{}>,
 	],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
-	safelist: [
-		...[...palette, ...aliases].map((c) => `hue-${c}`),
-	],
+	safelist: [...[...palette, ...aliases].map((c) => `hue-${c}`)],
 })

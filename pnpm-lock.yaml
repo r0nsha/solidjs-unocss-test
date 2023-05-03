@@ -4,6 +4,9 @@ dependencies:
   '@floating-ui/dom':
     specifier: ^1.2.6
     version: 1.2.6
+  '@fontsource/inter':
+    specifier: ^4.5.15
+    version: 4.5.15
   '@motionone/dom':
     specifier: ^10.15.5
     version: 10.15.5
@@ -634,6 +637,10 @@ packages:
     resolution: {integrity: sha512-02vxFDuvuVPs22iJICacezYJyf7zwwOCWkPNkWNBr1U0Qt1cKFYzWvxts0AmqcOQGwt/3KJWcWIgtbUU38keyw==}
     dependencies:
       '@floating-ui/core': 1.2.6
+    dev: false
+
+  /@fontsource/inter@4.5.15:
+    resolution: {integrity: sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==}
     dev: false
 
   /@iconify/types@2.0.0:

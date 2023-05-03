@@ -1,5 +1,6 @@
 import "uno.css"
 import "./index.scss"
+import "@fontsource/inter"
 import "@unocss/reset/normalize.css"
 
 import { render } from "solid-js/web"
