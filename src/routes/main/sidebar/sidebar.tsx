@@ -6,7 +6,6 @@ import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
 import { Button } from "../../../ui/button"
-import { Tooltip } from "../../../ui/float/tooltip"
 
 export const Sidebar: Component = () => {
 	return (
@@ -33,20 +32,13 @@ const Settings: Component = () => {
 			}
 		>
 			{(provided) => (
-				<Tooltip text={t.settings()}>
-					{(tprovided) => (
-						<Button
-							ref={(el) => {
-								provided.ref(el)
-								tprovided.ref(el)
-							}}
-							variant="ghost"
-							icon={IconSettings}
-							size="sm"
-							selected={provided.visible()}
-						/>
-					)}
-				</Tooltip>
+				<Button
+					ref={provided.ref}
+					variant="ghost"
+					icon={IconSettings}
+					size="sm"
+					selected={provided.visible()}
+				/>
 			)}
 		</Menu>
 	)
