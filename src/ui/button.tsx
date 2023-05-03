@@ -17,11 +17,11 @@ export type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantClasses: Record<ButtonVariant, string> = {
 	solid:
-		"bg-hue9 color-white outline-(width-0 transparent) hover:bg-hue10 active:bg-hue11 focus-visible:(outline-(width-3 solid hue7))",
+		"bg-hue9 color-white outline-(width-0 transparent) hover:bg-hue10 active:bg-hue11 focus-visible:(outline-(width-3 solid hue10))",
 	outline:
-		"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:(bg-hue3 outline-hue8) focus-visible:(bg-hue2 outline-hue7)",
+		"bg-hue1 color-hue10 outline-(width-2 solid hue6 offset--2) hover:(bg-hue2 color-hue11 outline-hue7) active:(bg-hue3 outline-hue8) focus-visible:(bg-hue2 outline-hue10)",
 	ghost:
-		"bg-transparent color-hue10 outline-(width-0 transparent offset--2) hover:(bg-hueA-4 color-hue11) active:bg-hueA-5 focus-visible:(bg-hueA-2 outline-(width-2 solid hue7))",
+		"bg-transparent color-hue10 outline-(width-0 transparent offset--2) hover:(bg-hueA-4 color-hue11) active:bg-hueA-5 focus-visible:(bg-hueA-2 outline-(width-2 solid hue10))",
 }
 
 const variantClassNeutralOverrides: Record<ButtonVariant, string> = {
