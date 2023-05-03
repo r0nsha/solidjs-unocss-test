@@ -1,20 +1,20 @@
 import { Component } from "solid-js"
 import { WorkoutList } from "./workout-list"
-import { ListItem } from "../../../ui/list-item"
 import { IconSettings } from "@tabler/icons-solidjs"
 import { useI18n } from "../../../locale/i18n.context"
 import { Menu } from "../../../ui/float/menu"
 import { useTheme } from "../../../contexts/theme.context"
 import { Toggle } from "../../../ui/toggle"
-import { Divider } from "../../../ui/divider"
+import { Button } from "../../../ui/button"
+import { Tooltip } from "../../../ui/float/tooltip"
 
 export const Sidebar: Component = () => {
 	return (
 		<div class="w-70 min-h-0 bg-neutral-2 flex flex-(col shrink-0)">
-			<div class="h-10" />
+			<div class="h-10 flex justify-end items-center px-2 mb-6">
+				<Settings />
+			</div>
 			<WorkoutList />
-			<Divider />
-			<Settings />
 		</div>
 	)
 }
@@ -23,28 +23,32 @@ const Settings: Component = () => {
 	const [t] = useI18n()
 
 	return (
-		<div class="flex flex-col px-2 py-4">
-			<Menu
-				class="w-60"
-				options={{
-					placement: "right-end",
-				}}
-				content={
-					<>
-						<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
-					</>
-				}
-			>
-				{(provided) => (
-					<ListItem
-						ref={provided.ref}
-						prefixIcon={IconSettings}
-						text={t.settings()}
-						selected={provided.visible()}
-					/>
-				)}
-			</Menu>
-		</div>
+		<Menu
+			class="w-60"
+			content={
+				<>
+					<span class="px-2 text-sm font-medium">{t.settings()}</span>
+					<Menu.Item closeMode="none" readonly text={t.dark_mode()} suffix={<ThemeToggle />} />
+				</>
+			}
+		>
+			{(provided) => (
+				<Tooltip text={t.settings()}>
+					{(tprovided) => (
+						<Button
+							ref={(el) => {
+								provided.ref(el)
+								tprovided.ref(el)
+							}}
+							variant="ghost"
+							icon={IconSettings}
+							size="sm"
+							selected={provided.visible()}
+						/>
+					)}
+				</Tooltip>
+			)}
+		</Menu>
 	)
 }
 

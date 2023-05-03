@@ -41,6 +41,16 @@ export default defineConfig({
 			menu: "var(--shadow-menu)",
 		},
 	},
+	variants: [
+		// selected:
+		(matcher) => {
+			if (!matcher.startsWith("selected:")) return matcher
+			return {
+				matcher: matcher.slice(9),
+				selector: (s) => `${s}.selected`,
+			}
+		},
+	],
 	transformers: [transformerVariantGroup(), transformerDirectives()],
 	safelist: [...[...palette, ...aliases].map((c) => `hue-${c}`)],
 })

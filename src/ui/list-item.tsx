@@ -47,6 +47,7 @@ export const ListItem: Component<ListItemProps> = (_props) => {
 					: local.readonly
 						? ""
 						: "hover:bg-hue4 active:(bg-hue5 color-hue12)",
+				local.selected && "bg-hue-5! color-hue12!",
 				html.class,
 			)}
 		>
